@@ -95,6 +95,8 @@ public class RobotContainer {
     final JoystickButton LeftBumper = new JoystickButton(operatorController,3);
     LeftBumper.whileHeld(new IntakeBall(m_intake));
     
+    final JoystickButton startButton = new JoystickButton(operatorController,XboxController.Button.kStart.value);
+    startButton.whenPressed(() -> drivetrain.resetGyro(),drivetrain);
 
     //final JoystickButton leftTriggButton = new JoystickButton(operatorController, 0);
     //leftTriggButton.whileHeld(new ReverseIntake(m_intake)); 

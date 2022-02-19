@@ -37,13 +37,16 @@ public static final Translation2d[] moduleOffset = {
     new Translation2d(-MODULE_DISTANCE_FROM_CENTRE_LENGTH,-MODULE_DISTANCE_FROM_CENTRE_WIDTH) //back right
 };
 
-    public static final double MAX_SPEED_METRES_PER_SECOND = 0.8;
-
-    public static final double CANCODER_RAW_TICKS_PER_180 = 2048;
-
-    public static final double HALF_ROTATION = CANCODER_RAW_TICKS_PER_180 / 180.0;
-
-    
+    public static final double 
+        MAX_SPEED_METRES_PER_SECOND = 4, //0.8
+        GEAR_RATIO = 8.14, //one rotation of wheel from 8.14 shaft rotations
+        CANCODER_RAW_TICKS_PER_180 = 2048,
+        TEN = 10,
+        WHEEL_RADIUS = 0.0508,
+        HALF_ROTATION = CANCODER_RAW_TICKS_PER_180 / 180.0,
+        TALONFX_RESOLUTION = 2048,
+        TICKS_PER_WHEEL_ROTATION = TALONFX_RESOLUTION * GEAR_RATIO,
+        OMEGA = TICKS_PER_WHEEL_ROTATION/(2*Math.PI);
 
 }
 
