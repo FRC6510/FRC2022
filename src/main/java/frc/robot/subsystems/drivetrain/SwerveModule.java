@@ -57,18 +57,26 @@ public class SwerveModule {
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         SwerveModuleState state = swerveModuleState;
-        driveMotor.set(ControlMode.PercentOutput, state.speedMetersPerSecond);
+        driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(state.speedMetersPerSecond));
         SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
         steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
 
     }
 
     protected SwerveModuleState getModuleState(){
-        return new SwerveModuleState(driveMotor.getSelectedSensorVelocity(), new Rotation2d(angleEncoder.getAbsolutePosition()));
+        return new SwerveModuleState(getWheelVelocity(), new Rotation2d(angleEncoder.getAbsolutePosition()));
     }
 
     public double getSteerError(){
         return steeringMotor.getClosedLoopError(0);
+    }
+
+    public double getWheelVelocity(){
+        return DrivetrainConstants.VELOCITY_MULTIPLIER * driveMotor.getSelectedSensorVelocity();
+    }
+
+    public double convertToWheelEncoderTicks(double wheelVelocity){
+        return wheelVelocity/DrivetrainConstants.VELOCITY_MULTIPLIER;
     }
 
 }

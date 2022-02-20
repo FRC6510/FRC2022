@@ -46,8 +46,9 @@ public static final Translation2d[] moduleOffset = {
         HALF_ROTATION = CANCODER_RAW_TICKS_PER_180 / 180.0,
         TALONFX_RESOLUTION = 2048,
         TICKS_PER_WHEEL_ROTATION = TALONFX_RESOLUTION * GEAR_RATIO,
-        OMEGA = TICKS_PER_WHEEL_ROTATION/(2*Math.PI);
-
+        OMEGA = TEN*((2*Math.PI)/TICKS_PER_WHEEL_ROTATION), //conversion from radians per 100ms to 1000ms (1s)
+        VELOCITY_MULTIPLIER = OMEGA * WHEEL_RADIUS;
+        
 }
 
 
