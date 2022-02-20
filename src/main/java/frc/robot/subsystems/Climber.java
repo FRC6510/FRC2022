@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX climber = new TalonFX(44);
-  private static Solenoid climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 5);
+  private static Solenoid climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
+  private static Solenoid hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -24,8 +25,18 @@ public class Climber extends SubsystemBase {
   public Climber(){
     climber.setInverted(false);
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
-    climber.configOpenloopRamp(1); //ramp acceleration
+    climber.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
+    //climber.configStatorCurrentLimit(true);
+    //climber.configPeakCurrentLimit(30); // don't activate current limit until current
+    //climber.configPeakCurrentDuration(100); // ... for at least 100 ms
+    //climber.configContinuousCurrentLimit(20); // once current-limiting is actived, hold at
+    
+
+    //climber.config
+
+    climber_pneu.set(false);
+    hook_pneu.set(false);
   }
 
   @Override
@@ -34,11 +45,11 @@ public class Climber extends SubsystemBase {
   }
 
   public void spin_climber(){
-    climber.set(ControlMode.PercentOutput,0.5); //speed
+    climber.set(ControlMode.PercentOutput,0.4); //speed
   }
 
   public void reverse_climber(){
-    climber.set(ControlMode.PercentOutput,-0.5); //speed
+    climber.set(ControlMode.PercentOutput,-0.4); //speed
   }
 
   public void climber_in(){
@@ -46,6 +57,14 @@ public class Climber extends SubsystemBase {
   }
 
   public void climber_out(){
+    climber_pneu.set(false);//speed
+  }
+
+  public void hook_close(){
+    climber_pneu.set(true); //speed
+  }
+
+  public void hook_open(){
     climber_pneu.set(false);//speed
   }
 

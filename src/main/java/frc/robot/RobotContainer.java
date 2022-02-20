@@ -7,11 +7,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.ClimbReverse;
 import frc.robot.commands.ClimbRobot;
+import frc.robot.commands.ClimberIn;
+import frc.robot.commands.ClimberOut;
+import frc.robot.commands.CloseHook;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.FeedBall;
-import frc.robot.commands.GyroReset;
 import frc.robot.commands.IntakeBall;
+import frc.robot.commands.OpenHook;
 import frc.robot.commands.ReverseBall;
 import frc.robot.commands.ReverseClimb;
 import frc.robot.commands.ReverseIntake;
@@ -82,10 +86,9 @@ public class RobotContainer {
 
     final JoystickButton Bbutton = new JoystickButton(operatorController,2);
     Bbutton.whileHeld(new ShootBall(m_shooter));
-
     //final JoystickButton Xbutton = new JoystickButton(operatorController,3);
     //Xbutton.whileHeld(new ReverseClimb(m_climber));
-  
+
     final JoystickButton Ybutton = new JoystickButton(operatorController,1);
     Ybutton.whileHeld(new ReverseShoot(m_shooter));
     
@@ -95,7 +98,7 @@ public class RobotContainer {
     final JoystickButton LeftBumper = new JoystickButton(operatorController,3);
     LeftBumper.whileHeld(new IntakeBall(m_intake));
     
-    final JoystickButton startButton = new JoystickButton(operatorController,XboxController.Button.kStart.value);
+    final JoystickButton startButton = new JoystickButton(driverController,XboxController.Button.kY.value);
     startButton.whenPressed(() -> drivetrain.resetGyro(),drivetrain);
 
     //final JoystickButton leftTriggButton = new JoystickButton(operatorController, 0);
@@ -104,6 +107,23 @@ public class RobotContainer {
     final JoystickButton rightTriggButton = new JoystickButton(operatorController,6);
     rightTriggButton.whileHeld(new ReverseBall(m_feeder));
     
+    //final JoystickButton buttonX = new JoystickButton(driverController,3);
+    //buttonX.whileHeld(new ClimberIn(m_climber));
+
+    //final JoystickButton buttonB = new JoystickButton(driverController,2);
+    //buttonX.whileHeld(new ClimberOut(m_climber));
+
+    //final JoystickButton leftBumper = new JoystickButton(driverController,5);
+    //buttonX.whileHeld(new OpenHook(m_climber));
+
+    //final JoystickButton rightBumper = new JoystickButton(driverController,6);
+    //buttonX.whileHeld(new CloseHook(m_climber));
+
+    final JoystickButton leftButton = new JoystickButton(operatorController,9);
+    leftButton.whileHeld(new ClimbRobot(m_climber));
+
+    final JoystickButton rightButton = new JoystickButton(operatorController,10);
+    rightButton.whileHeld(new ClimbReverse(m_climber));
     
 ;
   // new JoystickButton(driverController, Button.kA.value)

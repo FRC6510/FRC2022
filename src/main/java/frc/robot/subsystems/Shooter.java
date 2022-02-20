@@ -17,7 +17,7 @@ public class Shooter extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX ShooterLeft = new TalonFX(7);
   private static TalonFX ShooterRight = new TalonFX(8);
-  private static TalonFX ShooterBack = new TalonFX(0);
+  private static TalonFX ShooterBack = new TalonFX(35);
 
 
   private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -29,9 +29,9 @@ public class Shooter extends SubsystemBase {
     ShooterLeft.setNeutralMode(NeutralMode.Coast); //stop mode
     ShooterRight.setNeutralMode(NeutralMode.Coast);
     ShooterBack.setNeutralMode(NeutralMode.Coast);
-    ShooterLeft.configOpenloopRamp(1); //ramp acceleration
-    ShooterRight.configOpenloopRamp(1);
-    ShooterBack.configOpenloopRamp(1);
+    ShooterLeft.configOpenloopRamp(0.5); //ramp acceleration
+    ShooterRight.configOpenloopRamp(0.5);
+    ShooterBack.configOpenloopRamp(0.5);
     ShooterRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     ShooterBack.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
@@ -42,9 +42,9 @@ public class Shooter extends SubsystemBase {
   }
 
   public void spin_shooter(){
-    ShooterLeft.set(ControlMode.PercentOutput,0.75); //speed
-    ShooterRight.set(ControlMode.PercentOutput,0.75);
-    ShooterBack.set(ControlMode.PercentOutput,-0.75);
+    ShooterLeft.set(ControlMode.PercentOutput,0.6); //speed
+    ShooterRight.set(ControlMode.PercentOutput,0.6);
+    ShooterBack.set(ControlMode.PercentOutput,0.4);
 
   }
 

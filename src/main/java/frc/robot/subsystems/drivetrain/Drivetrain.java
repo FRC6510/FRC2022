@@ -47,8 +47,11 @@ public class Drivetrain extends SubsystemBase{
      SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
      SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
      SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
+     SmartDashboard.putNumber("yaw",imu.getYaw());
+     SmartDashboard.putNumber("converted yaw",imu.getRotation2d().getDegrees());
      
         driveOdometry.updateWithTime(Timer.getFPGATimestamp(), imu.getRotation2d(), measuredModuleStates);
+    
     }
     public void drive(double xVelocity, double yVelocity, double angularVelocity, boolean isFieldRelative){
         SwerveModuleState[] moduleStates;
@@ -83,7 +86,7 @@ public void resetGyro(){
 }
 
 public static double deadZone (double input){
-    if(Math.abs(input) < 0.1){ // <0.15
+    if(Math.abs(input) < 0.08){ // <0.15
         return 0;
     }
     return input;

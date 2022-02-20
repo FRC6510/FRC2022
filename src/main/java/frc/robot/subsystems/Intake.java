@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX intake = new TalonFX(55);
-  private static Solenoid intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 4);
+  private static Solenoid intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 5);
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -37,6 +37,7 @@ public class Intake extends SubsystemBase {
 
   public void spin_intake(){
     intake.set(ControlMode.PercentOutput,0.8); //speed
+    intake_pneu.set(true);
   }
 
   public void reverse_intake(){
@@ -45,6 +46,7 @@ public class Intake extends SubsystemBase {
 
   public void stop_intake(){
     intake.set(ControlMode.PercentOutput,0);
+    intake_pneu.set(false);
   }
 
   public void intake_out(){
