@@ -24,8 +24,8 @@ public class SwerveModule {
     public SwerveModule(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
         this.driveMotor = new WPI_TalonFX(driveMotorPort);
         this.steeringMotor = new WPI_TalonFX(steeringMotorPort);
-        configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0, 0,0,0);
-        configSwerveMotor(steeringMotor, FeedbackDevice.RemoteSensor0, 1.8, 0, 0, 0);  //kI 0.004 kP 1.5
+        configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0, 0, 0, 0.0488);
+        configSwerveMotor(steeringMotor, FeedbackDevice.RemoteSensor0, 1.8, 0, 0, 0);  //kI 0.004 kP 1.5 /1.8
 
 
         this.angleEncoder = new CANCoder(angleEncoderPort);
@@ -35,7 +35,7 @@ public class SwerveModule {
         canCoderConfiguration.magnetOffsetDegrees = encoderOffset;
         this.angleEncoder.configAllSettings(canCoderConfiguration);
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
-        steeringMotor.configClosedLoopPeakOutput(0, 0.5);
+        steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
 
     }
@@ -47,7 +47,7 @@ public class SwerveModule {
         motor.config_kP(0, kP, 0);
         motor.config_kI(0, kI, 0);
         motor.config_kD(0, kD, 0);
-        motor.config_kF(0, 0.244, 0);
+        motor.config_kF(0, kF, 0);
         motor.config_IntegralZone(0, 33);
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_50Ms);
         motor.configVelocityMeasurementWindow(8,50);
@@ -63,9 +63,9 @@ public class SwerveModule {
 
     }
 
-    public SwerveModuleState directionOptimisation(){
-        return null;
-    }
+    //public SwerveModuleState directionOptimisation(){
+    //    return null;
+    //}
 
     protected SwerveModuleState getModuleState(){
         return new SwerveModuleState(getWheelVelocity(), new Rotation2d(angleEncoder.getAbsolutePosition()));
