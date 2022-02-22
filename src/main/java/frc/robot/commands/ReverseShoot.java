@@ -4,8 +4,8 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Shooter.Shooter;
 
 /** An example command that uses an example subsystem. */
 public class ReverseShoot extends CommandBase {
