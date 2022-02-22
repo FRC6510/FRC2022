@@ -29,6 +29,7 @@ class Constants {
      * 
 	 * 	                                    			  kP kI kD      kF          Iz    PeakOut */
    public final static Gains kGains_Velocit  = new Gains( 0.18, 0, 5.4, (0.60*1023)/12204,  300,  1.00); //kp 5, kD 20 on 75%
+   public final static Gains k2Gains_Velocit = new Gains( 0.04, 0, 1.46, (0.4*1023)/8552,  300,  1.00);
 }
 //currently p 0.5, d 20 and going rly zigzaggy (was less zigzaggy when it was d10) -> maybe increase p?
  //make it 2046

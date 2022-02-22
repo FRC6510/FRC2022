@@ -22,6 +22,7 @@ public class Shooter extends SubsystemBase {
   private static TalonFX ShooterBack = new TalonFX(35);
 
   double targetVelocity_UnitsPer100ms = 12204; //15255 for 75% speed
+  double targetVelocity2_UnitsPer100ms = 8552;
 
 
   private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -39,6 +40,7 @@ public class Shooter extends SubsystemBase {
 
     ShooterLeft.set(TalonFXControlMode.Velocity, targetVelocity_UnitsPer100ms);
 		ShooterRight.set(TalonFXControlMode.Velocity, targetVelocity_UnitsPer100ms);
+    ShooterBack.set(TalonFXControlMode.Velocity, targetVelocity2_UnitsPer100ms);
 
     //ShooterLeft.set(ControlMode.PercentOutput,0.6); //speed
     //ShooterRight.set(ControlMode.PercentOutput,0.6);
@@ -67,16 +69,21 @@ public class Shooter extends SubsystemBase {
     /* Factory Default all hardware to prevent unexpected behaviour */
 		ShooterRight.configFactoryDefault();
 		ShooterLeft.configFactoryDefault();
+    ShooterBack.configFactoryDefault();
 
 		ShooterLeft.setInverted(true); //direction
 		ShooterRight.setInverted(false);
+    ShooterBack.setInverted(false);
 		ShooterLeft.follow(ShooterRight); //slave
 		ShooterLeft.setNeutralMode(NeutralMode.Coast); //stop mode
 		ShooterRight.setNeutralMode(NeutralMode.Coast);
+    ShooterBack.setNeutralMode(NeutralMode.Coast);
 		
 		/* Config neutral deadband to be the smallest possible */
 		ShooterRight.configNeutralDeadband(0.001);
 		ShooterLeft.configNeutralDeadband(0.001);
+    ShooterBack.configNeutralDeadband(0.001);
+
 
 		/* Config sensor used for Primary PID [Velocity] */
         ShooterRight.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor,
@@ -85,6 +92,9 @@ public class Shooter extends SubsystemBase {
 		ShooterLeft.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor,
                                             Constants.kPIDLoopIdx, 
 											Constants.kTimeoutMs);	
+    ShooterBack.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor,
+                      Constants.kPIDLoopIdx, 
+Constants.kTimeoutMs);	
 
 		/* Config the peak and nominal outputs */
 		ShooterRight.configNominalOutputForward(0, Constants.kTimeoutMs);
@@ -97,6 +107,11 @@ public class Shooter extends SubsystemBase {
 		ShooterLeft.configPeakOutputForward(1, Constants.kTimeoutMs);
 		ShooterLeft.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
+    ShooterBack.configNominalOutputForward(0, Constants.kTimeoutMs);
+		ShooterBack.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		ShooterBack.configPeakOutputForward(1, Constants.kTimeoutMs);
+		ShooterBack.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+
 		/* Config the Velocity closed loop gains in slot0 */
 		ShooterRight.config_kF(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kF, Constants.kTimeoutMs);
 		ShooterRight.config_kP(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kP, Constants.kTimeoutMs);
@@ -107,6 +122,11 @@ public class Shooter extends SubsystemBase {
 		ShooterLeft.config_kP(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kP, Constants.kTimeoutMs);
 		ShooterLeft.config_kI(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kI, Constants.kTimeoutMs);
 		ShooterLeft.config_kD(Constants.kPIDLoopIdx, Constants.kGains_Velocit.kD, Constants.kTimeoutMs);
+
+    ShooterBack.config_kF(Constants.kPIDLoopIdx, Constants.k2Gains_Velocit.kF, Constants.kTimeoutMs);
+		ShooterBack.config_kP(Constants.kPIDLoopIdx, Constants.k2Gains_Velocit.kP, Constants.kTimeoutMs);
+		ShooterBack.config_kI(Constants.kPIDLoopIdx, Constants.k2Gains_Velocit.kI, Constants.kTimeoutMs);
+		ShooterBack.config_kD(Constants.kPIDLoopIdx, Constants.k2Gains_Velocit.kD, Constants.kTimeoutMs);
 		/*
 		 * Talon FX does not need sensor phase set for its integrated sensor
 		 * This is because it will always be correct if the selected feedback device is integrated sensor (default value)
