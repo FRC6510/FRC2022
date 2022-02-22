@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -44,7 +45,8 @@ public class RobotContainer {
   private final Feeder m_feeder = new Feeder();
   private final Shooter m_shooter = new Shooter();
   private final Intake m_intake = new Intake();
-  private final Climber m_climber = new Climber();
+  private final Climber
+ m_climber = new Climber();
 
   XboxController driverController = new XboxController(0);
   XboxController operatorController = new XboxController(1); 
@@ -107,17 +109,17 @@ public class RobotContainer {
     final JoystickButton rightTriggButton = new JoystickButton(operatorController,6);
     rightTriggButton.whileHeld(new ReverseBall(m_feeder));
     
-    //final JoystickButton buttonX = new JoystickButton(driverController,3);
-    //buttonX.whileHeld(new ClimberIn(m_climber));
+    final JoystickButton buttonX = new JoystickButton(driverController,3);
+    buttonX.whenPressed(new ClimberIn(m_climber));
 
-    //final JoystickButton buttonB = new JoystickButton(driverController,2);
-    //buttonX.whileHeld(new ClimberOut(m_climber));
+    final JoystickButton buttonB = new JoystickButton(driverController,2);
+    buttonB.whenPressed(new ClimberOut(m_climber));
 
-    //final JoystickButton leftBumper = new JoystickButton(driverController,5);
-    //buttonX.whileHeld(new OpenHook(m_climber));
+    final JoystickButton leftBumper = new JoystickButton(driverController,5);
+    leftBumper.whileHeld(new OpenHook(m_climber));
 
-    //final JoystickButton rightBumper = new JoystickButton(driverController,6);
-    //buttonX.whileHeld(new CloseHook(m_climber));
+    final JoystickButton rightBumper = new JoystickButton(driverController,6);
+    rightBumper.whileHeld(new CloseHook(m_climber));
 
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     leftButton.whileHeld(new ClimbRobot(m_climber));
@@ -125,16 +127,16 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
     rightButton.whileHeld(new ClimbReverse(m_climber));
     
-;
-  // new JoystickButton(driverController, Button.kA.value)
+
+  new JoystickButton(driverController, Button.kA.value).whenPressed(() -> drivetrain.turnLFmodule(60)).whenReleased(() -> drivetrain.turnLFmodule(0));
+  //new JoystickButton(driverController, Button.kY.value)
   // .whenPressed(() -> drivetrain.turnLFmodule(5)).whenReleased(() -> drivetrain.turnLFmodule(0));
   // new JoystickButt    - on(driverController, Button.kB.value)
   // .whenPressed(() -> drivetrain.turnLFmodule(30)).whenReleased(() -> drivetrain.turnLFmodule(0));
   // new JoystickButton(driverController, Button.kX.value)
-  // .whenPressed(() -> drivetrain.turnLFmodule(90)).whenReleased(() -> drivetrain.turnLFmodule(0));
-  // new JoystickButton(driverController, Button.kY.value)
-  // .whenPressed(() -> drivetrain.turnLFmodule(-120)).whenReleased(() -> drivetrain.turnLFmodule(0));
 
+  // .whenPressed(() -> drivetrain.turnLFmodule(-120)).whenReleased(() -> drivetrain.turnLFmodule(0));
+;
   }
 
   /**

@@ -25,7 +25,7 @@ public class SwerveModule {
         this.driveMotor = new WPI_TalonFX(driveMotorPort);
         this.steeringMotor = new WPI_TalonFX(steeringMotorPort);
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 0.6, 0.0488);
-        configSwerveMotor(steeringMotor, FeedbackDevice.RemoteSensor0, 1.8, 0, 0, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
+        configSwerveMotor(steeringMotor, FeedbackDevice.RemoteSensor0, 1.8, 0, 18, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
 
 
         this.angleEncoder = new CANCoder(angleEncoderPort);

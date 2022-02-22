@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX intake = new TalonFX(55);
-  private static Solenoid intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 5);
+  private static Solenoid intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;

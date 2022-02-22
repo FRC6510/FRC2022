@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX climber = new TalonFX(44);
-  private static Solenoid climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
+  private static Solenoid climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
   private static Solenoid hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
 
 
@@ -35,8 +35,8 @@ public class Climber extends SubsystemBase {
 
     //climber.config
 
-    climber_pneu.set(false);
-    hook_pneu.set(false);
+  // climber_pneu.set(false);
+    //hook_pneu.set(false);
   }
 
   @Override
@@ -61,11 +61,11 @@ public class Climber extends SubsystemBase {
   }
 
   public void hook_close(){
-    climber_pneu.set(true); //speed
+    hook_pneu.set(true); //speed
   }
 
   public void hook_open(){
-    climber_pneu.set(false);//speed
+    hook_pneu.set(false);//speed
   }
 
   public void stop_climber(){
