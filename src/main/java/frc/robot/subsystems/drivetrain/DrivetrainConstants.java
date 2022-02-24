@@ -37,6 +37,8 @@ public static final Translation2d[] moduleOffset = {
     new Translation2d(-MODULE_DISTANCE_FROM_CENTRE_LENGTH,-MODULE_DISTANCE_FROM_CENTRE_WIDTH) //back right
 };
 
+    public static final double angleGearRatio = 12.8;
+
     public static final double 
         MAX_SPEED_METRES_PER_SECOND = 4, //0.8
         GEAR_RATIO = 8.14, //one rotation of wheel from 8.14 shaft rotations

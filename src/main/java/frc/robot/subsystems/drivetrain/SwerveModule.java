@@ -18,6 +18,7 @@ public class SwerveModule {
 
     private final WPI_TalonFX driveMotor;
     private final WPI_TalonFX steeringMotor;
+    double encoderOffset;
 
     private final CANCoder angleEncoder;
 
@@ -25,8 +26,9 @@ public class SwerveModule {
         this.driveMotor = new WPI_TalonFX(driveMotorPort);
         this.steeringMotor = new WPI_TalonFX(steeringMotorPort);
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 0.6, 0.0488);
-        configSwerveMotor(steeringMotor, FeedbackDevice.RemoteSensor0, 1.8, 0, 18, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
+        configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
 
+        this.encoderOffset = encoderOffset;
 
         this.angleEncoder = new CANCoder(angleEncoderPort);
         CANCoderConfiguration canCoderConfiguration = new CANCoderConfiguration();
@@ -37,6 +39,8 @@ public class SwerveModule {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
+        steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
+        resetToAbsolute();
 
     }
     protected void configSwerveMotor(WPI_TalonFX motor,FeedbackDevice FeedbackSensor, double kP, double kI, double kD, double kF){
@@ -54,14 +58,29 @@ public class SwerveModule {
 
     }
 
+    public static double degreesToFalcon(double degrees, double gearRatio){
+        double ticks = degrees / (360.0 / (gearRatio * 2048));
+        return ticks;
+    }
+
+    public static double falconToDegrees(double counts, double gearRatio){
+        return counts * (360/(gearRatio * 2048.0));
+    }
+
+private void resetToAbsolute(){
+    double absolutePosition = degreesToFalcon(angleEncoder.getAbsolutePosition() - encoderOffset, DrivetrainConstants.angleGearRatio);
+    steeringMotor.setSelectedSensorPosition(absolutePosition);
+}
+
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         //SwerveModuleState state = swerveModuleState;
         driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(state.speedMetersPerSecond));
         SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
+        steeringMotor.set(ControlMode.Position,degreesToFalcon(state.angle.getDegrees(), DrivetrainConstants.angleGearRatio));
         steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
-        steeringMotor.configFeedbackNotContinuous(false, 0);
+        // steeringMotor.configFeedbackNotContinuous(false, 0);
     }
 
     //public SwerveModuleState directionOptimisation(){
