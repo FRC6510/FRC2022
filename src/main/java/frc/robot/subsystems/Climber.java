@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX climber;
-  private static Solenoid climber_pneu;
-  private static Solenoid hook_pneu;
+ // private static Solenoid climber_pneu;
+  //private static Solenoid hook_pneu;
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -27,8 +27,8 @@ public class Climber extends SubsystemBase {
   public Climber(){
 
     climber = new TalonFX(44);
-    climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
-    hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+    //climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
+    //hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
 
     climber.setInverted(false);
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
@@ -41,8 +41,8 @@ public class Climber extends SubsystemBase {
     
 
     //climber.config
-    climber_pneu.set(false);
-    hook_pneu.set(false); //speed
+    //climber_pneu.set(false);
+    //hook_pneu.set(false); //speed
   }
 
   @Override
@@ -59,19 +59,19 @@ public class Climber extends SubsystemBase {
   }
 
   public void climber_in(){
-    climber_pneu.set(true); //speed
+    //.set(true); //speed
   }
 
   public void climber_out(){
-    climber_pneu.set(false);//speed
+    //climber_pneu.set(false);//speed
   }
 
   public void hook_close(){
-    hook_pneu.set(true); //speed
+   // hook_pneu.set(true); //speed
   }
 
   public void hook_open(){
-    hook_pneu.set(false);//speed
+    //hook_pneu.set(false);//speed
   }
 
   public void stop_climber(){
