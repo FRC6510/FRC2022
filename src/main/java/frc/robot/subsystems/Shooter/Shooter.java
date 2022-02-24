@@ -21,8 +21,8 @@ public class Shooter extends SubsystemBase {
   private static TalonFX ShooterRight = new TalonFX(8);
   private static TalonFX ShooterBack = new TalonFX(35);
 
-  double targetVelocity_UnitsPer100ms = 12204; //15255 for 75% speed
-  double targetVelocity2_UnitsPer100ms = 8552;
+  double targetVelocity_UnitsPer100ms = 9000; //15255 for 75% speed 12204
+  double targetVelocity2_UnitsPer100ms = 7000; //8552
 
 
   private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;

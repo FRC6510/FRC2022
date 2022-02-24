@@ -9,20 +9,27 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import org.opencv.features2d.FlannBasedMatcher;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static TalonFX climber = new TalonFX(44);
-  private static Solenoid climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
-  private static Solenoid hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+  private static TalonFX climber;
+  private static Solenoid climber_pneu;
+  private static Solenoid hook_pneu;
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
 
   public Climber(){
+
+    climber = new TalonFX(44);
+    climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
+    hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+
     climber.setInverted(false);
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
     climber.configOpenloopRamp(0.3); //ramp acceleration
@@ -34,9 +41,8 @@ public class Climber extends SubsystemBase {
     
 
     //climber.config
-
-  // climber_pneu.set(false);
-    //hook_pneu.set(false);
+    climber_pneu.set(false);
+    hook_pneu.set(false); //speed
   }
 
   @Override

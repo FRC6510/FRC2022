@@ -20,6 +20,7 @@ public class ClimberOut extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_climber.climber_out(); 
     
   }
 
@@ -27,7 +28,7 @@ public class ClimberOut extends CommandBase {
   @Override
   public void execute() {
 
-    m_climber.climber_out();  
+    
 
   }
     

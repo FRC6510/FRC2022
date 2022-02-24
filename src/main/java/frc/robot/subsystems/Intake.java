@@ -17,17 +17,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static TalonFX intake = new TalonFX(55);
-  private static Solenoid intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
-
+  private static TalonFX intake;
+  private static Solenoid intake_pneu;
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
 
   public Intake(){
+
+    intake = new TalonFX(55);
+    intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+    
     intake.setInverted(false);
     intake.setNeutralMode(NeutralMode.Brake); //stop mode
     intake.configOpenloopRamp(1); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
+    intake_pneu.set(false);
   }
 
   @Override
@@ -41,12 +45,12 @@ public class Intake extends SubsystemBase {
   }
 
   public void reverse_intake(){
-    intake.set(ControlMode.PercentOutput,-0.8); //speed
+   intake.set(ControlMode.PercentOutput,-0.8); //speed
   }
 
   public void stop_intake(){
     intake.set(ControlMode.PercentOutput,0);
-    intake_pneu.set(false);
+    intake_in();
   }
 
   public void intake_out(){
