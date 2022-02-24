@@ -11,9 +11,9 @@ public class DrivetrainConstants {
 
 public static final int
     LF_STEER_MOTOR_PORT = 15,
-    LB_STEER_MOTOR_PORT = 16,
+    LB_STEER_MOTOR_PORT = 16, 
     RF_STEER_MOTOR_PORT = 17,
-    RB_STEER_MOTOR_PORT = 14;
+    RB_STEER_MOTOR_PORT = 14; 
 
 public static final int
     LF_ANGLE_ENCODER_PORT = 19,

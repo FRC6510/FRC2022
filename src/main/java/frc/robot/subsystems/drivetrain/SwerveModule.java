@@ -31,7 +31,7 @@ public class SwerveModule {
         this.angleEncoder = new CANCoder(angleEncoderPort);
         CANCoderConfiguration canCoderConfiguration = new CANCoderConfiguration();
         canCoderConfiguration.initializationStrategy=SensorInitializationStrategy.BootToAbsolutePosition;
-        canCoderConfiguration.absoluteSensorRange = AbsoluteSensorRange.Signed_PlusMinus180;
+        canCoderConfiguration.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
         canCoderConfiguration.magnetOffsetDegrees = encoderOffset;
         this.angleEncoder.configAllSettings(canCoderConfiguration);
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
@@ -56,11 +56,12 @@ public class SwerveModule {
 
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
-        SwerveModuleState state = swerveModuleState;
+        SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
+        //SwerveModuleState state = swerveModuleState;
         driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(state.speedMetersPerSecond));
         SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
         steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
-
+        steeringMotor.configFeedbackNotContinuous(false, 0);
     }
 
     //public SwerveModuleState directionOptimisation(){
