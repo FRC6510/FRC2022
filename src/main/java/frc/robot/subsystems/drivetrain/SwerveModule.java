@@ -10,6 +10,7 @@ import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,8 @@ public class SwerveModule {
     private final WPI_TalonFX steeringMotor;
     double encoderOffset;
 
+    private final PIDController steerPID;
+
     private final CANCoder angleEncoder;
 
     public SwerveModule(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
@@ -28,12 +31,16 @@ public class SwerveModule {
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 0.6, 0.0488);
         configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
 
+        this.steerPID = new PIDController(0.0055,0,0);
+        this.steerPID.enableContinuousInput(-180,180);
+        this.steerPID.setTolerance(0);
+
         this.encoderOffset = encoderOffset;
 
         this.angleEncoder = new CANCoder(angleEncoderPort);
         CANCoderConfiguration canCoderConfiguration = new CANCoderConfiguration();
         canCoderConfiguration.initializationStrategy=SensorInitializationStrategy.BootToAbsolutePosition;
-        canCoderConfiguration.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
+        canCoderConfiguration.absoluteSensorRange = AbsoluteSensorRange.Signed_PlusMinus180;
         canCoderConfiguration.magnetOffsetDegrees = encoderOffset;
         this.angleEncoder.configAllSettings(canCoderConfiguration);
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
@@ -73,13 +80,16 @@ private void resetToAbsolute(){
 }
 
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
+        swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
+        double angleOutput = steerPID.calculate(angleEncoder.getAbsolutePosition(), swerveModuleState.angle.getDegrees());
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
-        SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
+        // SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         //SwerveModuleState state = swerveModuleState;
-        driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(state.speedMetersPerSecond));
-        SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
-        steeringMotor.set(ControlMode.Position,degreesToFalcon(state.angle.getDegrees(), DrivetrainConstants.angleGearRatio));
-        steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
+        driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(swerveModuleState.speedMetersPerSecond));
+        steeringMotor.set(ControlMode.PercentOutput,angleOutput);
+        // SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
+        // steeringMotor.set(ControlMode.Position,degreesToFalcon(state.angle.getDegrees(), DrivetrainConstants.angleGearRatio));
+        // steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
         // steeringMotor.configFeedbackNotContinuous(false, 0);
     }
 

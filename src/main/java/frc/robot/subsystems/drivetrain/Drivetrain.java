@@ -86,10 +86,12 @@ public void resetGyro(){
 }
 
 public static double deadZone (double input){
+
     if(Math.abs(input) < 0.2){ // <0.15
         return 0;
-    }
-    return input;
+    } else if(input<0) {
+        return -((1.0/0.64)*(input-0.2)*(input-0.2));
+    } return ((1.0/0.64)*(input-0.2)*(input-0.2));
 }    
 
 
