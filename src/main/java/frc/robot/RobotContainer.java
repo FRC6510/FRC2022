@@ -39,17 +39,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final Drivetrain drivetrain = new Drivetrain();;
 
+  XboxController driverController = new XboxController(0);
+  XboxController operatorController = new XboxController(1); 
+  // The robot's subsystems and commands are defined here...
+  private final Drivetrain drivetrain = new Drivetrain();
   private final Feeder m_feeder = new Feeder();
   private final Shooter m_shooter = new Shooter();
   private final Intake m_intake = new Intake();
   private final Climber m_climber = new Climber();
-
-  XboxController driverController = new XboxController(0);
-  XboxController operatorController = new XboxController(1); 
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -87,26 +85,19 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-
     RightBumper.whileHeld(new ReverseBall(m_feeder));
     Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
     Xbutton.whileHeld(new IntakeBall(m_intake));
     LeftBumper.whileHeld(new FeedBall(m_feeder));
-  
     
-
- 
-     //final JoystickButton leftTriggButton = new JoystickButton(operatorController, 0);
-    //leftTriggButton.whileHeld(new ReverseIntake(m_intake)); 
-    
-    final JoystickButton buttonA = new JoystickButton(driverController,2);
+    final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);
     final JoystickButton buttonX = new JoystickButton(driverController,3);
     final JoystickButton buttonY = new JoystickButton(driverController,4);
     final JoystickButton BumperLeft = new JoystickButton(driverController,5);
     final JoystickButton BumperRight = new JoystickButton(driverController,6);
-    final JoystickButton leftStartButtonDriver = new JoystickButton(operatorController,7);
+    final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
     buttonB.whenPressed(new ClimberOut(m_climber));
@@ -115,24 +106,6 @@ public class RobotContainer {
     BumperRight.whileHeld(new CloseHook(m_climber));
     buttonA.whileHeld(new ClimbRobot(m_climber));
     leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
-   
-
-    
-
-    ;
-    
-
-
-
-  //new JoystickButton(driverController, Button.kA.value).whenPressed(() -> drivetrain.turnLFmodule(60)).whenReleased(() -> drivetrain.turnLFmodule(0));
-  //new JoystickButton(driverController, Button.kY.value)
-  // .whenPressed(() -> drivetrain.turnLFmodule(5)).whenReleased(() -> drivetrain.turnLFmodule(0));
-  // new JoystickButt    - on(driverController, Button.kB.value)
-  // .whenPressed(() -> drivetrain.turnLFmodule(30)).whenReleased(() -> drivetrain.turnLFmodule(0));
-  // new JoystickButton(driverController, Button.kX.value)
-
-  // .whenPressed(() -> drivetrain.turnLFmodule(-120)).whenReleased(() -> drivetrain.turnLFmodule(0));
-
   }
 
   /**
