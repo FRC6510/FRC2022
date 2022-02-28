@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -18,20 +19,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX intake;
-  //private static Solenoid intake_pneu;
+ 
+  //Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+
+  private static Solenoid intake_pneu  = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
 
   public Intake(){
 
     intake = new TalonFX(55);
-   // intake_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+   //intake_pneu = 
     
     intake.setInverted(false);
     intake.setNeutralMode(NeutralMode.Brake); //stop mode
     intake.configOpenloopRamp(1); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
-    //intake_pneu.set(false);
+    intake_pneu.set(false);
   }
 
   @Override
@@ -41,7 +45,7 @@ public class Intake extends SubsystemBase {
 
   public void spin_intake(){
     intake.set(ControlMode.PercentOutput,0.8); //speed
-   // intake_pneu.set(true);
+    intake_pneu.set(true);
   }
 
   public void reverse_intake(){
@@ -54,11 +58,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void intake_out(){
-   // intake_pneu.set(true);
+    intake_pneu.set(true);
   }
 
   public void intake_in(){
-     // intake_pneu.set(false);
+    intake_pneu.set(false);
   }
 
   @Override

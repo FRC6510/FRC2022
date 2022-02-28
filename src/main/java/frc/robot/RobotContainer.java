@@ -5,7 +5,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.ClimbReverse;
@@ -13,9 +20,10 @@ import frc.robot.commands.ClimbRobot;
 import frc.robot.commands.ClimberIn;
 import frc.robot.commands.ClimberOut;
 import frc.robot.commands.CloseHook;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.FeedBall;
 import frc.robot.commands.IntakeBall;
+import frc.robot.commands.IntakeIn;
+import frc.robot.commands.IntakeOut;
 import frc.robot.commands.OpenHook;
 import frc.robot.commands.ReverseBall;
 import frc.robot.commands.ReverseClimb;
@@ -23,7 +31,6 @@ import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter.Shooter;
@@ -42,12 +49,14 @@ public class RobotContainer {
 
   XboxController driverController = new XboxController(0);
   XboxController operatorController = new XboxController(1); 
+
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
   private final Feeder m_feeder = new Feeder();
   private final Shooter m_shooter = new Shooter();
   private final Intake m_intake = new Intake();
   private final Climber m_climber = new Climber();
+ 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -89,6 +98,7 @@ public class RobotContainer {
     Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
     Xbutton.whileHeld(new IntakeBall(m_intake));
+    Abutton.whileHeld(new IntakeIn(m_intake));
     LeftBumper.whileHeld(new FeedBall(m_feeder));
     
     final JoystickButton buttonA = new JoystickButton(driverController,1);
@@ -100,10 +110,10 @@ public class RobotContainer {
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
-    buttonB.whenPressed(new ClimberOut(m_climber));
-    buttonX.whenPressed(new ClimberIn(m_climber));
+    buttonB.whileHeld(new ClimberOut(m_climber));
+    //buttonX.whenPressed(new ClimberIn(m_climber));
     BumperLeft.whileHeld(new OpenHook(m_climber));
-    BumperRight.whileHeld(new CloseHook(m_climber));
+    //BumperRight.whileHeld(new CloseHook(m_climber));
     buttonA.whileHeld(new ClimbRobot(m_climber));
     leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
   }
