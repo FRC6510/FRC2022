@@ -94,13 +94,13 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    RightBumper.whileHeld(new IndexFirstBall(m_feeder));
+    RightBumper.whileHeld(new IntakeMaster(m_intake,m_feeder));
     Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
    // Xbutton.whileHeld(new IntakeBall(m_intake));
    // Abutton.whileHeld(new IntakeIn(m_intake));
     //LeftBumper.whileHeld(new FeedBall(m_feeder));
-    LeftBumper.whileHeld(new IntakeBall(m_intake));
+    //LeftBumper.whileHeld(new IntakeBall(m_intake));
 
     
     final JoystickButton buttonA = new JoystickButton(driverController,1);

@@ -19,7 +19,7 @@ public class IntakeMaster extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-new IntakeBall(intake), new IntakeOut(intake), new IndexFirstBall(feeder));
+new IntakeBall(intake), new IndexFirstBall(feeder));
 
   }
 }
