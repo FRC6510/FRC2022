@@ -4,20 +4,30 @@
 
 package frc.robot.commands.Group;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.IntakeBall;
-import frc.robot.commands.IntakeOut;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.FeedBall;
+import frc.robot.commands.ReverseBall;
+import frc.robot.commands.stopFeeder;
+import frc.robot.subsystems.Feeder;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Intake extends ParallelCommandGroup {
-  /** Creates a new Intake. */
-  public Intake(frc.robot.subsystems.Intake intake) {
+public class IndexFirstBall extends SequentialCommandGroup {
+
+
+  /** Creates a new IndexFirstBall. */
+  public IndexFirstBall(Feeder feeder) {
+
+
+
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-new IntakeOut(intake),  new IntakeBall(intake)   );
 
+    new FeedBall(feeder), new stopFeeder(feeder).withTimeout(1), new ReverseBall(feeder)//.withTimeout()
+    
+
+    );
   }
 }

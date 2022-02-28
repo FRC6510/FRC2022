@@ -5,10 +5,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.MjpegServer;
-import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -30,6 +27,9 @@ import frc.robot.commands.ReverseClimb;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.Group.FullIntake;
+import frc.robot.commands.Group.IndexFirstBall;
+import frc.robot.commands.Group.IntakeMaster;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
@@ -94,12 +94,14 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    RightBumper.whileHeld(new ReverseBall(m_feeder));
+    RightBumper.whileHeld(new IndexFirstBall(m_feeder));
     Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
-    Xbutton.whileHeld(new IntakeBall(m_intake));
-    Abutton.whileHeld(new IntakeIn(m_intake));
-    LeftBumper.whileHeld(new FeedBall(m_feeder));
+   // Xbutton.whileHeld(new IntakeBall(m_intake));
+   // Abutton.whileHeld(new IntakeIn(m_intake));
+    //LeftBumper.whileHeld(new FeedBall(m_feeder));
+    LeftBumper.whileHeld(new IntakeBall(m_intake));
+
     
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);

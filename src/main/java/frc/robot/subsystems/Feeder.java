@@ -8,12 +8,17 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feeder extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static VictorSPX leftFeeder = new VictorSPX(5);
   private static VictorSPX frontFeeder = new VictorSPX(6);
+  DigitalInput feederSensor = new DigitalInput(0);
+
+
 
   public Feeder(){
     leftFeeder.setInverted(false);
@@ -24,17 +29,20 @@ public class Feeder extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+  
+    
     // This method will be called once per scheduler run
   }
 
   public void spin_feeder(){
-    leftFeeder.set(ControlMode.PercentOutput,1);
-    frontFeeder.set(ControlMode.PercentOutput,1);
+    leftFeeder.set(ControlMode.PercentOutput,0.6);
+    frontFeeder.set(ControlMode.PercentOutput,0.6);
   }
 
   public void reverse_feeder(){
-    leftFeeder.set(ControlMode.PercentOutput,-1);
-    frontFeeder.set(ControlMode.PercentOutput,-1);
+    leftFeeder.set(ControlMode.PercentOutput,-0.35);
+    //frontFeeder.set(ControlMode.PercentOutput,-0.35);
   }
 
   public void stop_feeder(){
@@ -42,8 +50,19 @@ public class Feeder extends SubsystemBase {
     frontFeeder.set(ControlMode.PercentOutput,0);
   }
 
+  public boolean sense_ball(){
+
+    return feederSensor.get();
+
+  }
+
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public void log(){
+    SmartDashboard.getBoolean("feederSensor", feederSensor.get());
+
   }
 }

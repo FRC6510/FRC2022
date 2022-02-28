@@ -5,14 +5,13 @@
 package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.subsystems.Feeder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ReverseBall extends CommandBase {
+public class stopFeeder extends CommandBase {
   private final Feeder m_feeder;
 
-  public ReverseBall(Feeder feeder) {
+  public stopFeeder(Feeder feeder) {
     m_feeder = feeder;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_feeder);
@@ -26,8 +25,8 @@ public class ReverseBall extends CommandBase {
   @Override
   public void execute() {
 
-    m_feeder.reverse_feeder();
-    SmartDashboard.putString("reverBall", "isRunning");
+    m_feeder.stop_feeder();
+
 
   }
     
@@ -35,18 +34,12 @@ public class ReverseBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_feeder.stop_feeder();
-    SmartDashboard.putString("reverBall", "isNotRunning");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_feeder.sense_ball() == true){
-
-      return false;
-     } else {
-       return true;
-     }
- 
+return false;
+  
   }
 }

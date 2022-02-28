@@ -44,8 +44,9 @@ public class Intake extends SubsystemBase {
   }
 
   public void spin_intake(){
-    intake.set(ControlMode.PercentOutput,0.8); //speed
+    intake.set(ControlMode.PercentOutput,0.8);//speed
     intake_pneu.set(true);
+
   }
 
   public void reverse_intake(){
@@ -54,7 +55,7 @@ public class Intake extends SubsystemBase {
 
   public void stop_intake(){
     intake.set(ControlMode.PercentOutput,0);
-    intake_in();
+    intake_pneu.set(false);
   }
 
   public void intake_out(){

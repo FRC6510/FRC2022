@@ -88,11 +88,18 @@ public void resetGyro(){
 
 public static double deadZone (double input){
 
-    if(Math.abs(input) < 0.2){ // <0.15
-        return 0;
-    } else if(input<0) {
-        return -((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
-    } return ((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
+//     if(Math.abs(input) < 0.2){ // <0.15
+//         return 0;
+//     } else if(input<0) {
+//         return -((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
+//     } return ((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
+// }    
+
+if(Math.abs(input) < 0.2){ // <0.15
+    return 0;
+} else if(input<0) {
+    return -(1.25*input + 0.2);
+} return (1.25*input + 0.2);
 }    
 
 
