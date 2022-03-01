@@ -4,22 +4,29 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class IntakeBall extends CommandBase {
   private final Intake m_intake;
+  private final Feeder m_feeder;
 
-  public IntakeBall(Intake intake) {
+  public IntakeBall(Intake intake, Feeder feeder) {
     m_intake = intake;
+    m_feeder = feeder;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_intake);
+    addRequirements(m_intake, m_feeder);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -38,6 +45,11 @@ public class IntakeBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(m_intake.sense_intake() && m_feeder.sense_ball()){
+      return false;
+    } else{
+      return true;
+    }
+    
   }
 }

@@ -5,6 +5,9 @@
 package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.subsystems.Feeder;
+
+import java.util.concurrent.TimeoutException;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

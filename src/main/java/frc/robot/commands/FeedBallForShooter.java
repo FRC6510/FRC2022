@@ -5,13 +5,15 @@
 package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.subsystems.Feeder;
+import frc.robot.subsystems.Shooter.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class FeedBall extends CommandBase {
+public class FeedBallForShooter extends CommandBase {
   private final Feeder m_feeder;
 
-  public FeedBall(Feeder feeder) {
+
+  public FeedBallForShooter(Feeder feeder) {
     m_feeder = feeder;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_feeder);
@@ -25,8 +27,9 @@ public class FeedBall extends CommandBase {
   @Override
   public void execute() {
 
-    m_feeder.spin_feeder(0.5
-    );
+      m_feeder.spin_feeder(1);
+    
+
 
   }
     
@@ -39,12 +42,6 @@ public class FeedBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_feeder.sense_ball() == true){
-
-     return false;
-    } else {
-      return true;
-    }
-  
+      return false;
   }
 }

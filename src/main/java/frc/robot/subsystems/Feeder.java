@@ -16,9 +16,7 @@ public class Feeder extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static VictorSPX leftFeeder = new VictorSPX(5);
   private static VictorSPX frontFeeder = new VictorSPX(6);
-  DigitalInput feederSensor = new DigitalInput(0);
-
-
+  public DigitalInput feederSensor = new DigitalInput(0);
 
   public Feeder(){
     leftFeeder.setInverted(false);
@@ -29,15 +27,12 @@ public class Feeder extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-  
-    
     // This method will be called once per scheduler run
   }
 
-  public void spin_feeder(){
-    leftFeeder.set(ControlMode.PercentOutput,0.6);
-    frontFeeder.set(ControlMode.PercentOutput,0.6);
+  public void spin_feeder(double speed){
+    leftFeeder.set(ControlMode.PercentOutput,speed);
+    frontFeeder.set(ControlMode.PercentOutput,speed);
   }
 
   public void reverse_feeder(){
@@ -51,9 +46,7 @@ public class Feeder extends SubsystemBase {
   }
 
   public boolean sense_ball(){
-
     return feederSensor.get();
-
   }
 
   @Override

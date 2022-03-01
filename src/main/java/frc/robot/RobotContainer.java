@@ -18,6 +18,7 @@ import frc.robot.commands.ClimberIn;
 import frc.robot.commands.ClimberOut;
 import frc.robot.commands.CloseHook;
 import frc.robot.commands.FeedBall;
+import frc.robot.commands.FeedBallForShooter;
 import frc.robot.commands.IntakeBall;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
@@ -26,10 +27,12 @@ import frc.robot.commands.ReverseBall;
 import frc.robot.commands.ReverseClimb;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
+import frc.robot.commands.SenseClimber;
 import frc.robot.commands.ShootBall;
-import frc.robot.commands.Group.FullIntake;
-import frc.robot.commands.Group.IndexFirstBall;
-import frc.robot.commands.Group.IntakeMaster;
+import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
+import frc.robot.commands.Group.Group.Intake.FullIntake;
+import frc.robot.commands.Group.Group.Intake.IntakeMaster;
+import frc.robot.commands.Group.Group.Shooter.ShootBalls;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
@@ -94,12 +97,11 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    RightBumper.whileHeld(new IntakeMaster(m_intake,m_feeder));
-    Ybutton.whileHeld(new ReverseShoot(m_shooter));
+    Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
+    //Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
-   // Xbutton.whileHeld(new IntakeBall(m_intake));
-   // Abutton.whileHeld(new IntakeIn(m_intake));
-    //LeftBumper.whileHeld(new FeedBall(m_feeder));
+    RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
+    Ybutton.whileHeld(new SenseClimber(m_climber));
     //LeftBumper.whileHeld(new IntakeBall(m_intake));
 
     

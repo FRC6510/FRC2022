@@ -11,8 +11,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import org.opencv.features2d.FlannBasedMatcher;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
@@ -20,6 +22,7 @@ public class Climber extends SubsystemBase {
   private static TalonFX climber;
   private static Solenoid climber_pneu;
   private static Solenoid hook_pneu;
+  DigitalInput climberSensor = new DigitalInput(1);
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -29,6 +32,7 @@ public class Climber extends SubsystemBase {
     climber = new TalonFX(44);
     climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+    
 
     climber.setInverted(false);
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
@@ -72,6 +76,15 @@ public class Climber extends SubsystemBase {
 
   public void stop_climber(){
     climber.set(ControlMode.PercentOutput,0);
+  }
+
+  public boolean sense_climber(){
+    return climberSensor.get();
+  }
+
+  public void climblog(){
+    SmartDashboard.putBoolean("climberSensor", climberSensor.get());
+
   }
 
   @Override

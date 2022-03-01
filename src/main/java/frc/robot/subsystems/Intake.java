@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -23,6 +24,8 @@ public class Intake extends SubsystemBase {
   //Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   private static Solenoid intake_pneu  = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+  public DigitalInput intakeSensor = new DigitalInput(2);
+
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
 
@@ -33,7 +36,7 @@ public class Intake extends SubsystemBase {
     
     intake.setInverted(false);
     intake.setNeutralMode(NeutralMode.Brake); //stop mode
-    intake.configOpenloopRamp(1); //ramp acceleration
+    intake.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     intake_pneu.set(false);
   }
@@ -64,6 +67,10 @@ public class Intake extends SubsystemBase {
 
   public void intake_in(){
     intake_pneu.set(false);
+  }
+
+  public boolean sense_intake(){
+    return intakeSensor.get();
   }
 
   @Override

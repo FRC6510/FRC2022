@@ -65,6 +65,18 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public boolean TargetReached(){
+
+    if(Math.abs (ShooterLeft.getClosedLoopError()) < 200){
+      return true;
+    }
+    else{
+      return false;
+    }
+    
+
+  }
+
   public void initShooter(){
     /* Factory Default all hardware to prevent unexpected behaviour */
 		ShooterRight.configFactoryDefault();

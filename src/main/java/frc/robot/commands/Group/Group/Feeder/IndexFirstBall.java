@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Group;
+package frc.robot.commands.Group.Group.Feeder;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.FeedBall;
@@ -25,7 +25,7 @@ public class IndexFirstBall extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
-    new FeedBall(feeder), new stopFeeder(feeder).withTimeout(1), new ReverseBall(feeder)//.withTimeout()
+    new ReverseBall(feeder).withTimeout(0.3), new FeedBall(feeder), new stopFeeder(feeder).withTimeout(1), new ReverseBall(feeder)//.withTimeout()
     
 
     );

@@ -4,17 +4,18 @@
 
 package frc.robot.commands;
 import frc.robot.Robot;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class FeedBall extends CommandBase {
-  private final Feeder m_feeder;
+public class SenseClimber extends CommandBase {
+  private final Climber m_climber;
 
-  public FeedBall(Feeder feeder) {
-    m_feeder = feeder;
+  public SenseClimber(Climber climber){
+    m_climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_feeder);
+    addRequirements(m_climber);
   }
 
   // Called when the command is initially scheduled.
@@ -25,26 +26,19 @@ public class FeedBall extends CommandBase {
   @Override
   public void execute() {
 
-    m_feeder.spin_feeder(0.5
-    );
+    m_climber.sense_climber();
 
   }
     
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_feeder.stop_feeder();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_feeder.sense_ball() == true){
-
-     return false;
-    } else {
-      return true;
-    }
+    return false;
   
   }
 }
