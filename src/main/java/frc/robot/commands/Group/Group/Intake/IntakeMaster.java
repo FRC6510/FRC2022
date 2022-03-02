@@ -22,7 +22,7 @@ public class IntakeMaster extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands(new ScheduleCommand(intake, feeder), new IndexFirstBall(feeder));
     addCommands(
-      new IntakeBall(intake,feeder), new ScheduleCommand( new IndexFirstBall(feeder)));
+      new IntakeBall(intake), new IndexFirstBall(feeder));
 
   }
 }
