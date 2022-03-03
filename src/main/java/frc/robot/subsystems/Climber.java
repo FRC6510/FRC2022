@@ -34,7 +34,7 @@ public class Climber extends SubsystemBase {
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
     
 
-    climber.setInverted(false);
+    climber.setInverted(true);
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
     climber.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
@@ -54,19 +54,19 @@ public class Climber extends SubsystemBase {
 
   public void spin_climber(){
 
-    if (!sense_climber() || climber.getSelectedSensorPosition()>0){
+    if (!sense_climber() || climber.getSelectedSensorPosition()<0){
       stop_climber();
     }
     else{
-      climber.set(ControlMode.PercentOutput,0.4); //speed
+      climber.set(ControlMode.PercentOutput,-0.4); //speed
     }
    
   }
 
   public void reverse_climber(){
 
-    if ( climber.getSelectedSensorPosition()>(-190000)){ //-202331
-      climber.set(ControlMode.PercentOutput,-0.7); //speed
+    if ( climber.getSelectedSensorPosition()<(190000)){ //202331
+      climber.set(ControlMode.PercentOutput,0.7); //speed
     }
     else{
       stop_climber();
