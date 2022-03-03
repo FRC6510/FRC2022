@@ -65,10 +65,8 @@ public class Climber extends SubsystemBase {
 
   public void reverse_climber(){
 
-   
-
-    if ( climber.getSelectedSensorPosition()>(-170000)){ //-199070
-      climber.set(ControlMode.PercentOutput,-0.4); //speed
+    if ( climber.getSelectedSensorPosition()>(-190000)){ //-202331
+      climber.set(ControlMode.PercentOutput,-0.7); //speed
     }
     else{
       stop_climber();

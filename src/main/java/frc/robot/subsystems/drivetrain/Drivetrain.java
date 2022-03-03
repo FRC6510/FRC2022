@@ -33,7 +33,7 @@ public class Drivetrain extends SubsystemBase{
         };
 
         driveKinematics = new SwerveDriveKinematics(moduleOffset);
-
+        // driveOdometry.
         driveOdometry = new SwerveDriveOdometry(driveKinematics, imu.getRotation2d());
 
     }
@@ -93,7 +93,7 @@ public void resetGyro(){
 }
 
 public static double deadZone (double input){
-    // System.out.println("Input" + input);
+    System.out.println("Input" + input);
 
     if(Math.abs(input) < 0.1){ // <0.15
         return 0;
