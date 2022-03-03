@@ -29,6 +29,14 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(){
     initShooter();
+    ShooterLeft.setStatusFramePeriod(1, 20);
+    ShooterLeft.setStatusFramePeriod(2, 30);
+
+    ShooterRight.setStatusFramePeriod(1, 20);
+    ShooterRight.setStatusFramePeriod(2, 30);
+
+    ShooterBack.setStatusFramePeriod(1, 20);
+    ShooterBack.setStatusFramePeriod(2, 30);
   }
 
   @Override

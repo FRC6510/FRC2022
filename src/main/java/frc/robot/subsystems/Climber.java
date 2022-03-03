@@ -30,8 +30,8 @@ public class Climber extends SubsystemBase {
   public Climber(){
 
     climber = new TalonFX(44);
-    climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
-    hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+    climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+    hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
     
 
     climber.setInverted(false);
@@ -43,6 +43,8 @@ public class Climber extends SubsystemBase {
     //climber.configPeakCurrentDuration(100); // ... for at least 100 ms
     //climber.configContinuousCurrentLimit(20); // once current-limiting is actived, hold at
     climber_pneu.set(false);
+
+    climber.setSelectedSensorPosition(0); //MAX POSITION -199070
   }
 
   @Override
@@ -51,14 +53,30 @@ public class Climber extends SubsystemBase {
   }
 
   public void spin_climber(){
-    climber.set(ControlMode.PercentOutput,0.4); //speed
+
+    if (!sense_climber() || climber.getSelectedSensorPosition()>0){
+      stop_climber();
+    }
+    else{
+      climber.set(ControlMode.PercentOutput,0.4); //speed
+    }
+   
   }
 
   public void reverse_climber(){
-    climber.set(ControlMode.PercentOutput,-0.4); //speed
+
+   
+
+    if ( climber.getSelectedSensorPosition()>(-17000)){ //-199070
+      climber.set(ControlMode.PercentOutput,-0.4); //speed
+    }
+    else{
+      stop_climber();
+    }
   }
 
   public void climber_in(){
+
     climber_pneu.set(false); //speed
   }
 
@@ -84,6 +102,7 @@ public class Climber extends SubsystemBase {
 
   public void climblog(){
     SmartDashboard.putBoolean("climberSensor", climberSensor.get());
+    SmartDashboard.putNumber("Climber", climber.getSelectedSensorPosition());
 
   }
 
@@ -91,4 +110,6 @@ public class Climber extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+  
 }

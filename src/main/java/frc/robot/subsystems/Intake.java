@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase {
  
   //Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
-  private static Solenoid intake_pneu  = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+  private static Solenoid intake_pneu  = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
   public DigitalInput intakeSensor = new DigitalInput(2);
 
 
@@ -37,6 +37,9 @@ public class Intake extends SubsystemBase {
     intake.setInverted(false);
     intake.setNeutralMode(NeutralMode.Brake); //stop mode
     intake.configOpenloopRamp(0.3); //ramp acceleration
+    intake.setStatusFramePeriod(1, 20);
+    intake.setStatusFramePeriod(2, 30);
+
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     intake_pneu.set(false);
   }

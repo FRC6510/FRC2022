@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ClimbReverse;
 import frc.robot.commands.ClimbRobot;
 import frc.robot.commands.ClimberIn;
@@ -59,7 +60,9 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
   private final Intake m_intake = new Intake();
   private final Climber m_climber = new Climber();
- 
+
+  public static boolean feeder_sensor= false;
+  public static boolean climber_sensor= false;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -74,6 +77,10 @@ public class RobotContainer {
           true), 
         drivetrain)
     );
+
+    m_feeder.setDefaultCommand(new RunCommand(() -> feeder_sensor = m_feeder.sense_ball(), m_feeder));
+
+    m_climber.setDefaultCommand(new RunCommand(() -> m_climber.climblog() , m_climber));
 
     configureButtonBindings();
 
