@@ -67,7 +67,7 @@ public class Climber extends SubsystemBase {
 
    
 
-    if ( climber.getSelectedSensorPosition()>(-17000)){ //-199070
+    if ( climber.getSelectedSensorPosition()>(-170000)){ //-199070
       climber.set(ControlMode.PercentOutput,-0.4); //speed
     }
     else{
