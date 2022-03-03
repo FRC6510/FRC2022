@@ -83,7 +83,8 @@ private void resetToAbsolute(){
 }
 
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
-        swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
+        // swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
+        // System.out.println("Swerve target angle" + swerveModuleState.angle.getDegrees());
         double angleOutput = steerPID.calculate(angleEncoder.getAbsolutePosition(), swerveModuleState.angle.getDegrees());
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         // SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
@@ -101,7 +102,9 @@ private void resetToAbsolute(){
     //}
 
     protected SwerveModuleState getModuleState(){
-        return new SwerveModuleState(getWheelVelocity(), new Rotation2d(angleEncoder.getAbsolutePosition()));
+        // System.out.println("Wheel Angle from Module State"+ angleEncoder.getAbsolutePosition());
+        // System.out.println("Wheel Velocity" + DrivetrainConstants.VELOCITY_MULTIPLIER * driveMotor.getSelectedSensorVelocity());
+        return new SwerveModuleState(getWheelVelocity(), Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
     }
 
     public double getSteerError(){
@@ -109,6 +112,7 @@ private void resetToAbsolute(){
     }
 
     public double getWheelVelocity(){
+
         return DrivetrainConstants.VELOCITY_MULTIPLIER * driveMotor.getSelectedSensorVelocity();
     }
 

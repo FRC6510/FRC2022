@@ -71,9 +71,9 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new RunCommand(
         () -> drivetrain.drive( //removed negative
-          Drivetrain.deadZone(-3.6*driverController.getLeftY()),
-          Drivetrain.deadZone(-3.6*driverController.getLeftX()),
-          Drivetrain.deadZone(-3.6*driverController.getRightX()),
+          -3.6*Drivetrain.deadZone(driverController.getLeftY()),
+          -3.6*Drivetrain.deadZone(driverController.getLeftX()),
+          -3.6*Drivetrain.deadZone(driverController.getRightX()),
           true), 
         drivetrain)
     );
