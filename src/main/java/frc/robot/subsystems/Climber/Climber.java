@@ -36,18 +36,10 @@ public class Climber extends SubsystemBase {
   public Climber(){
 
     climber = new TalonFX(44);
-<<<<<<< Updated upstream:src/main/java/frc/robot/subsystems/Climber.java
-    climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
-    hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
-    
-
-    climber.setInverted(false);
-=======
     climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 5);
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
     
     climber.setInverted(true);
->>>>>>> Stashed changes:src/main/java/frc/robot/subsystems/Climber/Climber.java
     climber.setNeutralMode(NeutralMode.Brake); //stop mode
     climber.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
@@ -105,8 +97,6 @@ public class Climber extends SubsystemBase {
 
   public void climblog(){
     SmartDashboard.putBoolean("climberSensor", climberSensor.get());
-<<<<<<< Updated upstream:src/main/java/frc/robot/subsystems/Climber.java
-=======
     SmartDashboard.putNumber("Climber", climber.getSelectedSensorPosition());
   }
 
@@ -145,7 +135,6 @@ public class Climber extends SubsystemBase {
 		climber.configMotionAcceleration(40000, CConstants.kTimeoutMs);
 
     climber.setSelectedSensorPosition(0, CConstants.kPIDLoopIdx, CConstants.kTimeoutMs);
->>>>>>> Stashed changes:src/main/java/frc/robot/subsystems/Climber/Climber.java
 
   }
 
