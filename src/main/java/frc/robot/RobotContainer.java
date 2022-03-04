@@ -13,15 +13,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-<<<<<<< Updated upstream
-import frc.robot.commands.ClimbReverse;
-import frc.robot.commands.ClimbRobot;
-import frc.robot.commands.ClimberIn;
-import frc.robot.commands.ClimberOut;
-import frc.robot.commands.CloseHook;
-=======
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
->>>>>>> Stashed changes
 import frc.robot.commands.FeedBall;
 import frc.robot.commands.FeedBallForShooter;
 import frc.robot.commands.IntakeBall;

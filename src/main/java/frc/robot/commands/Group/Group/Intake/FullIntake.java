@@ -15,11 +15,11 @@ import frc.robot.subsystems.Intake;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class FullIntake extends ParallelCommandGroup {
   /** Creates a new Intake. */
-  public FullIntake(Intake intake, Feeder feeder){
+  public FullIntake(Intake intake){
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-new IntakeOut(intake), new IntakeBall(intake, feeder));
+new IntakeOut(intake), new IntakeBall(intake));
 
   }
 }

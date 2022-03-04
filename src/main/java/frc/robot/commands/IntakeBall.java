@@ -46,7 +46,7 @@ public class IntakeBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_intake.sense_intake() &&  Feeder.sense_ball()){
+    if(m_intake.sense_intake()){
       return false;
     } else{
       return true;
