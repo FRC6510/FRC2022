@@ -26,10 +26,10 @@ public class Drivetrain extends SubsystemBase{
 
     public Drivetrain(){ //constructor method
         swerveModules = new SwerveModule[]{
-            new SwerveModule(LF_DRIVE_MOTOR_PORT, LF_STEER_MOTOR_PORT , LF_ANGLE_ENCODER_PORT, 13.184, true),
-            new SwerveModule(LB_DRIVE_MOTOR_PORT, LB_STEER_MOTOR_PORT , LB_ANGLE_ENCODER_PORT, 60.156, true),
-            new SwerveModule(RF_DRIVE_MOTOR_PORT, RF_STEER_MOTOR_PORT , RF_ANGLE_ENCODER_PORT, 104.238, false),
-            new SwerveModule(RB_DRIVE_MOTOR_PORT, RB_STEER_MOTOR_PORT , RB_ANGLE_ENCODER_PORT, 147.304, false) //TODO simplify later
+            new SwerveModule(LF_DRIVE_MOTOR_PORT, LF_STEER_MOTOR_PORT , LF_ANGLE_ENCODER_PORT, LF_OFFSET, true),
+            new SwerveModule(LB_DRIVE_MOTOR_PORT, LB_STEER_MOTOR_PORT , LB_ANGLE_ENCODER_PORT, LB_OFFSET, true),
+            new SwerveModule(RF_DRIVE_MOTOR_PORT, RF_STEER_MOTOR_PORT , RF_ANGLE_ENCODER_PORT, RF_OFFSET, false),
+            new SwerveModule(RB_DRIVE_MOTOR_PORT, RB_STEER_MOTOR_PORT , RB_ANGLE_ENCODER_PORT, RB_OFFSET, false) //TODO simplify later
         };
 
         driveKinematics = new SwerveDriveKinematics(moduleOffset);
@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase{
         for (int x = 0; x < measuredModuleStates.length; x++){
             measuredModuleStates[x] = swerveModules[x].getModuleState();
         }
-     SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError());
+     SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError()); 
      SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
      SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
      SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
@@ -72,12 +72,10 @@ public class Drivetrain extends SubsystemBase{
         for(int x = 0; x < moduleStates.length; x++){
             swerveModules[x].setDesiredModuleState(moduleStates[x]);
         }
-
     }
 public void turnLFmodule (double angle){
     for(SwerveModule swerveModule : swerveModules){
         swerveModule.setDesiredModuleState(new SwerveModuleState(0.0, Rotation2d.fromDegrees(angle)));
-
     }
     
 }    

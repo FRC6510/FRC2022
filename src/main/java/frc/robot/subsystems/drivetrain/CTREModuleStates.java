@@ -12,8 +12,8 @@ public class CTREModuleStates {
 
     public static SwerveModuleState optimise(SwerveModuleState desiredState, Rotation2d currentAngle){
          double targetAngle = adjustForContinuousRange(currentAngle.getDegrees(), desiredState.angle.getDegrees());
-         double targetSpeed = desiredState.speedMetersPerSecond;
-         double delta =  - currentAngle.getDegrees();
+         double targetSpeed = desiredState.speedMetersPerSecond; //so the error is this minus cuuuurrent speed?hu or should it be pos
+         double delta =  - currentAngle.getDegrees(); //AAA i wANNA sLeEp and it's only 11am ;-;;-;;-;;-;
         //  if(Math.abs(delta) > 90){
         //     targetSpeed = -targetSpeed;
         //     if(delta > 90){
