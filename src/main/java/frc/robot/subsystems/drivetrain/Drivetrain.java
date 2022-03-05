@@ -93,11 +93,16 @@ public void resetGyro(){
     imu.reset();
 }
 
+public void setGyroPosition(Double angle) {
+    imu.setYaw(-angle);
+}
+
 public Pose2d getRobotPosition() {
     return driveOdometry.getPoseMeters();
 }
 
 public void setRobotPosition(Pose2d pose2d, Rotation2d gyroAngle) {
+    imu.setYaw(-gyroAngle.getDegrees());
     driveOdometry.resetPosition(pose2d, gyroAngle);
 }
 

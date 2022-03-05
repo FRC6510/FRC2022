@@ -70,10 +70,10 @@ public static final Translation2d[] moduleOffset = {
             RB_OFFSET = 147.304;
                     
         public static final double
-            linearKp = 1, 
+            linearKp = 2, 
             linearKi = 0,
             linearKd =  0,
-            rotationalKp = 0.7,
+            rotationalKp = 1.8,
             rotationalKi = 0,
             rotationalKd = 0;
        
@@ -83,7 +83,7 @@ public static final Translation2d[] moduleOffset = {
             angularMotionConstraints = new TrapezoidProfile.Constraints(MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND, MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND_SQUARED);
 
         public static final Pose2d
-            endTolerance  = new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(5));
+            endTolerance  = new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(3));
 
         public static Profiled2dMovementConfig movementParameters = new Profiled2dMovementConfig(linearKp, linearKi, linearKd, rotationalKp, rotationalKi, rotationalKd, linearMotionConstraints, angularMotionConstraints, endTolerance);
 
