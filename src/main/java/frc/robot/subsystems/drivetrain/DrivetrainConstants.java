@@ -50,6 +50,16 @@ public static final Translation2d[] moduleOffset = {
         TICKS_PER_WHEEL_ROTATION = TALONFX_RESOLUTION * GEAR_RATIO,
         OMEGA = TEN*((2*Math.PI)/TICKS_PER_WHEEL_ROTATION), //conversion from radians per 100ms to 1000ms (1s)
         VELOCITY_MULTIPLIER = OMEGA * WHEEL_RADIUS;
+
+        /**
+         * To determine new values:
+         * Align until straight. Then get the absolute position value. Add/subtract (can't remember) that value to the current offset value.
+         */
+        public static final double
+            LF_OFFSET = 13.184,
+            LB_OFFSET = 60.156,
+            RF_OFFSET = 104.238,
+            RB_OFFSET = 147.304;
         
 }
 

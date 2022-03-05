@@ -1,4 +1,5 @@
 
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -23,20 +24,27 @@ import frc.robot.commands.FeedBallForShooter;
 import frc.robot.commands.IntakeBall;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
-import frc.robot.commands.OpenHook;
 import frc.robot.commands.ReverseBall;
-import frc.robot.commands.ReverseClimb;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
-import frc.robot.commands.SenseClimber;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.Group.Group.Climber.ClimbReverse;
+import frc.robot.commands.Group.Group.Climber.ClimbRobot;
+import frc.robot.commands.Group.Group.Climber.ClimberFullExtend;
+import frc.robot.commands.Group.Group.Climber.ClimberGoHome;
+import frc.robot.commands.Group.Group.Climber.ClimberIn;
+import frc.robot.commands.Group.Group.Climber.ClimberOut;
+import frc.robot.commands.Group.Group.Climber.CloseHook;
+import frc.robot.commands.Group.Group.Climber.OpenHook;
+import frc.robot.commands.Group.Group.Climber.ReverseClimb;
+import frc.robot.commands.Group.Group.Climber.SenseClimber;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.commands.Group.Group.Intake.FullIntake;
 import frc.robot.commands.Group.Group.Intake.IntakeMaster;
 import frc.robot.commands.Group.Group.Shooter.ShootBalls;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber.Climber;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -105,11 +113,10 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
-    //Ybutton.whileHeld(new ReverseShoot(m_shooter));
     Bbutton.whileHeld(new ShootBall(m_shooter));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
-    Ybutton.whileHeld(new SenseClimber(m_climber));
-    //LeftBumper.whileHeld(new IntakeBall(m_intake));
+    Xbutton.whileHeld(new ClimberGoHome(m_climber));
+    Ybutton.whileHeld(new ClimberFullExtend(m_climber));
 
     
     final JoystickButton buttonA = new JoystickButton(driverController,1);
@@ -127,6 +134,7 @@ public class RobotContainer {
     //BumperRight.whileHeld(new CloseHook(m_climber));
     buttonA.whileHeld(new ClimbRobot(m_climber));
     leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
+
   }
 
   /**
