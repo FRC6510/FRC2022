@@ -50,8 +50,6 @@ public class IntakeBall extends CommandBase {
       return false;
     } else{
       return true;
-    } else{
-      return false;
     }
     
   }

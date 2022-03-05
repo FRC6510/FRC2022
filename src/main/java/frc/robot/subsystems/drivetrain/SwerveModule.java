@@ -83,7 +83,7 @@ private void resetToAbsolute(){
 }
 
     public void setDesiredModuleState(SwerveModuleState swerveModuleState){
-        // swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
+        swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
         // System.out.println("Swerve target angle" + swerveModuleState.angle.getDegrees());
         double angleOutput = steerPID.calculate(angleEncoder.getAbsolutePosition(), swerveModuleState.angle.getDegrees());
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));

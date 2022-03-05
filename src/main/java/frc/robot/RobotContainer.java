@@ -7,23 +7,20 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ClimbReverse;
-import frc.robot.commands.ClimbRobot;
-import frc.robot.commands.ClimberIn;
-import frc.robot.commands.ClimberOut;
-import frc.robot.commands.CloseHook;
 import frc.robot.commands.FeedBall;
 import frc.robot.commands.FeedBallForShooter;
 import frc.robot.commands.IntakeBall;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
+import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.ReverseBall;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
@@ -47,6 +44,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber.Climber;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.drivetrain.Drivetrain;
+import frc.robot.subsystems.drivetrain.DrivetrainConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -69,8 +67,8 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Climber m_climber = new Climber();
 
-  public static boolean feeder_sensor= false;
-  public static boolean climber_sensor= false;
+  public static boolean feeder_sensor = false;
+  public static boolean climber_sensor = false;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -79,9 +77,9 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new RunCommand(
         () -> drivetrain.drive( //removed negative
-          -3.6*Drivetrain.deadZone(driverController.getLeftY()),
-          -3.6*Drivetrain.deadZone(driverController.getLeftX()),
-          -3.6*Drivetrain.deadZone(driverController.getRightX()),
+          -3.6 * Drivetrain.deadZone(driverController.getLeftY()),
+          -3.6 * Drivetrain.deadZone(driverController.getLeftX()),
+          -3.6 * Drivetrain.deadZone(driverController.getRightX()),
           true), 
         drivetrain)
     );
@@ -117,7 +115,7 @@ public class RobotContainer {
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     Xbutton.whileHeld(new ClimberGoHome(m_climber));
     Ybutton.whileHeld(new ClimberFullExtend(m_climber));
-
+    LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0, 0, Rotation2d.fromDegrees(0))), false);
     
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);
@@ -134,6 +132,8 @@ public class RobotContainer {
     //BumperRight.whileHeld(new CloseHook(m_climber));
     buttonA.whileHeld(new ClimbRobot(m_climber));
     leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
+
+
 
   }
 

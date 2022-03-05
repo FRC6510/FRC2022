@@ -5,6 +5,7 @@ import javax.imageio.spi.ImageOutputStreamSpi;
 
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -42,8 +43,8 @@ public class Drivetrain extends SubsystemBase{
         SwerveModuleState[] measuredModuleStates = new SwerveModuleState[4];
         for (int x = 0; x < measuredModuleStates.length; x++){
             measuredModuleStates[x] = swerveModules[x].getModuleState();
-            System.out.println("Wheel Angle "+ x +  ": " + swerveModules[x].getModuleState().angle.getDegrees());
-            System.out.println("Wheel Velocity" + swerveModules[x].getModuleState().speedMetersPerSecond);
+            // System.out.println("Wheel Angle "+ x +  ": " + swerveModules[x].getModuleState().angle.getDegrees());
+            // System.out.println("Wheel Velocity" + swerveModules[x].getModuleState().speedMetersPerSecond);
         }
      SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError()); 
      SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
@@ -77,7 +78,10 @@ public class Drivetrain extends SubsystemBase{
         for(int x = 0; x < moduleStates.length; x++){
             swerveModules[x].setDesiredModuleState(moduleStates[x]);
         }
+        
     }
+
+
 public void turnLFmodule (double angle){
     for(SwerveModule swerveModule : swerveModules){
         swerveModule.setDesiredModuleState(new SwerveModuleState(0.0, Rotation2d.fromDegrees(angle)));
@@ -89,8 +93,16 @@ public void resetGyro(){
     imu.reset();
 }
 
+public Pose2d getRobotPosition() {
+    return driveOdometry.getPoseMeters();
+}
+
+public void setRobotPosition(Pose2d pose2d, Rotation2d gyroAngle) {
+    driveOdometry.resetPosition(pose2d, gyroAngle);
+}
+
 public static double deadZone (double input){
-    System.out.println("Input" + input);
+    // System.out.println("Input" + input);
 
     if(Math.abs(input) < 0.1){ // <0.15
         return 0;

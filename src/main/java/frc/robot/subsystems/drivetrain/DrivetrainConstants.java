@@ -1,6 +1,10 @@
 package frc.robot.subsystems.drivetrain;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import frc.robot.commands.Profiled2dMovement.Profiled2dMovementConfig;
 
 public class DrivetrainConstants {
     public static final int 
@@ -40,7 +44,11 @@ public static final Translation2d[] moduleOffset = {
     public static final double angleGearRatio = 12.8;
 
     public static final double 
-        MAX_SPEED_METRES_PER_SECOND = 4, //0.8
+        MAX_SPEED_METRES_PER_SECOND = 3, //0.8
+        MAX_ACCELERATION_METRES_PER_SECOND_SQUARED = MAX_SPEED_METRES_PER_SECOND / 1.5,
+        MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND = 2*Math.PI,
+        MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND_SQUARED = MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+
         GEAR_RATIO = 8.14, //one rotation of wheel from 8.14 shaft rotations
         CANCODER_RAW_TICKS_PER_180 = 2048,
         TEN = 10,
@@ -60,7 +68,26 @@ public static final Translation2d[] moduleOffset = {
             LB_OFFSET = 60.156,
             RF_OFFSET = 104.238,
             RB_OFFSET = 147.304;
-        
+                    
+        public static final double
+            linearKp = 1, 
+            linearKi = 0,
+            linearKd =  0,
+            rotationalKp = 0.7,
+            rotationalKi = 0,
+            rotationalKd = 0;
+       
+    
+        public static final TrapezoidProfile.Constraints
+            linearMotionConstraints = new TrapezoidProfile.Constraints(MAX_SPEED_METRES_PER_SECOND, MAX_ACCELERATION_METRES_PER_SECOND_SQUARED),
+            angularMotionConstraints = new TrapezoidProfile.Constraints(MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND, MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND_SQUARED);
+
+        public static final Pose2d
+            endTolerance  = new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(5));
+
+        public static Profiled2dMovementConfig movementParameters = new Profiled2dMovementConfig(linearKp, linearKi, linearKd, rotationalKp, rotationalKi, rotationalKd, linearMotionConstraints, angularMotionConstraints, endTolerance);
+
+
 }
 
 
