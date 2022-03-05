@@ -28,7 +28,7 @@ public class IntakeDrive extends ParallelCommandGroup {
 
     addCommands(
       new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
-    new Pose2d(1, 0, Rotation2d.fromDegrees(0))),
+    new Pose2d(1.5, 1.2, Rotation2d.fromDegrees(39))),
       new IntakeBall(intake), 
       new IndexFirstBall(feeder)
 

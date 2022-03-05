@@ -117,9 +117,9 @@ public class RobotContainer {
     Xbutton.whileHeld(new ClimberGoHome(m_climber));
     Ybutton.whileHeld(new ClimberFullExtend(m_climber));
  
-    LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
-    new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
-    //LeftBumper.whenReleased(new A1M1(m_intake, m_feeder, drivetrain));
+    //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
+    //new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
+    LeftBumper.whenReleased(new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
 
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);

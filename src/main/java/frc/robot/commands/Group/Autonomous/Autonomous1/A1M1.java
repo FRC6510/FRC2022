@@ -12,9 +12,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.IntakeBall;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.Profiled2dMovement;
+import frc.robot.commands.ShootBall;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.DrivetrainConstants;
 import frc.robot.subsystems.Feeder;
@@ -27,12 +29,16 @@ public class A1M1 extends SequentialCommandGroup {
 
   private final Drivetrain drivetrain = new Drivetrain();
 
-  public A1M1(Intake intake,Feeder feeder, Drivetrain drivetrain) {
+  public A1M1(Intake intake,Feeder feeder, Drivetrain drivetrain, Shooter shooter) {
   
     addCommands(
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 1.2, Rotation2d.fromDegrees(39))),
+    new IntakeBall(intake).withTimeout(1),
+    //new IntakeDrive(drivetrain, intake, feeder).withTimeout(5),
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0, 0, Rotation2d.fromDegrees(-170))),
+    new ShootBall (shooter).withTimeout(1)
 
-    new IntakeDrive(drivetrain, intake, feeder)
-  
+
     );
 
   }
