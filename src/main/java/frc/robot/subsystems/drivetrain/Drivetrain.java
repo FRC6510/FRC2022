@@ -36,6 +36,7 @@ public class Drivetrain extends SubsystemBase{
         driveKinematics = new SwerveDriveKinematics(moduleOffset);
         // driveOdometry.
         driveOdometry = new SwerveDriveOdometry(driveKinematics, imu.getRotation2d());
+      // imu.reset(); //////////
 
     }
     @Override 
@@ -101,7 +102,7 @@ public Pose2d getRobotPosition() {
     return driveOdometry.getPoseMeters();
 }
 
-public void setRobotPosition(Pose2d pose2d, Rotation2d gyroAngle) {
+public void setRobotPosition(Pose2d pose2d , Rotation2d gyroAngle) {
     imu.setYaw(-gyroAngle.getDegrees());
     driveOdometry.resetPosition(pose2d, gyroAngle);
 }

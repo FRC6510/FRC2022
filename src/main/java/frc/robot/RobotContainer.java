@@ -25,6 +25,7 @@ import frc.robot.commands.ReverseBall;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.commands.ReverseShoot;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
 import frc.robot.commands.Group.Group.Climber.ClimbReverse;
 import frc.robot.commands.Group.Group.Climber.ClimbRobot;
 import frc.robot.commands.Group.Group.Climber.ClimberFullExtend;
@@ -115,8 +116,11 @@ public class RobotContainer {
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     Xbutton.whileHeld(new ClimberGoHome(m_climber));
     Ybutton.whileHeld(new ClimberFullExtend(m_climber));
-    LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-2, -1, Rotation2d.fromDegrees(-60))), false);
-    
+ 
+    LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
+    new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
+    //LeftBumper.whenReleased(new A1M1(m_intake, m_feeder, drivetrain));
+
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);
     final JoystickButton buttonX = new JoystickButton(driverController,3);

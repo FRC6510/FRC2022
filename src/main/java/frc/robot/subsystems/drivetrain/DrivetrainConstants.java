@@ -76,6 +76,15 @@ public static final Translation2d[] moduleOffset = {
             rotationalKp = 1.8,
             rotationalKi = 0,
             rotationalKd = 0;
+
+        
+        public static final double 
+            A1X = 0.0, 
+            A1Y = 0.0, 
+            A1R = 0.0, 
+            A2X = 0, 
+            A2Y = 1, 
+            A2R = 0;
        
     
         public static final TrapezoidProfile.Constraints
