@@ -27,6 +27,7 @@ import frc.robot.commands.ReverseShoot;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
 import frc.robot.commands.Group.Autonomous.Autonomous2.A2M1;
+import frc.robot.commands.Group.Autonomous.Autonomous3.A3M1;
 import frc.robot.commands.Group.Group.Climber.ClimbReverse;
 import frc.robot.commands.Group.Group.Climber.ClimbRobot;
 import frc.robot.commands.Group.Group.Climber.ClimberFullExtend;
@@ -120,7 +121,7 @@ public class RobotContainer {
  
     //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
     //new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
-    LeftBumper.whenReleased(new A2M1 ( drivetrain, m_feeder, m_shooter));
+    LeftBumper.whenReleased(new A1M1 ( m_intake, m_feeder, drivetrain, m_shooter));
     leftButton.whileHeld((new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
     new Pose2d(0, 0, Rotation2d.fromDegrees(0)))));
 

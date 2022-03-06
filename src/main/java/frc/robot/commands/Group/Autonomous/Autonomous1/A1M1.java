@@ -34,7 +34,7 @@ public class A1M1 extends SequentialCommandGroup {
   public A1M1(Intake intake,Feeder feeder, Drivetrain drivetrain, Shooter shooter) {
   
     addCommands(
-    new IntakeDrive(drivetrain, intake, feeder),
+    new IntakeDrive1a(drivetrain, intake, feeder),
     //new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.09, 0.92, Rotation2d.fromDegrees(21))),
    // new IntakeMaster(intake, feeder),
     //new IntakeDrive(drivetrain, intake, feeder).withTimeout(5),
