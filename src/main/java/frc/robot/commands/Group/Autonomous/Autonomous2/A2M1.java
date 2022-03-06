@@ -37,7 +37,7 @@ public class A2M1 extends SequentialCommandGroup {
   
     addCommands(
  
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-1, 0, Rotation2d.fromDegrees(0))),
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-0.7, 0, Rotation2d.fromDegrees(0))),
     new ShootAndFeed2 (shooter, feeder),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-2, 0, Rotation2d.fromDegrees(0)))
 
