@@ -64,14 +64,15 @@ public class Drivetrain extends SubsystemBase{
     public void drive(double xVelocity, double yVelocity, double angularVelocity, boolean isFieldRelative){
         SwerveModuleState[] moduleStates;
         ChassisSpeeds robotSpeed;
-        SmartDashboard.putNumber("yaw", imu.getRotation2d().getDegrees());
+        
         if(isFieldRelative) robotSpeed = ChassisSpeeds.fromFieldRelativeSpeeds(xVelocity, yVelocity, angularVelocity, imu.getRotation2d());
         else robotSpeed = new ChassisSpeeds(xVelocity, yVelocity, angularVelocity);
+        
+        SmartDashboard.putNumber("yaw", imu.getRotation2d().getDegrees());
         SmartDashboard.putNumber("xVelocity", robotSpeed.vxMetersPerSecond);
         SmartDashboard.putNumber("yVelocity", robotSpeed.vxMetersPerSecond);
         SmartDashboard.putNumber("angularVelocity", robotSpeed.vxMetersPerSecond);
 
-        
         moduleStates = driveKinematics.toSwerveModuleStates(robotSpeed);
         SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, MAX_SPEED_METRES_PER_SECOND);
         SmartDashboard.putNumber("LF ANGLE", moduleStates[0].angle.getDegrees());
@@ -108,17 +109,28 @@ public void setRobotPosition(Pose2d pose2d , Rotation2d gyroAngle) {
 }
 
 public static double deadZone (double input){
-    // System.out.println("Input" + input);
-
-    if(Math.abs(input) < 0.1){ // <0.15
+    if(Math.abs(input) < 0.2){
         return 0;
+    }else if(input > 0.2){
+        SmartDashboard.putNumber("Input pos deadzone", 1.25 * (input + 0.25));
+        return 1.25 * (input + 0.25);
+    } else {
+        SmartDashboard.putNumber("Input neg deadzone", 1.25 * (input - 0.25));
+        return 1.25* (input - 0.25);
     }
-    else if(input>0) {
-        return 1.11*(input + 0.1);
-    } else return 1.11*(input - 0.1);
+
     }    
+}
+
+    // if(Math.abs(input) < 0.1){ // <0.15
+    //     return 0;
+    // }
+    // else if(input>0) {
+    //     return 1.11*(input + 0.1);
+    // } else return 1.11*(input - 0.1);
+    // }    
  
     //  } else if(input<0) {
     //      return -((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
     //  } return ((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));  
-}
+

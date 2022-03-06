@@ -80,12 +80,12 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new RunCommand(
         () -> drivetrain.drive( //removed negative
-          -3.6 * Drivetrain.deadZone(driverController.getLeftY()),
-          -3.6 * Drivetrain.deadZone(driverController.getLeftX()),
-          -3.6 * Drivetrain.deadZone(driverController.getRightX()),
+           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),
           true), 
         drivetrain)
-    );
+        );
 
     m_feeder.setDefaultCommand(new RunCommand(() -> feeder_sensor = m_feeder.sense_ball(), m_feeder));
 
@@ -133,6 +133,7 @@ public class RobotContainer {
     final JoystickButton BumperRight = new JoystickButton(driverController,6);
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     
+
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
     buttonB.whileHeld(new ClimberOut(m_climber));
     //buttonX.whenPressed(new ClimberIn(m_climber));
@@ -140,6 +141,15 @@ public class RobotContainer {
     //BumperRight.whileHeld(new CloseHook(m_climber));
     buttonA.whileHeld(new ClimbRobot(m_climber));
     leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
+    buttonX.whileHeld(new RunCommand(
+      () -> drivetrain.drive( //removed negative
+         -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+         -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+         -1*Drivetrain.deadZone(driverController.getRightX()),
+        true), 
+      drivetrain)
+      );
+    
 
 
 

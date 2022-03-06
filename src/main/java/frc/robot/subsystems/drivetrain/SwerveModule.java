@@ -28,8 +28,8 @@ public class SwerveModule {
     public SwerveModule(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
         this.driveMotor = new WPI_TalonFX(driveMotorPort);
         this.steeringMotor = new WPI_TalonFX(steeringMotorPort);
-        configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 0.6, 0.0488);
-        configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kI 0.004 kP 1.5 /1.8 -> kp 1.8
+        configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 1.023*2, 0.0488); //p 0.1023 d 0.6
+        configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kP 1.8, d 18
 
         this.steerPID = new PIDController(0.0055,0,0);
         this.steerPID.enableContinuousInput(-180,180);
@@ -46,6 +46,7 @@ public class SwerveModule {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
+        driveMotor.configOpenloopRamp(1);/////////
         steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
         resetToAbsolute();
 

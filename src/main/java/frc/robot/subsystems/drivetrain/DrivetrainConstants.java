@@ -64,10 +64,10 @@ public static final Translation2d[] moduleOffset = {
          * Align until straight. Then get the absolute position value. Add/subtract (can't remember) that value to the current offset value.
          */
         public static final double
-            LF_OFFSET = 13.184,
-            LB_OFFSET = 60.156,
-            RF_OFFSET = 104.238,
-            RB_OFFSET = 147.304;
+            LF_OFFSET = 13.184-1.143,
+            LB_OFFSET = 60.156-0.527,
+            RF_OFFSET = 104.238+0.112,
+            RB_OFFSET = 147.304-2.549;
                     
         public static final double
             linearKp = 2, 
@@ -85,7 +85,10 @@ public static final Translation2d[] moduleOffset = {
             A2X = 0, 
             A2Y = 1, 
             A2R = 0;
-       
+
+        public static final double
+            DEADZONEMULTIPLIER = 3.6,
+            SLOWDEADZONEMULTIPLIER = 1.25;      
     
         public static final TrapezoidProfile.Constraints
             linearMotionConstraints = new TrapezoidProfile.Constraints(MAX_SPEED_METRES_PER_SECOND, MAX_ACCELERATION_METRES_PER_SECOND_SQUARED),
