@@ -12,6 +12,7 @@ import frc.robot.commands.IntakeBall;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
+import frc.robot.commands.Group.Group.Intake.IntakeMaster;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.DrivetrainConstants;
@@ -27,13 +28,10 @@ public class IntakeDrive extends ParallelCommandGroup {
   public IntakeDrive(Drivetrain drivetrain, Intake intake, Feeder feeder) {
 
     addCommands(
-      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
-    new Pose2d(1.5, 1.2, Rotation2d.fromDegrees(39))),
-      new IntakeBall(intake), 
-      new IndexFirstBall(feeder)
+      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.1, 0.74, Rotation2d.fromDegrees(21))),
+      new IntakeMaster(intake, feeder).withTimeout(3) //used to be 5 but might take too long
 
          
-      
       );
 
   }

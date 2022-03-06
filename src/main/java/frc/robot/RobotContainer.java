@@ -120,6 +120,8 @@ public class RobotContainer {
     //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
     //new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
     LeftBumper.whenReleased(new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
+    leftButton.whileHeld((new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
+    new Pose2d(0, 0, Rotation2d.fromDegrees(0)))));
 
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);
