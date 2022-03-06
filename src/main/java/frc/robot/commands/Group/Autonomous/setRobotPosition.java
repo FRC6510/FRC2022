@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Group.Autonomous;
 
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -14,7 +15,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 
 public class setRobotPosition extends CommandBase {
 
-    static WPI_PigeonIMU imu = new WPI_PigeonIMU(00);
+    static WPI_Pigeon2 imu = new WPI_Pigeon2(00, "canivore");
     private final Drivetrain m_drivetrain;
     private Pose2d m_startPos;
     private Rotation2d m_startR;

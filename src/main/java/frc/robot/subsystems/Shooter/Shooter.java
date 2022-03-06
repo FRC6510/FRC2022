@@ -19,7 +19,7 @@ public class Shooter extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private static TalonFX ShooterLeft = new TalonFX(7);
   private static TalonFX ShooterRight = new TalonFX(8);
-  private static TalonFX ShooterBack = new TalonFX(35);
+  private static TalonFX ShooterBack = new TalonFX(35, "canivore");
 
   double targetVelocity_UnitsPer100ms = 9000; //15255 for 75% speed 12204
   double targetVelocity2_UnitsPer100ms = 7000; //8552

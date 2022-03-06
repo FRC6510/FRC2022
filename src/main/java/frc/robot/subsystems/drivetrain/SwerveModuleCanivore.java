@@ -15,7 +15,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SwerveModule {
+public class SwerveModuleCanivore {
 
     private final WPI_TalonFX driveMotor;
     private final WPI_TalonFX steeringMotor;
@@ -25,9 +25,9 @@ public class SwerveModule {
 
     private final CANCoder angleEncoder;
 
-    public SwerveModule(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
-        this.driveMotor = new WPI_TalonFX(driveMotorPort); // added "rio"
-        this.steeringMotor = new WPI_TalonFX(steeringMotorPort); // added "rio"
+    public SwerveModuleCanivore(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
+        this.driveMotor = new WPI_TalonFX(driveMotorPort, "canivore"); //
+        this.steeringMotor = new WPI_TalonFX(steeringMotorPort, "canivore");
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 1.023*2, 0.0488); //p 0.1023 d 0.6
         configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kP 1.8, d 18
 
@@ -37,7 +37,7 @@ public class SwerveModule {
 
         this.encoderOffset = encoderOffset;
 
-        this.angleEncoder = new CANCoder(angleEncoderPort); // added "rio"
+        this.angleEncoder = new CANCoder(angleEncoderPort, "canivore");
         CANCoderConfiguration canCoderConfiguration = new CANCoderConfiguration();
         canCoderConfiguration.initializationStrategy=SensorInitializationStrategy.BootToAbsolutePosition;
         canCoderConfiguration.absoluteSensorRange = AbsoluteSensorRange.Signed_PlusMinus180;

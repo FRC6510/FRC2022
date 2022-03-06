@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
 
   public Intake(){
 
-    intake = new TalonFX(55);
+    intake = new TalonFX(55, "rio");
    //intake_pneu = 
     
     intake.setInverted(false);

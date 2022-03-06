@@ -35,7 +35,7 @@ public class Climber extends SubsystemBase {
 
   public Climber(){
 
-    climber = new TalonFX(44);
+    climber = new TalonFX(44, "canivore");
     climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 5);
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
     
