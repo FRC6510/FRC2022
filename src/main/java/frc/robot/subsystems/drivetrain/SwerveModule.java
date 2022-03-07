@@ -66,8 +66,8 @@ public class SwerveModule {
         motor.config_IntegralZone(0, 33);
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_50Ms);
         motor.configVelocityMeasurementWindow(8,50); //might need to change this
-        motor.setStatusFramePeriod(1, 50); /// ????(1, 20);
-        motor.setStatusFramePeriod(2, 80); /// ????(2, 30);
+        motor.setStatusFramePeriod(1, 20); /// ????(1, 20);
+        motor.setStatusFramePeriod(2, 30); /// ????(2, 30);
 
 
     }

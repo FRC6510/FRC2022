@@ -5,9 +5,8 @@
 package frc.robot.commands.Group.Group.Shooter;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.FeedBall;
-import frc.robot.commands.FeedBallForShooter;
-import frc.robot.commands.ShootBall;
+
+import frc.robot.commands.Group.Group.Feeder.FeedBallForShooter;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Shooter.Shooter;
 

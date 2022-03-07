@@ -6,7 +6,6 @@ package frc.robot.commands.Group.Group.Feeder;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.FeedBall;
-import frc.robot.commands.ReverseBall;
 import frc.robot.commands.stopFeeder;
 import frc.robot.subsystems.Feeder;
 

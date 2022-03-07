@@ -6,9 +6,9 @@ package frc.robot.commands.Group.Autonomous.Autonomous1;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.FeedBall;
-import frc.robot.commands.ReverseBall;
-import frc.robot.commands.ShootBallAuto;
 import frc.robot.commands.stopFeeder;
+import frc.robot.commands.Group.Group.Feeder.ReverseBall;
+import frc.robot.commands.Group.Group.Shooter.ShootBallAuto;
 import frc.robot.commands.Group.Group.Shooter.ShootBalls;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Shooter.Shooter;

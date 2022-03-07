@@ -6,8 +6,6 @@ package frc.robot.commands.Group.Group.Intake;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import frc.robot.commands.IntakeBall;
-import frc.robot.commands.IntakeOut;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Feeder;

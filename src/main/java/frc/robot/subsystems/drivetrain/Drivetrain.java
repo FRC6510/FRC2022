@@ -3,7 +3,8 @@ import static frc.robot.subsystems.drivetrain.DrivetrainConstants.*;
 
 import javax.imageio.spi.ImageOutputStreamSpi;
 
-import com.ctre.phoenix.sensors.WPI_PigeonIMU;
+import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -20,7 +21,7 @@ public class Drivetrain extends SubsystemBase{
     SwerveModule[] swerveModules;
     SwerveDriveKinematics driveKinematics;
     SwerveDriveOdometry driveOdometry;
-    static WPI_PigeonIMU imu = new WPI_PigeonIMU(00);
+    static  WPI_Pigeon2  imu = new WPI_Pigeon2(0, "canivore");
     
 
    // SwerveModule[] swerveModules; //0 is LF, 1 is LB, 2 is RF etc

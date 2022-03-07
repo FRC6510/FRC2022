@@ -26,7 +26,7 @@ public class Climber extends SubsystemBase {
   private static Solenoid climber_pneu;
   private static Solenoid hook_pneu;
   DigitalInput climberSensor = new DigitalInput(1);
-  double goHome = 0;
+  double goHome = -6000;
   double fullExtend = 201731;//202331
 
 
@@ -70,7 +70,7 @@ public class Climber extends SubsystemBase {
 
   public void reverse_climber(){
 
-    if ( climber.getSelectedSensorPosition()<(190000)){ //202331
+    if ( climber.getSelectedSensorPosition()<(140000)){ //202331 for max, 190000 for usual number
       climber.set(ControlMode.PercentOutput,0.7); //speed
     }
     else{

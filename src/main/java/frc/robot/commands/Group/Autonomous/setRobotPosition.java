@@ -15,7 +15,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 
 public class setRobotPosition extends CommandBase {
 
-    static WPI_Pigeon2 imu = new WPI_Pigeon2(00, "canivore");
+    static WPI_Pigeon2 imu = new WPI_Pigeon2(0, "canivore");
     private final Drivetrain m_drivetrain;
     private Pose2d m_startPos;
     private Rotation2d m_startR;

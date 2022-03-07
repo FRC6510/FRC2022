@@ -15,16 +15,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.FeedBall;
-import frc.robot.commands.FeedBallForShooter;
-import frc.robot.commands.IntakeBall;
-import frc.robot.commands.IntakeIn;
-import frc.robot.commands.IntakeOut;
 import frc.robot.commands.Profiled2dMovement;
-import frc.robot.commands.ReverseBall;
-import frc.robot.commands.ReverseIntake;
-import frc.robot.commands.ReverseShoot;
-import frc.robot.commands.ShootBall;
 import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
 import frc.robot.commands.Group.Autonomous.Autonomous2.A2M1;
 import frc.robot.commands.Group.Autonomous.Autonomous3.A3M1;
@@ -38,9 +29,17 @@ import frc.robot.commands.Group.Group.Climber.CloseHook;
 import frc.robot.commands.Group.Group.Climber.OpenHook;
 import frc.robot.commands.Group.Group.Climber.ReverseClimb;
 import frc.robot.commands.Group.Group.Climber.SenseClimber;
+import frc.robot.commands.Group.Group.Feeder.FeedBallForShooter;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
+import frc.robot.commands.Group.Group.Feeder.ReverseBall;
 import frc.robot.commands.Group.Group.Intake.FullIntake;
+import frc.robot.commands.Group.Group.Intake.IntakeBall;
+import frc.robot.commands.Group.Group.Intake.IntakeIn;
 import frc.robot.commands.Group.Group.Intake.IntakeMaster;
+import frc.robot.commands.Group.Group.Intake.IntakeOut;
+import frc.robot.commands.Group.Group.Intake.ReverseIntake;
+import frc.robot.commands.Group.Group.Shooter.ReverseShoot;
+import frc.robot.commands.Group.Group.Shooter.ShootBall;
 import frc.robot.commands.Group.Group.Shooter.ShootBalls;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
@@ -116,14 +115,17 @@ public class RobotContainer {
     Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
     Bbutton.whileHeld(new ShootBall(m_shooter));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
-    Xbutton.whileHeld(new ClimberGoHome(m_climber));
-    Ybutton.whileHeld(new ClimberFullExtend(m_climber));
- 
+    LeftBumper.whenReleased( new A3M1( drivetrain, m_intake,m_feeder , m_shooter));
+    //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
+    //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
+
+
     //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
     //new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
-    LeftBumper.whenReleased(new A1M1 ( m_intake, m_feeder, drivetrain, m_shooter));
-    leftButton.whileHeld((new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
-    new Pose2d(0, 0, Rotation2d.fromDegrees(0)))));
+    //leftButton.whileHeld((new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
+    //new Pose2d(0, 0, Rotation2d.fromDegrees(0)))));
+    //RightBumper.whileHeld(new ClimberIn(m_climber));
+    //LeftBumper.whileHeld(new ClimberOut(m_climber));
 
     final JoystickButton buttonA = new JoystickButton(driverController,1);
     final JoystickButton buttonB = new JoystickButton(driverController,2);
@@ -133,15 +135,13 @@ public class RobotContainer {
     final JoystickButton BumperRight = new JoystickButton(driverController,6);
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     
-
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
-    buttonB.whileHeld(new ClimberOut(m_climber));
-    //buttonX.whenPressed(new ClimberIn(m_climber));
-    BumperLeft.whileHeld(new OpenHook(m_climber));
+    //buttonX.whileHeld(new ClimberFullExtend(m_climber));
+    //leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
+    //buttonA.whileHeld(new ClimberGoHome(m_climber));
+    //BumperLeft.whileHeld(new OpenHook(m_climber));
     //BumperRight.whileHeld(new CloseHook(m_climber));
-    buttonA.whileHeld(new ClimbRobot(m_climber));
-    leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
-    buttonX.whileHeld(new RunCommand(
+    buttonB.whileHeld(new RunCommand(
       () -> drivetrain.drive( //removed negative
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
@@ -149,6 +149,7 @@ public class RobotContainer {
         true), 
       drivetrain)
       );
+    
     
 
 
