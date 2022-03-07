@@ -72,6 +72,13 @@ public class RobotContainer {
   public static boolean feeder_sensor = false;
   public static boolean climber_sensor = false;
 
+  public static double  FrontShooterTargetVelocity_Slow = 9000; 
+  public static double  BackShooter1TargetVelocity_Slow = 7000;
+
+  public static double  FrontShooterTargetVelocity_Fast = 16500;//16500 
+  public static double  BackShooter1TargetVelocity_Fast = 10000;//12000//10000 good//11000
+
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -113,7 +120,7 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter));
+    Bbutton.whileHeld(new ShootBall(m_shooter, FrontShooterTargetVelocity_Slow,BackShooter1TargetVelocity_Slow ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     LeftBumper.whenReleased( new A3M1( drivetrain, m_intake,m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));

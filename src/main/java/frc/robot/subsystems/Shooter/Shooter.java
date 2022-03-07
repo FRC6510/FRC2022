@@ -21,8 +21,8 @@ public class Shooter extends SubsystemBase {
   private static TalonFX ShooterRight = new TalonFX(8);
   private static TalonFX ShooterBack = new TalonFX(35, "canivore");
 
-  double targetVelocity_UnitsPer100ms = 9000; //15255 for 75% speed 12204
-  double targetVelocity2_UnitsPer100ms = 7000; //8552
+  double targetVelocity_UnitsPer100ms = 11593.8; //(15255)      95% speed of 12204
+  double targetVelocity2_UnitsPer100ms = 8124.4; //95% speed of 8552
 
 
   private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -45,15 +45,15 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void spin_shooter(){
+  public void spin_shooter(double FrontVel, double BackVel){
 
-    ShooterLeft.set(TalonFXControlMode.Velocity, targetVelocity_UnitsPer100ms);
-		ShooterRight.set(TalonFXControlMode.Velocity, targetVelocity_UnitsPer100ms);
-    ShooterBack.set(TalonFXControlMode.Velocity, targetVelocity2_UnitsPer100ms);
+    ShooterLeft.set(TalonFXControlMode.Velocity, FrontVel);
+		ShooterRight.set(TalonFXControlMode.Velocity, FrontVel);
+    ShooterBack.set(TalonFXControlMode.Velocity, BackVel);
 
-    //ShooterLeft.set(ControlMode.PercentOutput,0.6); //speed
-    //ShooterRight.set(ControlMode.PercentOutput,0.6);
-    //ShooterBack.set(ControlMode.PercentOutput,0.4);
+    //ShooterLeft.set(ControlMode.PercentOutput,0.75); //speed
+    //ShooterRight.set(ControlMode.PercentOutput,0.75);
+    //ShooterBack.set(ControlMode.PercentOutput,0.5);
 
   }
 

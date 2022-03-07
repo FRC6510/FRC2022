@@ -5,7 +5,7 @@
 package frc.robot.commands.Group.Group.Shooter;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-
+import frc.robot.RobotContainer;
 import frc.robot.commands.Group.Group.Feeder.FeedBallForShooter;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Shooter.Shooter;
@@ -20,7 +20,7 @@ public class ShootBalls extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
-    new ShootBall(shooter), new FeedBallForShooter(feeder)
+    new ShootBall(shooter, RobotContainer.FrontShooterTargetVelocity_Slow,RobotContainer.BackShooter1TargetVelocity_Slow), new FeedBallForShooter(feeder)
 
 
     );

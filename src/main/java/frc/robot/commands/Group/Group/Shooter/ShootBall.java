@@ -10,9 +10,13 @@ import frc.robot.subsystems.Shooter.Shooter;
 /** An example command that uses an example subsystem. */
 public class ShootBall extends CommandBase {
   private final Shooter m_shooter;
+  private final double m_FrontVel;
+  private final double m_BackVel;
 
-  public ShootBall(Shooter shooter) {
+  public ShootBall(Shooter shooter, double FrontVel, double BackVel) {
     m_shooter = shooter;
+    m_FrontVel= FrontVel;
+    m_BackVel= BackVel;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter);
   }
@@ -25,7 +29,7 @@ public class ShootBall extends CommandBase {
   @Override
   public void execute() {
 
-    m_shooter.spin_shooter();
+    m_shooter.spin_shooter(m_FrontVel,m_BackVel);
 
   }
     

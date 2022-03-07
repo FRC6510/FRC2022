@@ -5,6 +5,7 @@
 package frc.robot.commands.Group.Group.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter.Shooter;
 
 /** An example command that uses an example subsystem. */
@@ -25,7 +26,7 @@ public class ShootBallAuto extends CommandBase {
   @Override
   public void execute() {
 
-    m_shooter.spin_shooter();
+    m_shooter.spin_shooter(RobotContainer.FrontShooterTargetVelocity_Slow,RobotContainer.BackShooter1TargetVelocity_Slow);
 
   }
     
