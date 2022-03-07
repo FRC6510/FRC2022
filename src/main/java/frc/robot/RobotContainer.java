@@ -36,6 +36,7 @@ import frc.robot.commands.Group.Group.Intake.FullIntake;
 import frc.robot.commands.Group.Group.Intake.IntakeBall;
 import frc.robot.commands.Group.Group.Intake.IntakeIn;
 import frc.robot.commands.Group.Group.Intake.IntakeMaster;
+import frc.robot.commands.Group.Group.Intake.IntakeMasterTwoBalls;
 import frc.robot.commands.Group.Group.Intake.IntakeOut;
 import frc.robot.commands.Group.Group.Intake.ReverseIntake;
 import frc.robot.commands.Group.Group.Shooter.ReverseShoot;
@@ -84,7 +85,8 @@ public class RobotContainer {
   public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4;
   public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.4;
 
-
+  public static double  AmelieTestFront = 9000*1.68;
+  public static double  AmelieTestBack = 7000*1.68;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -126,8 +128,8 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter, FrontShooterTargetVelocity_Fast,BackShooter1TargetVelocity_Fast ));
+    Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
+    Bbutton.whileHeld(new ShootBall(m_shooter, AmelieTestFront,AmelieTestBack ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
