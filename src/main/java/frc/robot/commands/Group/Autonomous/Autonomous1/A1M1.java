@@ -9,6 +9,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.RobotContainer;
 import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
@@ -39,7 +40,7 @@ public class A1M1 extends SequentialCommandGroup {
    // new IntakeMaster(intake, feeder),
     //new IntakeDrive(drivetrain, intake, feeder).withTimeout(5),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.84, 0.6, Rotation2d.fromDegrees(-167))),
-    new ShootAndFeed (shooter, feeder),
+    new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))) //-167
 
 

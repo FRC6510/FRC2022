@@ -14,13 +14,14 @@ import frc.robot.subsystems.Shooter.Shooter;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootBalls extends ParallelCommandGroup {
+
   /** Creates a new ShootBalls. */
-  public ShootBalls(Shooter shooter, Feeder feeder) {
+  public ShootBalls(Shooter shooter, Feeder feeder, double FrontAuto3aVelocity, double m_BackAuto3bVelocity) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
-    new ShootBall(shooter, RobotContainer.FrontShooterTargetVelocity_Slow,RobotContainer.BackShooter1TargetVelocity_Slow), new FeedBallForShooter(feeder)
+    new ShootBall(shooter, FrontAuto3aVelocity, m_BackAuto3bVelocity), new FeedBallForShooter(feeder)
 
 
     );

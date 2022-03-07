@@ -9,6 +9,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.RobotContainer;
 import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
 import frc.robot.commands.Group.Autonomous.Autonomous1.ShootAndFeed;
@@ -36,12 +37,12 @@ public class A3M1 extends SequentialCommandGroup {
   
     addCommands(
     new IntakeDrive3a(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.81, 0, Rotation2d.fromDegrees(167))),
-    new ShootAndFeed (shooter, feeder),
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.36, -0.04, Rotation2d.fromDegrees(167))),//0.81, 0,167
+    new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Auto3a,RobotContainer.FrontShooterTargetVelocity_Auto3b),
     new IntakeDrive3b(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-0.47, -1.78, Rotation2d.fromDegrees(129))),
-    new ShootAndFeed (shooter, feeder)
-
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.01, -2.57, Rotation2d.fromDegrees(129))),//-0.47, -1.78,129
+    new ShootAndFeed (shooter, feeder,RobotContainer.FrontShooterTargetVelocity_Auto3b, RobotContainer.BackShooter1TargetVelocity_Auto3b),
+    new IntakeDrive3c(drivetrain, intake, feeder)// we might need 2 balls intaking
     );
 
   }

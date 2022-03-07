@@ -20,14 +20,14 @@ public class ShootAndFeed extends SequentialCommandGroup {
 
 
   /** Creates a new IndexFirstBall. */
-  public ShootAndFeed (Shooter shooter, Feeder feeder) {
+  public ShootAndFeed (Shooter shooter, Feeder feeder, double vel1, double vel2) {
 
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
-    new ShootBallAuto(shooter), new ShootBalls(shooter, feeder).withTimeout(3)
+    new ShootBallAuto(shooter, vel1, vel2), new ShootBalls(shooter, feeder, vel1, vel1).withTimeout(1)//need to test, was 1.5 before
     
     );
   }

@@ -11,9 +11,17 @@ import frc.robot.subsystems.Shooter.Shooter;
 /** An example command that uses an example subsystem. */
 public class ShootBallAuto extends CommandBase {
   private final Shooter m_shooter;
+  public static double  m_FrontVel;
+  public static double  m_BackVel;
 
-  public ShootBallAuto(Shooter shooter) {
+
+
+
+  public ShootBallAuto(Shooter shooter, double FrontVel, double BackVel) {
     m_shooter = shooter;
+    m_FrontVel = FrontVel;
+    m_BackVel = BackVel;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter);
   }
@@ -25,9 +33,7 @@ public class ShootBallAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    m_shooter.spin_shooter(RobotContainer.FrontShooterTargetVelocity_Slow,RobotContainer.BackShooter1TargetVelocity_Slow);
-
+    m_shooter.spin_shooter(m_FrontVel, m_BackVel);
   }
     
   // Called once the command ends or is interrupted.

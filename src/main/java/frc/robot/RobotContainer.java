@@ -78,6 +78,13 @@ public class RobotContainer {
   public static double  FrontShooterTargetVelocity_Fast = 16500;//16500 
   public static double  BackShooter1TargetVelocity_Fast = 10000;//12000//10000 good//11000
 
+  public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.2; 
+  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.2;
+
+  public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4;
+  public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.4;
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -120,9 +127,9 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMaster(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter, FrontShooterTargetVelocity_Slow,BackShooter1TargetVelocity_Slow ));
+    Bbutton.whileHeld(new ShootBall(m_shooter, FrontShooterTargetVelocity_Fast,BackShooter1TargetVelocity_Fast ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
-    LeftBumper.whenReleased( new A3M1( drivetrain, m_intake,m_feeder , m_shooter));
+    LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
     //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
 
