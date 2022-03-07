@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase{
     SwerveModule[] swerveModules;
-    SwerveModuleCanivore[] swerveModulesCanivore;
     SwerveDriveKinematics driveKinematics;
     SwerveDriveOdometry driveOdometry;
     static WPI_PigeonIMU imu = new WPI_PigeonIMU(00);
@@ -27,17 +26,14 @@ public class Drivetrain extends SubsystemBase{
    // SwerveModule[] swerveModules; //0 is LF, 1 is LB, 2 is RF etc
 
     public Drivetrain(){ //constructor method
-        swerveModulesCanivore = new SwerveModuleCanivore[]{
-            new SwerveModuleCanivore(LF_DRIVE_MOTOR_PORT, LF_STEER_MOTOR_PORT , LF_ANGLE_ENCODER_PORT, LF_OFFSET, true),
-            new SwerveModuleCanivore(LB_DRIVE_MOTOR_PORT, LB_STEER_MOTOR_PORT , LB_ANGLE_ENCODER_PORT, LB_OFFSET, true),
-        //new SwerveModule(RF_DRIVE_MOTOR_PORT, RF_STEER_MOTOR_PORT , RF_ANGLE_ENCODER_PORT, RF_OFFSET, false),
-            new SwerveModuleCanivore(RB_DRIVE_MOTOR_PORT, RB_STEER_MOTOR_PORT , RB_ANGLE_ENCODER_PORT, RB_OFFSET, false) //TODO simplify later
+        swerveModules= new SwerveModule[]{
+            new SwerveModule(LF_DRIVE_MOTOR_PORT, LF_STEER_MOTOR_PORT , LF_ANGLE_ENCODER_PORT, LF_OFFSET, true),
+            new SwerveModule(LB_DRIVE_MOTOR_PORT, LB_STEER_MOTOR_PORT , LB_ANGLE_ENCODER_PORT, LB_OFFSET, true),
+            new SwerveModule(RF_DRIVE_MOTOR_PORT, RF_STEER_MOTOR_PORT , RF_ANGLE_ENCODER_PORT, RF_OFFSET, false),
+            new SwerveModule(RB_DRIVE_MOTOR_PORT, RB_STEER_MOTOR_PORT , RB_ANGLE_ENCODER_PORT, RB_OFFSET, false) //TODO simplify later
         };
         
-        swerveModules = new SwerveModule[]{
-            new SwerveModule(RF_DRIVE_MOTOR_PORT, RF_STEER_MOTOR_PORT , RF_ANGLE_ENCODER_PORT, RF_OFFSET, false)            
-            };
-
+   
 
         driveKinematics = new SwerveDriveKinematics(moduleOffset);
         // driveOdometry.
