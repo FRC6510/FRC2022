@@ -2,24 +2,21 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Group.Group.Shooter;
+package frc.robot.commands;
+import frc.robot.subsystems.Feeder;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter.Shooter;
 
 /** An example command that uses an example subsystem. */
-public class ShootBall extends CommandBase {
-  private final Shooter m_shooter;
-  private final double m_FrontVel;
-  private final double m_BackVel;
+public class ResetGyro extends CommandBase {
 
-  public ShootBall(Shooter shooter, double FrontVel, double BackVel) {
-    m_shooter = shooter;
-    m_FrontVel= FrontVel;
-    m_BackVel= BackVel;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
+
+  static  WPI_Pigeon2  imu = new WPI_Pigeon2(0, "canivore");
+  
+  public void resetGyro(){
+    imu.reset();
   }
 
   // Called when the command is initially scheduled.
@@ -30,20 +27,19 @@ public class ShootBall extends CommandBase {
   @Override
   public void execute() {
 
-    m_shooter.spin_shooter(m_FrontVel,m_BackVel);
-    SmartDashboard.putNumber("vel1", m_FrontVel);
 
   }
     
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.stop_shooter();
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+return false;
+  
   }
 }

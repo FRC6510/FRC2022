@@ -20,6 +20,7 @@ import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
 import frc.robot.commands.Group.Autonomous.Autonomous2.A2M1;
 import frc.robot.commands.Group.Autonomous.Autonomous3.A3M1;
+import frc.robot.commands.Group.Autonomous.Autonomous4.A4M1;
 import frc.robot.commands.Group.Group.Climber.ClimbReverse;
 import frc.robot.commands.Group.Group.Climber.ClimbRobot;
 import frc.robot.commands.Group.Group.Climber.ClimberFullExtend;
@@ -46,6 +47,7 @@ import frc.robot.commands.Group.Group.Shooter.ShootBalls;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber.Climber;
+import frc.robot.subsystems.Limelight.Limelight;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.DrivetrainConstants;
@@ -70,6 +72,7 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
   private final Intake m_intake = new Intake();
   private final Climber m_climber = new Climber();
+  private final Limelight m_Limelight = new Limelight();
 
   public static boolean feeder_sensor = false;
   public static boolean climber_sensor = false;
@@ -86,16 +89,24 @@ public class RobotContainer {
   public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4;
   public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.4;
 
-  public static double  AmelieTestFront = 9000*1.68;
-  public static double  AmelieTestBack = 7000*1.68;
+  public static double  AmelieTestFront = 9000*1.68; //15120
+  public static double  AmelieTestBack = 7000*1.68; //11760
 
+  public static double shooterVelocity;
+
+  public static final double
+		K = 0.38, //constant for speed / distance
+		FConstant = 9000,
+		BConstant = 7000;
+
+  public static double D, SF, SB ;
 
   private final Command Red2balls =  new A1M1(m_intake, m_feeder, drivetrain, m_shooter);
   private final Command Red1ball  =  new A2M1(drivetrain, m_feeder, m_shooter);
   private final Command Red3Ball  =  new A3M1( drivetrain, m_intake, m_feeder , m_shooter);
+  private final Command Red4ball = new A4M1 (drivetrain, m_intake, m_feeder , m_shooter);
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -113,15 +124,21 @@ public class RobotContainer {
 
     m_feeder.setDefaultCommand(new RunCommand(() -> feeder_sensor = m_feeder.sense_ball(), m_feeder));
 
-    m_climber.setDefaultCommand(new RunCommand(() -> m_climber.climblog() , m_climber));
+    m_climber.setDefaultCommand(new RunCommand(() -> m_climber.climblog() , m_climber));  
+
+    m_Limelight.setDefaultCommand(new RunCommand(() -> shooterVelocity = Limelight.UpdateShooterVelocity(), m_Limelight));
 
     configureButtonBindings();
 
     m_chooser.setDefaultOption("2 ball auto", Red2balls);
     m_chooser.addOption("1 ball auto", Red1ball);
     m_chooser.addOption("3 ball auto", Red3Ball);
+    m_chooser.addOption("4 ball auto", Red4ball);
 
     SmartDashboard.putData(m_chooser);
+    //SmartDashboard.putNumber("distance from limelight to goal",frc.robot.subsystems.Limelight.Limelight.distanceFromLimelightToGoalInches);
+
+   
   }
 
   /**
@@ -143,13 +160,11 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter, AmelieTestFront,AmelieTestBack ));
+    Bbutton.whileHeld(new ShootBall(m_shooter, shooterVelocity,14000 ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
-    LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
-
-
+    //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
     //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
     //new Pose2d(1, 0, Rotation2d.fromDegrees(0))));
     //leftButton.whileHeld((new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 

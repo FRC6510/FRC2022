@@ -4,13 +4,17 @@
 
 package frc.robot.commands.Group.Autonomous.Autonomous1;
 
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
 import frc.robot.commands.Profiled2dMovement;
+import frc.robot.commands.ResetGyro;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.commands.Group.Group.Intake.IntakeBall;
@@ -29,7 +33,10 @@ import frc.robot.subsystems.drivetrain.DrivetrainConstants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class A1M1 extends SequentialCommandGroup {
 
+
   private final Drivetrain drivetrain = new Drivetrain();
+  
+
 
 
   public A1M1(Intake intake,Feeder feeder, Drivetrain drivetrain, Shooter shooter) {
@@ -41,8 +48,8 @@ public class A1M1 extends SequentialCommandGroup {
     //new IntakeDrive(drivetrain, intake, feeder).withTimeout(5),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.84, 0.6, Rotation2d.fromDegrees(-167))),
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))) //-167
-
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))), //-167
+    new ResetGyro()
 
     );
 
