@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
@@ -88,6 +89,14 @@ public class RobotContainer {
   public static double  AmelieTestFront = 9000*1.68;
   public static double  AmelieTestBack = 7000*1.68;
 
+
+  private final Command Red2balls =  new A1M1(m_intake, m_feeder, drivetrain, m_shooter);
+  private final Command Red1ball  =  new A2M1(drivetrain, m_feeder, m_shooter);
+  private final Command Red3Ball  =  new A3M1( drivetrain, m_intake, m_feeder , m_shooter);
+
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -108,6 +117,11 @@ public class RobotContainer {
 
     configureButtonBindings();
 
+    m_chooser.setDefaultOption("2 ball auto", Red2balls);
+    m_chooser.addOption("1 ball auto", Red1ball);
+    m_chooser.addOption("3 ball auto", Red3Ball);
+
+    SmartDashboard.putData(m_chooser);
   }
 
   /**
@@ -131,9 +145,9 @@ public class RobotContainer {
     Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
     Bbutton.whileHeld(new ShootBall(m_shooter, AmelieTestFront,AmelieTestBack ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
-    LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
+    //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
-    //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
+    LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
 
 
     //LeftBumper.whenReleased(new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, 
@@ -166,8 +180,6 @@ public class RobotContainer {
       drivetrain)
       );
     
-    
-
 
 
   }
@@ -178,4 +190,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
 
+   public Command getAutonomousCommand(){
+    return m_chooser.getSelected();
+   }
 }
