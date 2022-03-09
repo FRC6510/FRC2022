@@ -67,19 +67,37 @@ public class Limelight extends SubsystemBase {
   RobotContainer.SF = RobotContainer.K*RobotContainer.D*RobotContainer.FConstant;
   RobotContainer.SB = RobotContainer.K*RobotContainer.D*RobotContainer.BConstant;
 
+  /*if(distanceFromLimelightToGoalInches <= 400){
+    FrontSpeed = 0.1*distanceFromLimelightToGoalInches*9000*1.8*0.0254;
+    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000*1.8*0.0254;
+  } else if(400 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 300){
+    FrontSpeed = 0.1*distanceFromLimelightToGoalInches*9000*2*0.0254;
+    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000*2*0.0254;
+  } else if(300 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 160){
+    FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*1.4*0.0254; //0.38, 0.3
+    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*1.4*0.0254;  
+  } else{
+    FrontSpeed = 
+    9000;
+    BackSpeed = 7000;
+  } */
+
+  //improve mid-back distance
   if(distanceFromLimelightToGoalInches >= 340){
-    FrontSpeed = 0.06*distanceFromLimelightToGoalInches*9000/2*0.0254;
-    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000/2*0.0254;
-  } else if(340 < distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 250){
-    FrontSpeed = 0.10*distanceFromLimelightToGoalInches*9000*0.0254;
-    BackSpeed =  0.20*distanceFromLimelightToGoalInches*7000*0.0254;
-  } else if(250 < distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 170){
+    FrontSpeed = 0.1*distanceFromLimelightToGoalInches*9000*1.8*0.0254;
+    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000*1.8*0.0254;
+  } else if(340 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 270){
+    FrontSpeed = 0.15*distanceFromLimelightToGoalInches*9000*0.0254;
+    BackSpeed =  0.24*distanceFromLimelightToGoalInches*7000*0.0254;
+  } else if(270 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 160){
     FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.0254; //0.38, 0.3
     BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.0254;  
   } else{
-    FrontSpeed = 9000;
+    FrontSpeed = 
+    9000;
     BackSpeed = 7000;
-  }
+  } 
+
 
   Angle = x;
   //FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.025; //0.38, 0.3
