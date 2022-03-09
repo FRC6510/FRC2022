@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
@@ -31,7 +32,9 @@ public class SwerveModule {
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 1.023*2, 0.0488); //p 0.1023 d 0.6
         configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kP 1.8, d 18
 
-        this.steerPID = new PIDController(0.0055,0,0);
+        SmartDashboard.putNumber("motor hello "+this.steeringMotor.getDeviceID(), this.getSteerError());
+
+        this.steerPID = new PIDController(0.0055,0,0);//0.0055
         this.steerPID.enableContinuousInput(-180,180);
         this.steerPID.setTolerance(0);
 
@@ -46,7 +49,7 @@ public class SwerveModule {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
-        driveMotor.configOpenloopRamp(1);///////// Is this changing the autonomous?
+        //driveMotor.configOpenloopRamp(1);///////// Is this changing the autonomous?
         steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
         resetToAbsolute();
 
@@ -90,11 +93,16 @@ private void resetToAbsolute(){
         swerveModuleState = SwerveModuleState.optimize(swerveModuleState, Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition()));
         // System.out.println("Swerve target angle" + swerveModuleState.angle.getDegrees());
         double angleOutput = steerPID.calculate(angleEncoder.getAbsolutePosition(), swerveModuleState.angle.getDegrees());
+        
+        
         // SwerveModuleState state = SwerveModuleState.optimize(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         // SwerveModuleState state = CTREModuleStates.optimise(swerveModuleState, new Rotation2d(angleEncoder.getAbsolutePosition()));
         //SwerveModuleState state = swerveModuleState;
         driveMotor.set(ControlMode.Velocity, convertToWheelEncoderTicks(swerveModuleState.speedMetersPerSecond));
-        steeringMotor.set(ControlMode.PercentOutput,angleOutput);
+        steeringMotor.set(ControlMode.PercentOutput,angleOutput);///
+
+        SmartDashboard.putNumber("targetposSteering", angleOutput);
+        SmartDashboard.putNumber("key"+this.steeringMotor.getDeviceID(), getSteerError());
         // SmartDashboard.putNumber("target", DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());
         // steeringMotor.set(ControlMode.Position,degreesToFalcon(state.angle.getDegrees(), DrivetrainConstants.angleGearRatio));
         // steeringMotor.set(ControlMode.Position, DrivetrainConstants.HALF_ROTATION * state.angle.getDegrees());

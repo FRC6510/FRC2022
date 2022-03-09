@@ -159,7 +159,9 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
+    //Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
+    Abutton.whileHeld(new RunCommand(() -> drivetrain.turnLFmodule(90) , drivetrain));
+    Abutton.whenReleased(new RunCommand(() -> drivetrain.turnLFmodule(0) , drivetrain));
     Bbutton.whileHeld(new ShootBall(m_shooter, shooterVelocity,14000 ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));

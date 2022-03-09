@@ -6,6 +6,7 @@ package frc.robot.commands.Group.Group.Shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Limelight.Limelight;
 import frc.robot.subsystems.Shooter.Shooter;
 
 /** An example command that uses an example subsystem. */
@@ -29,8 +30,11 @@ public class ShootBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    m_shooter.spin_shooter(m_FrontVel,m_BackVel);
+    if((Limelight.BackSpeed > 0) && (Limelight.FrontSpeed > 0))
+      m_shooter.spin_shooter(Limelight.FrontSpeed,Limelight.BackSpeed);
+    else
+      m_shooter.spin_shooter(9000,7000);
+    
     SmartDashboard.putNumber("vel1", m_FrontVel);
 
   }
