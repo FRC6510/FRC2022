@@ -31,6 +31,7 @@ public class Intake extends SubsystemBase {
 
   public Intake(){
 
+    //double solenoids huhu
     intake = new TalonFX(55, "rio");
    //intake_pneu = 
     

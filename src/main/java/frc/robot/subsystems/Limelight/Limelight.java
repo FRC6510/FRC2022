@@ -23,6 +23,9 @@ import frc.robot.RobotContainer;
 public class Limelight extends SubsystemBase {
   public static double distanceFromLimelightToGoalInches;
   public static double FrontSpeed,BackSpeed;
+  public static double Angle, ControllerValue;
+  public static double x;
+
   /** Creates a new ExampleSubsystem. */
   private boolean m_LimelightHasValidTarget = false;
 
@@ -43,8 +46,8 @@ public class Limelight extends SubsystemBase {
 
    double targetOffsetAngle_Vertical = ty.getDouble(0.0);
 
-   double limelightMountAngleDegrees = 22.92;//67.08;
-   double limelightLensHeightInches = 37.4;
+   double limelightMountAngleDegrees = 16.5; //67.08, idk maybe subtract 16.5 from 90
+   double limelightLensHeightInches = 35.7;
    double goalHeightInches = 104;
 
    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
@@ -64,8 +67,23 @@ public class Limelight extends SubsystemBase {
   RobotContainer.SF = RobotContainer.K*RobotContainer.D*RobotContainer.FConstant;
   RobotContainer.SB = RobotContainer.K*RobotContainer.D*RobotContainer.BConstant;
 
-  FrontSpeed = 0.38*distanceFromLimelightToGoalInches*9000*0.025;
-  BackSpeed =  0.38*distanceFromLimelightToGoalInches*7000*0.025;
+  if(distanceFromLimelightToGoalInches >= 340){
+    FrontSpeed = 0.06*distanceFromLimelightToGoalInches*9000/2*0.0254;
+    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000/2*0.0254;
+  } else if(340 < distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 250){
+    FrontSpeed = 0.10*distanceFromLimelightToGoalInches*9000*0.0254;
+    BackSpeed =  0.20*distanceFromLimelightToGoalInches*7000*0.0254;
+  } else if(250 < distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches > 170){
+    FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.0254; //0.38, 0.3
+    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.0254;  
+  } else{
+    FrontSpeed = 9000;
+    BackSpeed = 7000;
+  }
+
+  Angle = x;
+  //FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.025; //0.38, 0.3
+  //BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.025;
 
 //post to smart dashboard periodically
 SmartDashboard.putNumber("LimelightX", x);

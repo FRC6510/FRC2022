@@ -84,7 +84,7 @@ public class RobotContainer {
   public static double  BackShooter1TargetVelocity_Fast = 10000;//12000//10000 good//11000
 
   public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.2; 
-  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.2;
+  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.2; 
 
   public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4;
   public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.4;
@@ -159,10 +159,8 @@ public class RobotContainer {
     final JoystickButton leftButton = new JoystickButton(operatorController,9);
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
-    //Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
-    Abutton.whileHeld(new RunCommand(() -> drivetrain.turnLFmodule(90) , drivetrain));
-    Abutton.whenReleased(new RunCommand(() -> drivetrain.turnLFmodule(0) , drivetrain));
-    Bbutton.whileHeld(new ShootBall(m_shooter, shooterVelocity,14000 ));
+    Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
+    Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed,14000 ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
@@ -192,12 +190,11 @@ public class RobotContainer {
       () -> drivetrain.drive( //removed negative
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-         -1*Drivetrain.deadZone(driverController.getRightX()),
+         -Limelight.Angle*0.05,
         true), 
       drivetrain)
-      );
-    
-
+      ); //-1*Drivetrain.deadZone(driverController.getRightX())
+  
 
   }
 

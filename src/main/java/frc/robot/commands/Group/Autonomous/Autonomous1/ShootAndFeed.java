@@ -27,7 +27,7 @@ public class ShootAndFeed extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
-    new ShootBallAuto(shooter, vel1, vel2), new ShootBalls(shooter, feeder, vel1, vel1).withTimeout(1)//need to test, was 1.5 before
+    new ShootBallAuto(shooter, vel1, vel2), new ShootBalls(shooter, feeder, vel1, vel1).withTimeout(1)
     
     );
   }
