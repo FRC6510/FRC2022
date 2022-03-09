@@ -67,7 +67,9 @@ public class Drivetrain extends SubsystemBase{
         SmartDashboard.putNumber("yPos", driveOdometry.getPoseMeters().getTranslation().getY());
         SmartDashboard.putNumber("rotation", driveOdometry.getPoseMeters().getRotation().getDegrees());
     }
-
+    public void stopDrive (){
+        
+    }
     public void drive(double xVelocity, double yVelocity, double angularVelocity, boolean isFieldRelative){
         SwerveModuleState[] moduleStates;
         ChassisSpeeds robotSpeed;

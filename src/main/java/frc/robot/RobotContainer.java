@@ -190,11 +190,19 @@ public class RobotContainer {
       () -> drivetrain.drive( //removed negative
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-         -Limelight.Angle*0.05,
+         -1*Drivetrain.deadZone(driverController.getRightX()),
         true), 
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
-  
+      buttonA.whileHeld(new RunCommand(
+        () -> drivetrain.drive( //removed negative
+           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+           -Limelight.Angle*0.05*1.2,//REMOVE1.5
+          true), 
+        drivetrain)
+        ); //-1*Drivetrain.deadZone(driverController.getRightX())
+    
 
   }
 

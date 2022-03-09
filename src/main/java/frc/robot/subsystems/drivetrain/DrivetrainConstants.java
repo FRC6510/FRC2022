@@ -76,7 +76,7 @@ public static final Translation2d[] moduleOffset = {
             RB_OFFSET =147.304-2.549+5; //149.941;//147.304-2.549;
                     
         public static final double //ASAPH
-            linearKp = 2, 
+            linearKp = 2, //2
             linearKi = 0,
             linearKd =  0,
             rotationalKp = 1.8,
@@ -94,14 +94,15 @@ public static final Translation2d[] moduleOffset = {
 
         public static final double
             DEADZONEMULTIPLIER = 3.6,
-            SLOWDEADZONEMULTIPLIER = 1.25;      
+            SLOWDEADZONEMULTIPLIER = 1.25,
+            SLOWLIMELIGHTMULTIPLIER= 2.5;      
     
         public static final TrapezoidProfile.Constraints
             linearMotionConstraints = new TrapezoidProfile.Constraints(MAX_SPEED_METRES_PER_SECOND, MAX_ACCELERATION_METRES_PER_SECOND_SQUARED),
             angularMotionConstraints = new TrapezoidProfile.Constraints(MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND, MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND_SQUARED);
 
         public static final Pose2d
-            endTolerance  = new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(3)); // ASAPH
+            endTolerance  = new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(3)); // ASAPH 0.05 0.05 3
 
         public static Profiled2dMovementConfig movementParameters = new Profiled2dMovementConfig(linearKp, linearKi, linearKd, rotationalKp, rotationalKi, rotationalKd, linearMotionConstraints, angularMotionConstraints, endTolerance);
 
