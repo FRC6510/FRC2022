@@ -54,6 +54,10 @@ public class Drivetrain extends SubsystemBase{
      SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
      SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
      SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
+     SmartDashboard.putNumber("LF ANGLE", measuredModuleStates[0].angle.getDegrees());
+     SmartDashboard.putNumber("LB ANGLE", measuredModuleStates[1].angle.getDegrees());
+     SmartDashboard.putNumber("RF ANGLE", measuredModuleStates[2].angle.getDegrees());
+     SmartDashboard.putNumber("RB ANGLE", measuredModuleStates[3].angle.getDegrees());
      SmartDashboard.putNumber("yaw",imu.getYaw());
      SmartDashboard.putNumber("converted yaw",imu.getRotation2d().getDegrees());
      //SmartDashboard.putNumber("status frame", swerveModules[0].STATU );
@@ -79,7 +83,6 @@ public class Drivetrain extends SubsystemBase{
 
         moduleStates = driveKinematics.toSwerveModuleStates(robotSpeed);
         SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, MAX_SPEED_METRES_PER_SECOND);
-        SmartDashboard.putNumber("LF ANGLE", moduleStates[0].angle.getDegrees());
 
         for(int x = 0; x < moduleStates.length; x++){
             swerveModules[x].setDesiredModuleState(moduleStates[x]);
@@ -117,10 +120,10 @@ public static double deadZone (double input){
         return 0;
     }else if(input > 0.2){
         SmartDashboard.putNumber("Input pos deadzone", 1.25 * (input + 0.25));
-        return 1.25 * (input + 0.25);
+        return 1.25 * (input - 0.2);
     } else {
         SmartDashboard.putNumber("Input neg deadzone", 1.25 * (input - 0.25));
-        return 1.25* (input - 0.25);
+        return 1.25* (input + 0.2);
     }
 
     }    

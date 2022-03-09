@@ -70,10 +70,10 @@ public static final Translation2d[] moduleOffset = {
             RF_OFFSET = 104.238 ,
             RB_OFFSET = 152.490;//147.304 - 2.549 + 15 - 2.7; //+45 */
 
-            LF_OFFSET = 10.898,  //13.184-1.143, //Need to test again
-            LB_OFFSET = 59.678,//60.156-0.527, // Should we change PID for turning?
-            RF_OFFSET = -76.025,//104.238+0.112,
-            RB_OFFSET = 149.941;//147.304-2.549;
+            LF_OFFSET = 13.184-1.143,//10.898,  //13.184-1.143, //Need to test again
+            LB_OFFSET =60.156-0.527, //59.678,//60.156-0.527, // Should we change PID for turning?
+            RF_OFFSET = 104.238+0.112,//-76.025,//104.238+0.112,
+            RB_OFFSET =147.304-2.549+5; //149.941;//147.304-2.549;
                     
         public static final double
             linearKp = 2, 
