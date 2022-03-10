@@ -38,12 +38,15 @@ public class A3M1 extends SequentialCommandGroup {
   
     addCommands(
     new IntakeDrive3a(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.36, -0.04, Rotation2d.fromDegrees(167))),//0.81, 0,167
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1, 0, Rotation2d.fromDegrees(167))),//0.81, 0,167
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Auto3a,RobotContainer.BackShooter1TargetVelocity_Auto3a),
     new IntakeDrive3b(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.01, -2.57, Rotation2d.fromDegrees(129))),//-0.47, -1.78,129
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.5, -2.535, Rotation2d.fromDegrees(129))),//-0.47, -1.78,129
     new ShootAndFeed (shooter, feeder,RobotContainer.FrontShooterTargetVelocity_Auto3b, RobotContainer.BackShooter1TargetVelocity_Auto3b),
-    new IntakeDrive3c(drivetrain, intake, feeder)
+    //new IntakeDrive3c(drivetrain, intake, feeder)
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.5, -2.535, Rotation2d.fromDegrees(90)))//-0.47, -1.78,129
+  
+    //blue alliance intakeDrive1a x1.02 y0.02        
   
     );
 

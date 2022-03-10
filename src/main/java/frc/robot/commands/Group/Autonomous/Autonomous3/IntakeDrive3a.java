@@ -28,7 +28,7 @@ public class IntakeDrive3a extends ParallelCommandGroup {
   public IntakeDrive3a (Drivetrain drivetrain, Intake intake, Feeder feeder) {
 
     addCommands(
-      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.36, -0.04, Rotation2d.fromDegrees(2))),
+      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.1, 0, Rotation2d.fromDegrees(0))), //1.36, -0.04 ,2
       new IntakeMaster(intake, feeder).withTimeout(3) //used to be 5 but might take too long
 
          
