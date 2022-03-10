@@ -83,12 +83,12 @@ public class Limelight extends SubsystemBase {
   } */
 
   //improve mid-back distance
-  if(distanceFromLimelightToGoalInches >= 340){
-    FrontSpeed = 0.1*distanceFromLimelightToGoalInches*9000*1.8*0.0254;
-    BackSpeed =  0.23*distanceFromLimelightToGoalInches*7000*1.8*0.0254;
-  } else if(340 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 270){
-    FrontSpeed = 0.15*distanceFromLimelightToGoalInches*9000*0.0254;
-    BackSpeed =  0.24*distanceFromLimelightToGoalInches*7000*0.0254;
+  if(distanceFromLimelightToGoalInches >= 380){
+    FrontSpeed = 0.08*distanceFromLimelightToGoalInches*9000*2*0.0254;
+    BackSpeed =  0.26*distanceFromLimelightToGoalInches*7000*2*0.0254;
+  } else if(380 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 270){
+    FrontSpeed = 0.13*distanceFromLimelightToGoalInches*9000*1.8*0.0254; //0.15
+    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*1.8*0.0254; //0.24
   } else if(270 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 160){
     FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.0254; //0.38, 0.3
     BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.0254;  

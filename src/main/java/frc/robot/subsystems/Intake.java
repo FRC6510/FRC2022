@@ -24,8 +24,9 @@ public class Intake extends SubsystemBase {
  
   //Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
-  private static DoubleSolenoid intake_pneu  = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 5,4);
-  public DigitalInput intakeSensor = new DigitalInput(2);
+ private static DoubleSolenoid intake_pneu  = new DoubleSolenoid(2,PneumaticsModuleType.CTREPCM, 5,4);
+ //private static Solenoid intake_pneu  = new Solenoid(PneumaticsModuleType.CTREPCM, 0); 
+ public DigitalInput intakeSensor = new DigitalInput(2);
 
 
   //private static final double velocitykp = 0, velocityki = 0, velocitykd = 0;
@@ -44,6 +45,7 @@ public class Intake extends SubsystemBase {
 
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     intake_pneu.set(Value.kReverse);
+   //intake_pneu.set(false);
   }
 
   @Override
@@ -54,7 +56,7 @@ public class Intake extends SubsystemBase {
   public void spin_intake(){
     intake.set(ControlMode.PercentOutput,0.8);//speed
     intake_pneu.set(Value.kForward);
-
+    //intake_pneu.set(true);
   }
 
   public void reverse_intake(){
@@ -63,15 +65,18 @@ public class Intake extends SubsystemBase {
 
   public void stop_intake(){
     intake.set(ControlMode.PercentOutput,0);
-    intake_pneu.set(Value.kReverse);
+   intake_pneu.set(Value.kReverse);
+    //intake_pneu.set(false);
   }
 
   public void intake_out(){
     intake_pneu.set(Value.kForward);
+    //intake_pneu.set(true);
   }
 
   public void intake_in(){
-    intake_pneu.set(Value.kReverse);
+   intake_pneu.set(Value.kReverse);
+   //intake_pneu.set(false);
   }
 
   public boolean sense_intake(){

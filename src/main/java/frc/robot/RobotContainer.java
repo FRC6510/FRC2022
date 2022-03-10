@@ -64,7 +64,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
 
   XboxController driverController = new XboxController(0);
-  XboxController operatorController = new XboxController(1); 
+  XboxController operatorController = new XboxController(1);
+  XboxController climberController = new XboxController(2); 
 
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
@@ -162,6 +163,8 @@ public class RobotContainer {
     Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
     Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed,14000 ));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
+    LeftBumper.whileHeld(new ReverseBall(m_feeder));
+    Xbutton.whileHeld(new ReverseIntake(m_intake));
     //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
     //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
@@ -181,11 +184,6 @@ public class RobotContainer {
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
-    //buttonX.whileHeld(new ClimberFullExtend(m_climber));
-    //leftStartButtonDriver.whileHeld(new ReverseClimb(m_climber));
-    //buttonA.whileHeld(new ClimberGoHome(m_climber));
-    //BumperLeft.whileHeld(new OpenHook(m_climber));
-    //BumperRight.whileHeld(new CloseHook(m_climber));
     buttonB.whileHeld(new RunCommand(
       () -> drivetrain.drive( //removed negative
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
@@ -194,16 +192,32 @@ public class RobotContainer {
         true), 
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
-      buttonA.whileHeld(new RunCommand(
-        () -> drivetrain.drive( //removed negative
-           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-           -Limelight.Angle*0.05*1.2,//REMOVE1.5
-          true), 
-        drivetrain)
-        ); //-1*Drivetrain.deadZone(driverController.getRightX())
-    
+    buttonA.whileHeld(new RunCommand(
+      () -> drivetrain.drive( //removed negative
+        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+        -Limelight.Angle*0.05*1.2,//REMOVE1.5
+        true), 
+      drivetrain)
+      ); //-1*Drivetrain.deadZone(driverController.getRightX())
 
+      BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
+      BumperRight.whileHeld(new ClimberGoHome(m_climber));
+        
+        final JoystickButton CbuttonA = new JoystickButton(climberController,1);
+        final JoystickButton CbuttonB = new JoystickButton(climberController,2);
+        final JoystickButton CbuttonX = new JoystickButton(climberController,3);
+        final JoystickButton CbuttonY = new JoystickButton(climberController,4);
+        final JoystickButton CBumperLeft = new JoystickButton(climberController,5);
+        final JoystickButton CBumperRight = new JoystickButton(climberController,6);
+        final JoystickButton CleftStartButtonDriver = new JoystickButton(climberController,7);
+
+
+        CBumperLeft.whenReleased(new OpenHook(m_climber));
+        CBumperRight.whenReleased(new CloseHook(m_climber));
+        CbuttonB.whenReleased(new ClimberIn(m_climber));
+        CbuttonY.whenReleased(new ClimberOut(m_climber));
+        
   }
 
   /**
