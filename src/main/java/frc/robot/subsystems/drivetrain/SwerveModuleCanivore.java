@@ -46,7 +46,7 @@ public class SwerveModuleCanivore {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
-        driveMotor.configOpenloopRamp(1);///////// Is this changing the autonomous?
+        //driveMotor.configOpenloopRamp(1);///////// Is this changing the autonomous? ,1
         steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
         resetToAbsolute();
 

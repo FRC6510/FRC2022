@@ -104,18 +104,23 @@ public class Limelight extends SubsystemBase {
   //BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.025;
 
 //post to smart dashboard periodically
-SmartDashboard.putNumber("LimelightX", x);
-SmartDashboard.putNumber("LimelightY", y);
-SmartDashboard.putNumber("LimelightArea", area);
-SmartDashboard.putNumber("distance from limelight to goal",distanceFromLimelightToGoalInches);
-SmartDashboard.putBoolean("LMhasTarget",m_LimelightHasValidTarget);
-SmartDashboard.putNumber("D", RobotContainer.D);
-SmartDashboard.putNumber("SF", FrontSpeed);
-SmartDashboard.putNumber("SB", BackSpeed);
+//SmartDashboard.putNumber("LimelightX", x);
+//SmartDashboard.putNumber("LimelightY", y);
+//SmartDashboard.putNumber("LimelightArea", area);
+//SmartDashboard.putNumber("distance from limelight to goal",distanceFromLimelightToGoalInches);
+//SmartDashboard.putBoolean("LMhasTarget",m_LimelightHasValidTarget);
+//SmartDashboard.putNumber("D", RobotContainer.D);
+//SmartDashboard.putNumber("SF", FrontSpeed);
+//SmartDashboard.putNumber("SB", BackSpeed);
   }
 
   public static double UpdateShooterVelocity(){
     return FrontSpeed;
+  }
+
+  public void turnLimelightOn(){
+    
+
   }
   public void Update_Limelight_Tracking()
   {

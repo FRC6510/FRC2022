@@ -28,7 +28,7 @@ public class IntakeDrive1a extends ParallelCommandGroup {
   public IntakeDrive1a (Drivetrain drivetrain, Intake intake, Feeder feeder) {
 
     addCommands(
-      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.1, 0.74, Rotation2d.fromDegrees(21))),
+      new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.13, 0.66, Rotation2d.fromDegrees(11))), //1.1,0.74    -21 is the biggest angle (does not work)
       new IntakeMaster(intake, feeder).withTimeout(3) //used to be 5 but might take too long
 
          

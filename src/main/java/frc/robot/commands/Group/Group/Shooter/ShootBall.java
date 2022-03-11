@@ -35,7 +35,7 @@ public class ShootBall extends CommandBase {
     else
       m_shooter.spin_shooter(9000,7000);
     
-    SmartDashboard.putNumber("vel1", m_FrontVel);
+    //SmartDashboard.putNumber("vel1", m_FrontVel);
 
   }
     

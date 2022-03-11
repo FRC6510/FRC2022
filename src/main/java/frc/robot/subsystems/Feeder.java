@@ -24,6 +24,8 @@ public class Feeder extends SubsystemBase {
     frontFeeder.setInverted(true);
     leftFeeder.setNeutralMode(NeutralMode.Brake); //stop mode
     frontFeeder.setNeutralMode(NeutralMode.Brake);
+    
+
   }
 
   @Override
@@ -38,6 +40,7 @@ public class Feeder extends SubsystemBase {
 
   public void reverse_feeder(){
     leftFeeder.set(ControlMode.PercentOutput,-0.35);
+
     //frontFeeder.set(ControlMode.PercentOutput,-0.35);
   }
 
@@ -50,13 +53,15 @@ public class Feeder extends SubsystemBase {
     return feederSensor.get();
   }
 
+  
+
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
 
   public void log(){
-    SmartDashboard.getBoolean("feederSensor", feederSensor.get());
+    //SmartDashboard.getBoolean("feederSensor", feederSensor.get());
 
   }
 }

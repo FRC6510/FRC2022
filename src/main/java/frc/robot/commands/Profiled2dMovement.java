@@ -125,9 +125,9 @@ public class Profiled2dMovement extends CommandBase{
         final Rotation2d rotateError = poseError.getRotation();
         final Translation2d translateTolerance = poseTolerance.getTranslation();
         final Rotation2d rotateTolerance = poseTolerance.getRotation();
-        SmartDashboard.putBoolean("X on Target", Math.abs(translateError.getX()) < translateTolerance.getX());
-        SmartDashboard.putBoolean("Y on Target", Math.abs(translateError.getY()) < translateTolerance.getY());
-        SmartDashboard.putBoolean("Rotaton on Target", Math.abs(rotateError.getRadians()) < rotateTolerance.getRadians());
+        //SmartDashboard.putBoolean("X on Target", Math.abs(translateError.getX()) < translateTolerance.getX());
+        //SmartDashboard.putBoolean("Y on Target", Math.abs(translateError.getY()) < translateTolerance.getY());
+        //SmartDashboard.putBoolean("Rotaton on Target", Math.abs(rotateError.getRadians()) < rotateTolerance.getRadians());
         return Math.abs(translateError.getX()) < translateTolerance.getX()
                     && Math.abs(translateError.getY()) <translateTolerance.getY()
                     && Math.abs(rotateError.getRadians()) < rotateTolerance.getRadians();

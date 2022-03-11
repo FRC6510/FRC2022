@@ -112,8 +112,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void climblog(){
-    SmartDashboard.putBoolean("climberSensor", climberSensor.get());
-    SmartDashboard.putNumber("Climber", climber.getSelectedSensorPosition());
+    //SmartDashboard.putBoolean("climberSensor", climberSensor.get());
+    //SmartDashboard.putNumber("Climber", climber.getSelectedSensorPosition());
   }
 
   public void init_climber(){

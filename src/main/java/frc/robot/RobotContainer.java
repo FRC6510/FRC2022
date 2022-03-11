@@ -137,7 +137,7 @@ public class RobotContainer {
     m_chooser.addOption("4 ball auto", Red4ball);
 
     SmartDashboard.putData(m_chooser);
-    //SmartDashboard.putNumber("distance from limelight to goal",frc.robot.subsystems.Limelight.Limelight.distanceFromLimelightToGoalInches);
+    SmartDashboard.putNumber("distance from limelight to goal",frc.robot.subsystems.Limelight.Limelight.distanceFromLimelightToGoalInches);
 
    
   }
@@ -165,6 +165,7 @@ public class RobotContainer {
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     LeftBumper.whileHeld(new ReverseBall(m_feeder));
     Xbutton.whileHeld(new ReverseIntake(m_intake));
+    //Ybutton.toggleWhenPressed()
     //LeftBumper.whenPressed( new A3M1( drivetrain, m_intake, m_feeder , m_shooter));
     //LeftBumper.whenReleased(new A2M1 (drivetrain, m_feeder, m_shooter));
     //LeftBumper.whenReleased ( new A1M1(m_intake, m_feeder, drivetrain, m_shooter));
@@ -182,7 +183,9 @@ public class RobotContainer {
     final JoystickButton BumperLeft = new JoystickButton(driverController,5);
     final JoystickButton BumperRight = new JoystickButton(driverController,6);
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
-    
+    final JoystickButton joystickButtonRight = new JoystickButton(driverController,10);
+
+
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
     buttonB.whileHeld(new RunCommand(
       () -> drivetrain.drive( //removed negative
@@ -198,6 +201,15 @@ public class RobotContainer {
         -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
         -Limelight.Angle*0.05*1.2,//REMOVE1.5
         true), 
+      drivetrain)
+      ); //-1*Drivetrain.deadZone(driverController.getRightX())
+
+      joystickButtonRight.whileHeld(new RunCommand(
+      () -> drivetrain.drive( //removed negative
+        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+        -1*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
+        false), 
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
 

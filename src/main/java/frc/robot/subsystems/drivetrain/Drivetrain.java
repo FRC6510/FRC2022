@@ -50,22 +50,22 @@ public class Drivetrain extends SubsystemBase{
             // System.out.println("Wheel Angle "+ x +  ": " + swerveModules[x].getModuleState().angle.getDegrees());
             // System.out.println("Wheel Velocity" + swerveModules[x].getModuleState().speedMetersPerSecond);
         }
-     SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError()); 
-     SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
-     SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
-     SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
-     SmartDashboard.putNumber("LF ANGLE", measuredModuleStates[0].angle.getDegrees());
-     SmartDashboard.putNumber("LB ANGLE", measuredModuleStates[1].angle.getDegrees());
-     SmartDashboard.putNumber("RF ANGLE", measuredModuleStates[2].angle.getDegrees());
-     SmartDashboard.putNumber("RB ANGLE", measuredModuleStates[3].angle.getDegrees());
-     SmartDashboard.putNumber("yaw",imu.getYaw());
-     SmartDashboard.putNumber("converted yaw",imu.getRotation2d().getDegrees());
+     //SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError()); 
+     //SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
+     //SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
+     //SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
+     //SmartDashboard.putNumber("LF ANGLE", measuredModuleStates[0].angle.getDegrees());
+     //SmartDashboard.putNumber("LB ANGLE", measuredModuleStates[1].angle.getDegrees());
+     //SmartDashboard.putNumber("RF ANGLE", measuredModuleStates[2].angle.getDegrees());
+     //SmartDashboard.putNumber("RB ANGLE", measuredModuleStates[3].angle.getDegrees());
+     //SmartDashboard.putNumber("yaw",imu.getYaw());
+     //SmartDashboard.putNumber("converted yaw",imu.getRotation2d().getDegrees());
      //SmartDashboard.putNumber("status frame", swerveModules[0].STATU );
      
         driveOdometry.updateWithTime(Timer.getFPGATimestamp(), imu.getRotation2d(), measuredModuleStates);
-        SmartDashboard.putNumber("xPos", driveOdometry.getPoseMeters().getTranslation().getX());
-        SmartDashboard.putNumber("yPos", driveOdometry.getPoseMeters().getTranslation().getY());
-        SmartDashboard.putNumber("rotation", driveOdometry.getPoseMeters().getRotation().getDegrees());
+       //SmartDashboard.putNumber("xPos", driveOdometry.getPoseMeters().getTranslation().getX());
+        //SmartDashboard.putNumber("yPos", driveOdometry.getPoseMeters().getTranslation().getY());
+        //SmartDashboard.putNumber("rotation", driveOdometry.getPoseMeters().getRotation().getDegrees());
     }
     public void stopDrive (){
         
@@ -78,10 +78,10 @@ public class Drivetrain extends SubsystemBase{
         if(isFieldRelative) robotSpeed = ChassisSpeeds.fromFieldRelativeSpeeds(xVelocity, yVelocity, angularVelocity, imu.getRotation2d());
         else robotSpeed = new ChassisSpeeds(xVelocity, yVelocity, angularVelocity);
         
-        SmartDashboard.putNumber("yaw", imu.getRotation2d().getDegrees());
-        SmartDashboard.putNumber("xVelocity", robotSpeed.vxMetersPerSecond);
-        SmartDashboard.putNumber("yVelocity", robotSpeed.vxMetersPerSecond);
-        SmartDashboard.putNumber("angularVelocity", robotSpeed.vxMetersPerSecond);
+        //SmartDashboard.putNumber("yaw", imu.getRotation2d().getDegrees());
+        //SmartDashboard.putNumber("xVelocity", robotSpeed.vxMetersPerSecond);
+        //SmartDashboard.putNumber("yVelocity", robotSpeed.vxMetersPerSecond);
+        //SmartDashboard.putNumber("angularVelocity", robotSpeed.vxMetersPerSecond);
 
         moduleStates = driveKinematics.toSwerveModuleStates(robotSpeed);
         SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, MAX_SPEED_METRES_PER_SECOND);
@@ -121,10 +121,10 @@ public static double deadZone (double input){
     if(Math.abs(input) < 0.2){
         return 0;
     }else if(input > 0.2){
-        SmartDashboard.putNumber("Input pos deadzone", 1.25 * (input + 0.25));
+        //SmartDashboard.putNumber("Input pos deadzone", 1.25 * (input + 0.25));
         return 1.25 * (input - 0.2);
     } else {
-        SmartDashboard.putNumber("Input neg deadzone", 1.25 * (input - 0.25));
+        //SmartDashboard.putNumber("Input neg deadzone", 1.25 * (input - 0.25));
         return 1.25* (input + 0.2);
     }
 

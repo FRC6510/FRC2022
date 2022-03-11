@@ -43,7 +43,7 @@ public class A1M1 extends SequentialCommandGroup {
   
     addCommands(
     new IntakeDrive1a(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.98, 0.75, Rotation2d.fromDegrees(-150))), //84, 0.6, -167
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.98, 0.75, Rotation2d.fromDegrees(-167))), //84, 0.6, -167 between -150 
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))), //-167
     new ResetGyro()
