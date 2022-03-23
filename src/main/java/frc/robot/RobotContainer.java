@@ -9,11 +9,16 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.ADXL345_I2C.Axes;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Profiled2dMovement;
@@ -54,6 +59,7 @@ import frc.robot.subsystems.drivetrain.DrivetrainConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -78,20 +84,23 @@ public class RobotContainer {
   public static boolean feeder_sensor = false;
   public static boolean climber_sensor = false;
 
-  public static double  FrontShooterTargetVelocity_Slow = 9000; 
-  public static double  BackShooter1TargetVelocity_Slow = 7000;
+  public static double  FrontShooterTargetVelocity_Slow = 9000*0.78; //no multiplier
+  public static double  BackShooter1TargetVelocity_Slow = 7000*0.78;  
 
   public static double  FrontShooterTargetVelocity_Fast = 16500;//16500 
   public static double  BackShooter1TargetVelocity_Fast = 10000;//12000//10000 good//11000
 
-  public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.2; 
-  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.2; 
+  public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.1*0.95; //both 1.2 
+  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.3*0.95; 
 
-  public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4;
-  public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.4;
+  public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.3*0.9; //1.4
+  public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.5*0.9;
 
   public static double  AmelieTestFront = 9000*1.68; //15120
   public static double  AmelieTestBack = 7000*1.68; //11760
+
+  public static double AsaphFrontShooter = 0;
+  public static double AsaphBackShooter = 0;
 
   public static double shooterVelocity;
 
@@ -184,7 +193,7 @@ public class RobotContainer {
     final JoystickButton BumperRight = new JoystickButton(driverController,6);
     final JoystickButton leftStartButtonDriver = new JoystickButton(driverController,7);
     final JoystickButton joystickButtonRight = new JoystickButton(driverController,10);
-
+    final xboxTrigger rightTrigger = new xboxTrigger(driverController, 3);
 
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
     buttonB.whileHeld(new RunCommand(
@@ -204,14 +213,16 @@ public class RobotContainer {
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
 
-      joystickButtonRight.whileHeld(new RunCommand(
+     rightTrigger.whileHeld(new RunCommand(
       () -> drivetrain.drive( //removed negative
-        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-        -1*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
+        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+        -3.6*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
         false), 
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
+
+      
 
       BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
       BumperRight.whileHeld(new ClimberGoHome(m_climber));
@@ -223,13 +234,18 @@ public class RobotContainer {
         final JoystickButton CBumperLeft = new JoystickButton(climberController,5);
         final JoystickButton CBumperRight = new JoystickButton(climberController,6);
         final JoystickButton CleftStartButtonDriver = new JoystickButton(climberController,7);
-
+        
 
         CBumperLeft.whenReleased(new OpenHook(m_climber));
         CBumperRight.whenReleased(new CloseHook(m_climber));
         CbuttonB.whenReleased(new ClimberIn(m_climber));
         CbuttonY.whenReleased(new ClimberOut(m_climber));
-        
+
+    
+    ShuffleboardTab tab = Shuffleboard.getTab("Shooter"); ////
+  NetworkTableEntry frontShooter = tab.add("FrontSpeed",1).getEntry();
+   SmartDashboard.putNumber("Shooter Test", frontShooter.getDouble(1.0));
+
   }
 
   /**

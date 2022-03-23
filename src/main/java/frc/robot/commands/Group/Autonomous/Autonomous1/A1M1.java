@@ -46,6 +46,8 @@ public class A1M1 extends SequentialCommandGroup {
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.98, 0.75, Rotation2d.fromDegrees(-167))), //84, 0.6, -167 between -150 
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))), //-167
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.6, Rotation2d.fromDegrees(-90))), 
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.9, Rotation2d.fromDegrees(-130))), 
     new ResetGyro()
 
     //blue alliance intakeDrive1a x101.5 y85                            

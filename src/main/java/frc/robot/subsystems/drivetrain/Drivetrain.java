@@ -100,7 +100,7 @@ public void turnLFmodule (double angle){
     
 }    
 
-public void resetGyro(){
+public static void resetGyro(){
     imu.reset();
 }
 

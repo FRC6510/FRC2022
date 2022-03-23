@@ -41,7 +41,7 @@ public class A3M1 extends SequentialCommandGroup {
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1, 0, Rotation2d.fromDegrees(167))),//0.81, 0,167
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Auto3a,RobotContainer.BackShooter1TargetVelocity_Auto3a),
     new IntakeDrive3b(drivetrain, intake, feeder),
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.5, -2.535, Rotation2d.fromDegrees(129))),//-0.47, -1.78,129
+    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.5, -2.535, Rotation2d.fromDegrees(140))),//-0.47, -1.78, 129
     new ShootAndFeed (shooter, feeder,RobotContainer.FrontShooterTargetVelocity_Auto3b, RobotContainer.BackShooter1TargetVelocity_Auto3b),
     //new IntakeDrive3c(drivetrain, intake, feeder)
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.5, -2.535, Rotation2d.fromDegrees(90)))//-0.47, -1.78,129

@@ -14,7 +14,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
@@ -38,7 +39,7 @@ public class Limelight extends SubsystemBase {
     // This method will be called once per scheduler run
 
    // SmartDashboard.putNumber("distance from limelight to goal",distanceFromLimelightToGoalInches);
-
+  
    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
    NetworkTableEntry tx = table.getEntry("tx");
    NetworkTableEntry ty = table.getEntry("ty");
@@ -83,15 +84,24 @@ public class Limelight extends SubsystemBase {
   } */
 
   //improve mid-back distance
-  if(distanceFromLimelightToGoalInches >= 380){
-    FrontSpeed = 0.08*distanceFromLimelightToGoalInches*9000*2*0.0254;
-    BackSpeed =  0.26*distanceFromLimelightToGoalInches*7000*2*0.0254;
+  /*if(distanceFromLimelightToGoalInches >= 380){
+    FrontSpeed = 0.7*0.08*distanceFromLimelightToGoalInches*9000*2.1*0.0254; //0.09 multiplier, 2.1 multiplier -> 0.08
+    BackSpeed = 1*0.28*distanceFromLimelightToGoalInches*7000*2.1*0.0254; //0.26 multiplier, 2.1 multiplier) ->0.9?
   } else if(380 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 270){
-    FrontSpeed = 0.13*distanceFromLimelightToGoalInches*9000*1.8*0.0254; //0.15
-    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*1.8*0.0254; //0.24
-  } else if(270 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 160){
-    FrontSpeed = 0.25*distanceFromLimelightToGoalInches*9000*0.0254; //0.38, 0.3
-    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*0.0254;  
+    FrontSpeed = 0.13*distanceFromLimelightToGoalInches*9000*1.3*0.0254; //0.15 , 1.8 multiplier
+    BackSpeed =  0.25*distanceFromLimelightToGoalInches*7000*1.3*0.0254; //0.24, 1.8 multiplier
+  } else if(270 > distanceFromLimelightToGoalInches && distanceFromLimelightToGoalInches >= 130){
+    FrontSpeed = 0.22 *distanceFromLimelightToGoalInches*9000*0.0254; //0.38, 0.3
+    BackSpeed =  0.22*distanceFromLimelightToGoalInches*7000*0.0254;  //both used to be
+  } else{
+    FrontSpeed = 
+    9000;
+    BackSpeed = 7000;
+  }  */
+
+  if(distanceFromLimelightToGoalInches >= 350){
+    FrontSpeed = 0.7*0.08*distanceFromLimelightToGoalInches*9000*2.1*0.0254; //0.09 multiplier, 2.1 multiplier -> 0.08
+    BackSpeed = 1*0.28*distanceFromLimelightToGoalInches*7000*2.1*0.0254; //0.26 multiplier, 2.1 multiplier) ->0.9?
   } else{
     FrontSpeed = 
     9000;
