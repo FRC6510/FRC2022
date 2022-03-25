@@ -93,7 +93,7 @@ public static final Translation2d[] moduleOffset = {
             A2R = 0;
 
         public static final double
-            DEADZONEMULTIPLIER = 3.6,
+            DEADZONEMULTIPLIER = 4,//3.6
             SLOWDEADZONEMULTIPLIER = 1.25,
             SLOWLIMELIGHTMULTIPLIER= 2.5;      
     

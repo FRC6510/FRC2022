@@ -27,8 +27,8 @@ public class SwerveModule {
     private final CANCoder angleEncoder;
 
     public SwerveModule(int driveMotorPort, int steeringMotorPort , int angleEncoderPort, double encoderOffset, boolean isDriveMotorInverted) {
-        this.driveMotor = new WPI_TalonFX(driveMotorPort,"canivore"); // added "rio"
-        this.steeringMotor = new WPI_TalonFX(steeringMotorPort, "canivore"); // added "rio"
+        this.driveMotor = new WPI_TalonFX(driveMotorPort,"canivore"); 
+        this.steeringMotor = new WPI_TalonFX(steeringMotorPort, "canivore"); 
         configSwerveMotor(driveMotor, FeedbackDevice.IntegratedSensor, 0.1023, 0, 1.023*2, 0.0488); //p 0.1023 d 0.6
         configSwerveMotor(steeringMotor, FeedbackDevice.IntegratedSensor, 1.8, 0, 18, 0);  //kP 1.8, d 18
 
@@ -49,14 +49,11 @@ public class SwerveModule {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
-        //driveMotor.configOpenloopRamp(1);///////// Is this changing the autonomous?, 1
+        driveMotor.configClosedloopRamp(0.3);///////// Is this changing the autonomous?, 1
         steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
         resetToAbsolute();
-
     }
 
-    
-    
     protected void configSwerveMotor(WPI_TalonFX motor,FeedbackDevice FeedbackSensor, double kP, double kI, double kD, double kF){
         motor.configFactoryDefault();
         motor.setNeutralMode(NeutralMode.Brake);
@@ -71,7 +68,6 @@ public class SwerveModule {
         motor.configVelocityMeasurementWindow(8,50); //might need to change this
         motor.setStatusFramePeriod(1, 50); /// ????(1, 20);
         motor.setStatusFramePeriod(2, 80); /// ????(2, 30);
-
 
     }
 
