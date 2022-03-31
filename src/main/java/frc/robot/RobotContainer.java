@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.Group.Autonomous.Autonomous1.A1M1;
 import frc.robot.commands.Group.Autonomous.Autonomous2.A2M1;
 import frc.robot.commands.Group.Autonomous.Autonomous3.A3M1;
@@ -36,6 +35,7 @@ import frc.robot.commands.Group.Group.Climber.CloseHook;
 import frc.robot.commands.Group.Group.Climber.OpenHook;
 import frc.robot.commands.Group.Group.Climber.ReverseClimb;
 import frc.robot.commands.Group.Group.Climber.SenseClimber;
+import frc.robot.commands.Group.Group.Drivetrain.Profiled2dMovement;
 import frc.robot.commands.Group.Group.Feeder.FeedBallForShooter;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.commands.Group.Group.Feeder.ReverseBall;
@@ -67,9 +67,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
-
-  //changing the code yay!! just adding comments  
-
 public class RobotContainer {
 
   XboxController driverController = new XboxController(0);
@@ -151,7 +148,6 @@ public class RobotContainer {
     SmartDashboard.putData(m_chooser);
     SmartDashboard.putNumber("distance from limelight to goal",frc.robot.subsystems.Limelight.Limelight.distanceFromLimelightToGoalInches);
 
-   
   }
 
   /**
@@ -173,7 +169,7 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed,14000 ));
+    Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed, 14000));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     LeftBumper.whileHeld(new ReverseBall(m_feeder));
     Xbutton.whileHeld(new ReverseIntake(m_intake));
@@ -225,8 +221,6 @@ public class RobotContainer {
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
 
-      
-
       BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
       BumperRight.whileHeld(new ClimberGoHome(m_climber));
         
@@ -237,7 +231,6 @@ public class RobotContainer {
         final JoystickButton CBumperLeft = new JoystickButton(climberController,5);
         final JoystickButton CBumperRight = new JoystickButton(climberController,6);
         final JoystickButton CleftStartButtonDriver = new JoystickButton(climberController,7);
-        
 
         CBumperLeft.whenReleased(new OpenHook(m_climber));
         CBumperRight.whenReleased(new CloseHook(m_climber));

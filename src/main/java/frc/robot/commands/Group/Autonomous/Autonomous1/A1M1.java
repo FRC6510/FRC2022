@@ -10,12 +10,14 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
-import frc.robot.commands.Profiled2dMovement;
 import frc.robot.commands.ResetGyro;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
+import frc.robot.commands.Group.Group.Drivetrain.Profiled2dMovement;
+import frc.robot.commands.Group.Group.Drivetrain.SimpleDrive;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.commands.Group.Group.Intake.IntakeBall;
 import frc.robot.commands.Group.Group.Intake.IntakeMaster;
@@ -46,8 +48,9 @@ public class A1M1 extends SequentialCommandGroup {
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(0.98, 0.75, Rotation2d.fromDegrees(-167))), //84, 0.6, -167 between -150 
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(1.5, 0.6, Rotation2d.fromDegrees(-130))), //-167
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.6, Rotation2d.fromDegrees(-90))), 
-    new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.9, Rotation2d.fromDegrees(-130))), 
+    //new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.6, Rotation2d.fromDegrees(-90))), 
+    //new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(2, 0.9, Rotation2d.fromDegrees(-130))),
+    new SimpleDrive(drivetrain, 0, 0, 0, 1),
     new ResetGyro()
 
     //blue alliance intakeDrive1a x101.5 y85                            
