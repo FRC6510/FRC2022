@@ -128,7 +128,14 @@ public static double deadZone (double input){
         return 1.25* (input + 0.2);
     }
 
-    }    
+}    
+
+public void setDriveMotorClosedLoopRamp(double rampTime) {
+    for (SwerveModule swerveModule : swerveModules) {
+        swerveModule.setClosedLoopRamp(rampTime);
+    }
+}
+
 }
 
     // if(Math.abs(input) < 0.1){ // <0.15

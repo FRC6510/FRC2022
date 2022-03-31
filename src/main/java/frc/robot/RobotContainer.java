@@ -244,8 +244,13 @@ public class RobotContainer {
   AsaphFrontShooter = 20000 * frontShooter.getDouble(1);
   SmartDashboard.putNumber("Asaph", AsaphFrontShooter);
 
-
   }
+
+  public void setDriveTrainClosedLoopRamp(double ramp) {
+    drivetrain.setDriveMotorClosedLoopRamp(ramp);
+  }
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

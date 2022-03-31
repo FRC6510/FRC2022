@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static TalonFX climber;
+  private static TalonFX climbMotor;
   private static Solenoid climber_pneu;
   private static Solenoid hook_pneu;
   DigitalInput climberSensor = new DigitalInput(1);
@@ -35,13 +35,13 @@ public class Climber extends SubsystemBase {
 
   public Climber(){
 
-    climber = new TalonFX(44, "canivore");
+    climbMotor = new TalonFX(44, "canivore");
     climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
     
-    climber.setInverted(true);
-    climber.setNeutralMode(NeutralMode.Brake); //stop mode
-    climber.configOpenloopRamp(0.3); //ramp acceleration
+    climbMotor.setInverted(true);
+    climbMotor.setNeutralMode(NeutralMode.Brake); //stop mode
+    climbMotor.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     //climber.configStatorCurrentLimit(true);
     //climber.configPeakCurrentLimit(30); // don't activate current limit until current
@@ -49,29 +49,33 @@ public class Climber extends SubsystemBase {
     //climber.configContinuousCurrentLimit(20); // once current-limiting is actived, hold at
     climber_pneu.set(false);
 
-    climber.setSelectedSensorPosition(0); //MAX POSITION -199070
+    climbMotor.setSelectedSensorPosition(0); //MAX POSITION -199070
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    System.out.println("Climber Position" + climbMotor.getSelectedSensorPosition());
+    System.out.println("Climber Error" + climbMotor.getClosedLoopError());
+    SmartDashboard.putNumber("clim pos", climbMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("clim error", climbMotor.getClosedLoopError());
   }
 
   public void spin_climber(){
 
-    if (!sense_climber() || climber.getSelectedSensorPosition()<0){
+    if (!sense_climber() || climbMotor.getSelectedSensorPosition()<0){
       stop_climber();
     }
     else{
-      climber.set(ControlMode.PercentOutput,-0.4); //speed
+      climbMotor.set(ControlMode.PercentOutput,-0.4); //speed
     }
    
   }
 
   public void reverse_climber(){
 
-    if ( climber.getSelectedSensorPosition()<(140000)){ //202331 for max, 190000 for usual number
-      climber.set(ControlMode.PercentOutput,0.7); //speed
+    if ( climbMotor.getSelectedSensorPosition()<(140000)){ //202331 for max, 190000 for usual number
+      climbMotor.set(ControlMode.PercentOutput,0.7); //speed
     }
     else{
       stop_climber();
@@ -79,11 +83,11 @@ public class Climber extends SubsystemBase {
   }
 
   public void fullextend_climber(){
-			climber.set(TalonFXControlMode.MotionMagic, fullExtend);
+			climbMotor.set(TalonFXControlMode.MotionMagic, fullExtend);
   }
 
   public void goHome_climber(){
-			climber.set(TalonFXControlMode.MotionMagic, goHome);
+			climbMotor.set(TalonFXControlMode.MotionMagic, goHome);
   }
 
   public void climber_in(){
@@ -104,7 +108,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void stop_climber(){
-    climber.set(ControlMode.PercentOutput,0);
+    climbMotor.set(ControlMode.PercentOutput,0);
   }
 
   public boolean sense_climber(){
@@ -118,39 +122,39 @@ public class Climber extends SubsystemBase {
 
   public void init_climber(){
         /* Factory Default all hardware to prevent unexpected behaviour */
-        climber.configFactoryDefault();
+        climbMotor.configFactoryDefault();
 
-		climber.setInverted(true); //direction
-		climber.setNeutralMode(NeutralMode.Brake); //stop mode
+		climbMotor.setInverted(true); //direction
+		climbMotor.setNeutralMode(NeutralMode.Brake); //stop mode
 		
 		/* Config neutral deadband to be the smallest possible */
-		climber.configNeutralDeadband(0.001);
+		climbMotor.configNeutralDeadband(0.001);
 
 
 		/* Config sensor used for Primary PID [Velocity] */
-    climber.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor,
+    climbMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor,
                                             CConstants.kPIDLoopIdx, CConstants.kTimeoutMs);
 
-    climber.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, CConstants.kTimeoutMs);
-		climber.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, CConstants.kTimeoutMs);
+    climbMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, CConstants.kTimeoutMs);
+		climbMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, CConstants.kTimeoutMs);
 
 
 		/* Config the peak and nominal outputs */
-		climber.configNominalOutputForward(0, CConstants.kTimeoutMs);
-		climber.configNominalOutputReverse(0, CConstants.kTimeoutMs);
-		climber.configPeakOutputForward(1, CConstants.kTimeoutMs);
-		climber.configPeakOutputReverse(-1, CConstants.kTimeoutMs);
+		climbMotor.configNominalOutputForward(0, CConstants.kTimeoutMs);
+		climbMotor.configNominalOutputReverse(0, CConstants.kTimeoutMs);
+		climbMotor.configPeakOutputForward(1, CConstants.kTimeoutMs);
+		climbMotor.configPeakOutputReverse(-1, CConstants.kTimeoutMs);
 
 		/* Config the Velocity closed loop gains in slot0 */
-		climber.config_kF(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kF, CConstants.kTimeoutMs);
-		climber.config_kP(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kP, CConstants.kTimeoutMs);
-		climber.config_kI(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kI, CConstants.kTimeoutMs);
-		climber.config_kD(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kD, CConstants.kTimeoutMs);
+		climbMotor.config_kF(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kF, CConstants.kTimeoutMs);
+		climbMotor.config_kP(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kP, CConstants.kTimeoutMs);
+		climbMotor.config_kI(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kI, CConstants.kTimeoutMs);
+		climbMotor.config_kD(CConstants.kPIDLoopIdx, CConstants.kGains_Velocit.kD, CConstants.kTimeoutMs);
 
-    climber.configMotionCruiseVelocity(19337.5, CConstants.kTimeoutMs);
-		climber.configMotionAcceleration(40000, CConstants.kTimeoutMs);
+    climbMotor.configMotionCruiseVelocity(19337.5, CConstants.kTimeoutMs);
+		climbMotor.configMotionAcceleration(40000, CConstants.kTimeoutMs);
 
-    climber.setSelectedSensorPosition(0, CConstants.kPIDLoopIdx, CConstants.kTimeoutMs);
+    climbMotor.setSelectedSensorPosition(0, CConstants.kPIDLoopIdx, CConstants.kTimeoutMs);
 
   }
 

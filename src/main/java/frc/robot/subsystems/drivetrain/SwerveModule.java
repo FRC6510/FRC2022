@@ -49,7 +49,7 @@ public class SwerveModule {
         steeringMotor.configRemoteFeedbackFilter(angleEncoder,0);
         steeringMotor.configClosedLoopPeakOutput(0, 1);
         driveMotor.setInverted(isDriveMotorInverted);
-        driveMotor.configClosedloopRamp(0.3);///////// Is this changing the autonomous?, 1
+        // driveMotor.configClosedloopRamp(0.3);///////// Is this changing the autonomous?, 1
         steeringMotor.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
         resetToAbsolute();
     }
@@ -123,6 +123,10 @@ private void resetToAbsolute(){
 
     public double convertToWheelEncoderTicks(double wheelVelocity){
         return wheelVelocity/DrivetrainConstants.VELOCITY_MULTIPLIER;
+    }
+
+    public void setClosedLoopRamp(double ramp){
+        this.driveMotor.configClosedloopRamp(ramp);
     }
 
 }
