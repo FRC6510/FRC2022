@@ -41,7 +41,7 @@ public class Climber extends SubsystemBase {
     
     climbMotor.setInverted(true);
     climbMotor.setNeutralMode(NeutralMode.Brake); //stop mode
-    climbMotor.configOpenloopRamp(0.3); //ramp acceleration
+    climbMotor.configClosedloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     //climber.configStatorCurrentLimit(true);
     //climber.configPeakCurrentLimit(30); // don't activate current limit until current
