@@ -213,6 +213,7 @@ public class RobotContainer {
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
 
      rightTrigger.whileHeld(new RunCommand(
+<<<<<<< HEAD
       () -> {
         // m_Limelight.turnLimelightLEDOn(true);
         drivetrain.drive( //removed negative
@@ -223,6 +224,15 @@ public class RobotContainer {
       }, 
       drivetrain));
       // ).whenReleased(new RunCommand(() -> m_Limelight.turnLimelightLEDOn(false)), false); //-1*Drivetrain.deadZone(driverController.getRightX())
+=======
+      () -> drivetrain.drive( //removed negative
+        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+        -3.6*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
+        false), 
+      drivetrain)
+      ); //-1*Drivetrain.deadZone(driverController.getRightX())
+>>>>>>> parent of 23b710c (Added some limelight stuff.)
 
       BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
       BumperRight.whileHeld(new ClimberGoHome(m_climber));

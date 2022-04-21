@@ -26,14 +26,12 @@ public class Limelight extends SubsystemBase {
   public static double FrontSpeed,BackSpeed;
   public static double Angle, ControllerValue;
   public static double x;
-  NetworkTable table;
 
   /** Creates a new ExampleSubsystem. */
   private boolean m_LimelightHasValidTarget = false;
-  
 
   public Limelight(){
-    this.table  = NetworkTableInstance.getDefault().getTable("limelight");
+ 
   }
 
   @Override
@@ -42,7 +40,7 @@ public class Limelight extends SubsystemBase {
 
    // SmartDashboard.putNumber("distance from limelight to goal",distanceFromLimelightToGoalInches);
   
-   table = NetworkTableInstance.getDefault().getTable("limelight");
+   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
    NetworkTableEntry tx = table.getEntry("tx");
    NetworkTableEntry ty = table.getEntry("ty");
    NetworkTableEntry ta = table.getEntry("ta");
@@ -130,9 +128,9 @@ public class Limelight extends SubsystemBase {
     return FrontSpeed;
   }
 
-  public void turnLimelightLEDOn(boolean isOn){
-    if (isOn) NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3);
-    else NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(1);
+  public void turnLimelightOn(){
+    
+
   }
   public void Update_Limelight_Tracking()
   {

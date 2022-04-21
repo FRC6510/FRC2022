@@ -37,19 +37,22 @@ public class Climber extends SubsystemBase {
 
   public Climber(){
 
+
     climbMotor = new TalonFX(44, "canivore");
     climber_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
     hook_pneu = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
     
+    init_climber();
+
     climbMotor.setInverted(true);
     climbMotor.setNeutralMode(NeutralMode.Brake); //stop mode
-    climbMotor.configClosedloopRamp(0.3); //ramp acceleration
+    //climbMotor.configOpenloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     //climber.configStatorCurrentLimit(true);
     //climbMotor.configPeakCurrentLimit(20); // don't activate current limit until current
     //climbMotor.configPeakCurrentDuration(100); // ... for at least 100 ms
     //climber.configContinuousCurrentLimit(20); // once current-limiting is actived, hold at
-    
+  
     //enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  
     //climbMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,20,25,1.0)); 
     //climbMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true,20,100,20));
