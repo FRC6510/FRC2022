@@ -7,7 +7,9 @@ package frc.robot.subsystems.Climber;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -44,9 +46,15 @@ public class Climber extends SubsystemBase {
     climbMotor.configClosedloopRamp(0.3); //ramp acceleration
     //Intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); <-- What's this?
     //climber.configStatorCurrentLimit(true);
-    //climber.configPeakCurrentLimit(30); // don't activate current limit until current
-    //climber.configPeakCurrentDuration(100); // ... for at least 100 ms
+    //climbMotor.configPeakCurrentLimit(20); // don't activate current limit until current
+    //climbMotor.configPeakCurrentDuration(100); // ... for at least 100 ms
     //climber.configContinuousCurrentLimit(20); // once current-limiting is actived, hold at
+    
+    //enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  
+    //climbMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,20,25,1.0)); 
+    //climbMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true,20,100,20));
+    //climbMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true,10,15,0.5));
+
     climber_pneu.set(false);
 
     climbMotor.setSelectedSensorPosition(0); //MAX POSITION -199070

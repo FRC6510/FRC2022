@@ -216,9 +216,9 @@ public class RobotContainer {
       () -> {
         // m_Limelight.turnLimelightLEDOn(true);
         drivetrain.drive( //removed negative
-          -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-          -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-          -3.6*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
+          -3.6*0.7*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+          -3.6*0.7*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+          -3.6*0.7*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
         false);
       }, 
       drivetrain));
