@@ -44,7 +44,7 @@ public static final Translation2d[] moduleOffset = {
     public static final double angleGearRatio = 12.8;
 
     public static final double 
-        MAX_SPEED_METRES_PER_SECOND = 3, //0.8
+        MAX_SPEED_METRES_PER_SECOND = 3.5, //0.8 - 93
         MAX_ACCELERATION_METRES_PER_SECOND_SQUARED = MAX_SPEED_METRES_PER_SECOND,
         MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND = 2*Math.PI,
         MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND_SQUARED = MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,

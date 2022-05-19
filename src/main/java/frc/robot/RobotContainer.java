@@ -87,14 +87,17 @@ public class RobotContainer {
   public static double  FrontShooterTargetVelocity_Slow = 9000*0.78; //no multiplier
   public static double  BackShooter1TargetVelocity_Slow = 7000*0.78;  
 
+  public static double  FrontShooterTargetVelocity_Mid = 9000*0.90; //9000*0.83(under shoot) - 0.93(over shoot)
+  public static double  BackShooter1TargetVelocity_Mid = 7000*0.90;  //7000*0.83(under shoot) - 0.93(over shoot)
+
   public static double  FrontShooterTargetVelocity_Fast = 16500;//16500 
   public static double  BackShooter1TargetVelocity_Fast = 10000;//12000//10000 good//11000
 
-  public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.1*0.95; //both 1.2 
-  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.3*0.95; 
+  public static double  FrontShooterTargetVelocity_Auto3a = 9000*1.2; //both 1.2  //1.1*0.95
+  public static double  BackShooter1TargetVelocity_Auto3a = 7000*1.4; //1.3*0.95
 
-  public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.3*0.9; //1.4
-  public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.5*0.9;
+  public static double  FrontShooterTargetVelocity_Auto3b = 9000*1.4; //1.4, 1.3*0.9
+  public static double  BackShooter1TargetVelocity_Auto3b = 7000*1.5;//1.5*0.9
 
   public static double  AmelieTestFront = 9000*1.68; //15120
   public static double  AmelieTestBack = 7000*1.68; //11760
@@ -158,7 +161,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    final JoystickButton Abutton = new JoystickButton(operatorController,1);
+    final JoystickButton Abutton = new JoystickButton(operatorController,1); //limelight
     final JoystickButton Bbutton = new JoystickButton(operatorController,2);
     final JoystickButton Xbutton = new JoystickButton(operatorController,3);
     final JoystickButton Ybutton = new JoystickButton(operatorController,4);
@@ -213,8 +216,6 @@ public class RobotContainer {
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
 
      rightTrigger.whileHeld(new RunCommand(
-<<<<<<< HEAD
-<<<<<<< HEAD
       () -> {
         // m_Limelight.turnLimelightLEDOn(true);
         drivetrain.drive( //removed negative
@@ -225,20 +226,6 @@ public class RobotContainer {
       }, 
       drivetrain));
       // ).whenReleased(new RunCommand(() -> m_Limelight.turnLimelightLEDOn(false)), false); //-1*Drivetrain.deadZone(driverController.getRightX())
-=======
-=======
->>>>>>> parent of 23b710c (Added some limelight stuff.)
-      () -> drivetrain.drive( //removed negative
-        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-        -3.6*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-        -3.6*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
-        false), 
-      drivetrain)
-      ); //-1*Drivetrain.deadZone(driverController.getRightX())
-<<<<<<< HEAD
->>>>>>> parent of 23b710c (Added some limelight stuff.)
-=======
->>>>>>> parent of 23b710c (Added some limelight stuff.)
 
       BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
       BumperRight.whileHeld(new ClimberGoHome(m_climber));
