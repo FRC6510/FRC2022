@@ -14,7 +14,6 @@ import frc.robot.commands.ResetGyro;
 import frc.robot.commands.Group.Autonomous.setRobotPosition;
 import frc.robot.commands.Group.Autonomous.Autonomous1.ShootAndFeed;
 import frc.robot.commands.Group.Group.Drivetrain.Profiled2dMovement;
-import frc.robot.commands.Group.Group.Drivetrain.SimpleDrive;
 import frc.robot.commands.Group.Group.Feeder.IndexFirstBall;
 import frc.robot.commands.Group.Group.Intake.IntakeBall;
 import frc.robot.commands.Group.Group.Intake.IntakeMaster;
@@ -39,7 +38,7 @@ public class A2M1 extends SequentialCommandGroup {
   public A2M1(Drivetrain drivetrain, Feeder feeder, Shooter shooter) {
   
     addCommands(
-    //new SimpleDrive(drivetrain, 0, 0, 0, 8),
+ 
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-0.7, 0, Rotation2d.fromDegrees(0))),
     new ShootAndFeed (shooter, feeder, RobotContainer.FrontShooterTargetVelocity_Slow, RobotContainer.BackShooter1TargetVelocity_Slow),
     new Profiled2dMovement(drivetrain, DrivetrainConstants.movementParameters, new Pose2d(-2, 0, Rotation2d.fromDegrees(0))),
