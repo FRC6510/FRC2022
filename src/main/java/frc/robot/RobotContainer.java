@@ -172,7 +172,7 @@ public class RobotContainer {
     final JoystickButton rightButton = new JoystickButton(operatorController,10);
 
     Abutton.whileHeld(new IntakeMasterTwoBalls(m_intake,m_feeder));
-    Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed, 14000));
+    Bbutton.whileHeld(new ShootBall(m_shooter, Limelight.FrontSpeed, Limelight.BackSpeed));
     RightBumper.whileHeld(new FeedBallForShooter(m_feeder));
     LeftBumper.whileHeld(new ReverseBall(m_feeder));
     Xbutton.whileHeld(new ReverseIntake(m_intake));

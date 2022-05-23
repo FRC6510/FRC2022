@@ -109,7 +109,7 @@ public class Limelight extends SubsystemBase {
   //0.7*0.08*distanceFromLimelightToGoalInches*9000*2.1*0.0254
   //1*0.28*distanceFromLimelightToGoalInches*7000*2.1*0.0254
   } else{
-    FrontSpeed = 9000*1.2;
+    FrontSpeed = 9000*1.2; 
     BackSpeed = 7000*1.2;
   } 
 
