@@ -28,9 +28,8 @@ class CConstants {
      * kF: 1023 represents output value to Talon at 100%, 20660 represents Velocity units at 100% output
      * 
 	 * 	                                    			  kP kI kD      kF          Iz    PeakOut */
-   //old constantspublic final static Gains kGains_Velocit  = new Gains(1.6, 0.001, 0.5284, 0.039676794, 0, 1.0); //kp 0.05284, kD 20 on 75%
-   public final static Gains kGains_Velocit  = new Gains(0, 0, 0, 0, 0, 1.0); //15250 70%
-   public final static Gains kGains_Velocit_Load  = new Gains(0.0, 0.0, 0.0, 0.046957377, 0, 1.0); 
+   public final static Gains kGains_Velocit  = new Gains(1.6, 0.001, 0.5284, 0.039676794, 0, 1.0); //kp 0.05284, kD 20 on 75%
+   public final static Gains kGains_Velocit_Load  = new Gains(0.0, 0.0, 0.0, 0.0, 0, 1.0); 
 }
 //currently p 0.5, d 20 and going rly zigzaggy (was less zigzaggy when it was d10) -> maybe increase p?
  //make it 2046

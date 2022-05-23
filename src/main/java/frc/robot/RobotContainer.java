@@ -229,10 +229,7 @@ public class RobotContainer {
 
       BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
       BumperRight.whileHeld(new ClimberGoHome(m_climber));
-      
-      //BumperLeft.whileHeld(new ClimbRobot(m_climber));
-      //BumperRight.whileHeld(new ClimbReverse(m_climber));
-
+        
         final JoystickButton CbuttonA = new JoystickButton(climberController,1);
         final JoystickButton CbuttonB = new JoystickButton(climberController,2);
         final JoystickButton CbuttonX = new JoystickButton(climberController,3);

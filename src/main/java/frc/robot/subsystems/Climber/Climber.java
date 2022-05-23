@@ -28,8 +28,8 @@ public class Climber extends SubsystemBase {
   private static Solenoid climber_pneu;
   private static Solenoid hook_pneu;
   DigitalInput climberSensor = new DigitalInput(1);
-  double goHome = -8000; //8000
-  double fullExtend = 202331; //151700
+  double goHome = -8000; //6000
+  double fullExtend = 201731;//202331
 
 
 
