@@ -243,7 +243,6 @@ public class RobotContainer {
         CbuttonB.whenReleased(new ClimberIn(m_climber));
         CbuttonY.whenReleased(new ClimberOut(m_climber));
 
-    
   ShuffleboardTab tab = Shuffleboard.getTab("Shooter"); ////
   NetworkTableEntry frontShooter = tab.add("FrontSpeed",1).getEntry();
   SmartDashboard.putNumber("Shooter Test", frontShooter.getDouble(1.0));

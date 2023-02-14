@@ -63,6 +63,7 @@ public static final Translation2d[] moduleOffset = {
          * To determine new values:
          * Align until straight. Then get the absolute position value. Add/subtract (can't remember) that value to the current offset value.
          */
+        
         public static final double
            /* LF_OFFSET = 198.445 , //Need to test again also subtract seven
             LB_OFFSET = 55.635 , // Should we change PID for turning?

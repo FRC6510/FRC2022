@@ -48,24 +48,11 @@ public class Drivetrain extends SubsystemBase{
         for (int x = 0; x < measuredModuleStates.length; x++){
             measuredModuleStates[x] = swerveModules[x].getModuleState();
             // System.out.println("Wheel Angle "+ x +  ": " + swerveModules[x].getModuleState().angle.getDegrees());
-            // System.out.println("Wheel Velocity" + swerveModules[x].getModuleState().speedMetersPerSecond);
+
         }
-     //SmartDashboard.putNumber("frontLeftError: ",  swerveModules[0].getSteerError()); 
-     //SmartDashboard.putNumber("backLeftError: ",  swerveModules[1].getSteerError());
-     //SmartDashboard.putNumber("frontRightError: ",  swerveModules[2].getSteerError());
-     //SmartDashboard.putNumber("backRightaError: ",  swerveModules[3].getSteerError());
-     //SmartDashboard.putNumber("LF ANGLE", measuredModuleStates[0].angle.getDegrees());
-     //SmartDashboard.putNumber("LB ANGLE", measuredModuleStates[1].angle.getDegrees());
-     //SmartDashboard.putNumber("RF ANGLE", measuredModuleStates[2].angle.getDegrees());
-     //SmartDashboard.putNumber("RB ANGLE", measuredModuleStates[3].angle.getDegrees());
-     //SmartDashboard.putNumber("yaw",imu.getYaw());
-     //SmartDashboard.putNumber("converted yaw",imu.getRotation2d().getDegrees());
-     //SmartDashboard.putNumber("status frame", swerveModules[0].STATU );
      
         driveOdometry.updateWithTime(Timer.getFPGATimestamp(), imu.getRotation2d(), measuredModuleStates);
-       //SmartDashboard.putNumber("xPos", driveOdometry.getPoseMeters().getTranslation().getX());
-        //SmartDashboard.putNumber("yPos", driveOdometry.getPoseMeters().getTranslation().getY());
-        //SmartDashboard.putNumber("rotation", driveOdometry.getPoseMeters().getRotation().getDegrees());
+
     }
     public void stopDrive (){
         
@@ -73,7 +60,6 @@ public class Drivetrain extends SubsystemBase{
     public void drive(double xVelocity, double yVelocity, double angularVelocity, boolean isFieldRelative){
         SwerveModuleState[] moduleStates;
         ChassisSpeeds robotSpeed;
-    
         
         if(isFieldRelative) robotSpeed = ChassisSpeeds.fromFieldRelativeSpeeds(xVelocity, yVelocity, angularVelocity, imu.getRotation2d());
         else robotSpeed = new ChassisSpeeds(xVelocity, yVelocity, angularVelocity);
@@ -135,18 +121,5 @@ public void setDriveMotorClosedLoopRamp(double rampTime) {
         swerveModule.setClosedLoopRamp(rampTime);
     }
 }
-
 }
-
-    // if(Math.abs(input) < 0.1){ // <0.15
-    //     return 0;
-    // }
-    // else if(input>0) {
-    //     return 1.11*(input + 0.1);
-    // } else return 1.11*(input - 0.1);
-    // }    
- 
-    //  } else if(input<0) {
-    //      return -((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));
-    //  } return ((1.0/0.64)*(0.8*input-0.2)*(0.8*input-0.2));  
 
