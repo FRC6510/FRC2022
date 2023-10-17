@@ -128,9 +128,9 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new RunCommand(
         () -> drivetrain.drive( //removed negative
-           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-           -DrivetrainConstants.DEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),
+           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+           -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+           -DrivetrainConstants.ROTAIONALMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),
           true), 
         drivetrain)
         );
