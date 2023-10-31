@@ -130,13 +130,13 @@ public class RobotContainer {
         () -> drivetrain.drive( //removed negative
            -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
            -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-           -DrivetrainConstants.ROTAIONALMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),
+           -DrivetrainConstants.SLOWROTATIONALMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()), //slow speed
           true), 
         drivetrain)
         );
 
     m_feeder.setDefaultCommand(new RunCommand(() -> feeder_sensor = m_feeder.sense_ball(), m_feeder));
-
+    //Climber movement does nothing
     m_climber.setDefaultCommand(new RunCommand(() -> m_climber.climblog() , m_climber));  
 
     m_Limelight.setDefaultCommand(new RunCommand(() -> shooterVelocity = Limelight.UpdateShooterVelocity(), m_Limelight));
@@ -188,7 +188,7 @@ public class RobotContainer {
     //LeftBumper.whileHeld(new ClimberOut(m_climber));
 
     final JoystickButton buttonA = new JoystickButton(driverController,1);
-    final JoystickButton buttonB = new JoystickButton(driverController,2);
+    final JoystickButton buttonB = new JoystickButton(driverController, 2);
     final JoystickButton buttonX = new JoystickButton(driverController,3);
     final JoystickButton buttonY = new JoystickButton(driverController,4);
     final JoystickButton BumperLeft = new JoystickButton(driverController,5);
@@ -197,38 +197,40 @@ public class RobotContainer {
     final JoystickButton joystickButtonRight = new JoystickButton(driverController,10);
     final xboxTrigger rightTrigger = new xboxTrigger(driverController, 3);
 
+
     buttonY.whenPressed(() -> drivetrain.resetGyro(),drivetrain); 
     buttonB.whileHeld(new RunCommand(
       () -> drivetrain.drive( //removed negative
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-         -1*Drivetrain.deadZone(driverController.getRightX()),
+         -DrivetrainConstants.ROTATIONALMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),
         true), 
       drivetrain)
       ); //-1*Drivetrain.deadZone(driverController.getRightX())
-    buttonA.whileHeld(new RunCommand(
-      () -> drivetrain.drive( //removed negative
-        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-        -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-        -Limelight.Angle*0.05*1.2,//REMOVE1.5
-        true), 
-      drivetrain)
-      ); //-1*Drivetrain.deadZone(driverController.getRightX())
-
+      //TODO uncomment when not dancing
+    // buttonA.whileHeld(new RunCommand(
+    //   () -> drivetrain.drive( //removed negative
+    //     -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+    //     -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+    //     -Limelight.Angle*0.05*1.2,//REMOVE1.5
+    //     true), 
+    //   drivetrain)
+    //   ); //-1*Drivetrain.deadZone(driverController.getRightX())
+    //FAST DANCING
      rightTrigger.whileHeld(new RunCommand(
       () -> {
         // m_Limelight.turnLimelightLEDOn(true);
         drivetrain.drive( //removed negative
-          -3.6*0.7*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
-          -3.6*0.7*DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
-          -3.6*0.7*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
+          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftY()), //*3.6 all
+          -DrivetrainConstants.SLOWDEADZONEMULTIPLIER*Drivetrain.deadZone(driverController.getLeftX()),
+          -DrivetrainConstants.ROTATIONALMULTIPLIER*Drivetrain.deadZone(driverController.getRightX()),//REMOVE1.5
         false);
       }, 
       drivetrain));
       // ).whenReleased(new RunCommand(() -> m_Limelight.turnLimelightLEDOn(false)), false); //-1*Drivetrain.deadZone(driverController.getRightX())
 
-      BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
-      BumperRight.whileHeld(new ClimberGoHome(m_climber));
+      // BumperLeft.whileHeld(new ClimberFullExtend(m_climber));
+      // BumperRight.whileHeld(new ClimberGoHome(m_climber));
         
         final JoystickButton CbuttonA = new JoystickButton(climberController,1);
         final JoystickButton CbuttonB = new JoystickButton(climberController,2);
@@ -240,8 +242,12 @@ public class RobotContainer {
 
         CBumperLeft.whenReleased(new OpenHook(m_climber));
         CBumperRight.whenReleased(new CloseHook(m_climber));
-        CbuttonB.whenReleased(new ClimberIn(m_climber));
-        CbuttonY.whenReleased(new ClimberOut(m_climber));
+        //changed to driver
+        BumperLeft.whenReleased(new ClimberIn(m_climber));
+        BumperRight.whenReleased(new ClimberOut(m_climber));
+
+        // CbuttonB.whenReleased(new ClimberIn(m_climber));
+        // CbuttonY.whenReleased(new ClimberOut(m_climber));
 
   ShuffleboardTab tab = Shuffleboard.getTab("Shooter"); ////
   NetworkTableEntry frontShooter = tab.add("FrontSpeed",1).getEntry();

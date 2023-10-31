@@ -52,9 +52,9 @@ public class Shooter extends SubsystemBase {
 		ShooterRight.set(TalonFXControlMode.Velocity, FrontVel);
     ShooterBack.set(TalonFXControlMode.Velocity, BackVel);
 
-    //ShooterLeft.set(ControlMode.PercentOutput,0.75); //speed
-    //ShooterRight.set(ControlMode.PercentOutput,0.75);
-    //ShooterBack.set(ControlMode.PercentOutput,0.5);
+    // ShooterLeft.set(ControlMode.PercentOutput,1); //speed
+    // ShooterRight.set(ControlMode.PercentOutput,1);
+    // ShooterBack.set(ControlMode.PercentOutput,1);
 
   }
 

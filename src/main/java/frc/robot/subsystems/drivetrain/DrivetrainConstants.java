@@ -97,7 +97,8 @@ public static final Translation2d[] moduleOffset = {
             DEADZONEMULTIPLIER = 4,//3.6
             SLOWDEADZONEMULTIPLIER = 1.25,
             SLOWLIMELIGHTMULTIPLIER= 2.5,
-            ROTAIONALMULTIPLIER = MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;    
+            ROTATIONALMULTIPLIER = MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+            SLOWROTATIONALMULTIPLIER = ROTATIONALMULTIPLIER/6;
     
         public static final TrapezoidProfile.Constraints
             linearMotionConstraints = new TrapezoidProfile.Constraints(MAX_SPEED_METRES_PER_SECOND, MAX_ACCELERATION_METRES_PER_SECOND_SQUARED),
