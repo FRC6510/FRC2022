@@ -58,6 +58,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.DrivetrainConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -270,6 +271,6 @@ public class RobotContainer {
    */
 
    public Command getAutonomousCommand(){
-    return m_chooser.getSelected();
+    return new WaitCommand(1);
    }
 }
